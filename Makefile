@@ -46,7 +46,7 @@ build:
 	
 	@cp ./bootstrap/img/* ./img/
 	
-	@cat ./bootstrap/js/bootstrap-transition.js ./bootstrap/js/bootstrap-alert.js ./bootstrap/js/bootstrap-button.js ./bootstrap/js/bootstrap-carousel.js ./bootstrap/js/bootstrap-collapse.js ./bootstrap/js/bootstrap-dropdown.js ./bootstrap/js/bootstrap-modal.js ./bootstrap/js/bootstrap-tooltip.js ./bootstrap/js/bootstrap-popover.js ./bootstrap/js/bootstrap-scrollspy.js ./bootstrap/js/bootstrap-tab.js ./bootstrap/js/bootstrap-typeahead.js ./bootstrap/js/bootstrap-affix.js > ./js/bootstrap.js
+	@cat ./bootstrap/js/bootstrap-datepicker.js ./bootstrap/js/bootstrap-transition.js ./bootstrap/js/bootstrap-alert.js ./bootstrap/js/bootstrap-button.js ./bootstrap/js/bootstrap-carousel.js ./bootstrap/js/bootstrap-collapse.js ./bootstrap/js/bootstrap-dropdown.js ./bootstrap/js/bootstrap-modal.js ./bootstrap/js/bootstrap-tooltip.js ./bootstrap/js/bootstrap-popover.js ./bootstrap/js/bootstrap-scrollspy.js ./bootstrap/js/bootstrap-tab.js ./bootstrap/js/bootstrap-typeahead.js ./bootstrap/js/bootstrap-affix.js > ./js/bootstrap.js
 	@uglifyjs ./js/bootstrap.js -nc > ./js/bootstrap.min.tmp.js
 
 	@echo "/**\n* Bootstrap.js v2.2.2 by @fat & @mdo\n* Copyright 2012 Twitter, Inc.\n* http://www.apache.org/licenses/LICENSE-2.0.txt\n*/" > ./bootstrap/copyright
