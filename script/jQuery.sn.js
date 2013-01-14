@@ -14,7 +14,6 @@
 			};
 			$.extend(true,def,options);
 			return this.each(function(){
-				alert('go!');
 				$(this).data('sn',def);
 				$(this).snEvents({'href':'#autoload'});
 			});

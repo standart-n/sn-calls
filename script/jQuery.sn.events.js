@@ -12,10 +12,8 @@
 				switch (href.replace(/(.*)#(.*)/,"$2")){
 					case "autoload":
 						var sn=$(this).data('sn');
-						if (sn.bonus.inputText) {
-							$("#bonus-area-input input").val(sn.bonus.inputText);
-						}
-						$(this).snTriggers('bonusForm');
+						$('#dp1').datepicker();
+						$('#dp2').datepicker();
 					break;
 					case "checkCard":
 						var card_val=$("#bonus-area-input input").val();

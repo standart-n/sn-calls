@@ -14,7 +14,7 @@ function engine() {
 }
 
 function getControls() {
-	foreach (array("url","sql","project","console") as $key) {
+	foreach (array("url","sql","project","calls","console") as $key) {
 		if (!file_exists(project."/controls/".$key.".php")) return false;
 		require_once(project."/controls/".$key.".php");
 		sn::cl($key);
