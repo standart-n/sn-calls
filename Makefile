@@ -26,8 +26,8 @@ build:
 	@recess --compile ${SN_LESS} > ${SN_CSS}
 	@echo "Compiling LESS with Recess...               ${CHECK} Done"
 
-	@cat ./script/jQuery.sn.js ./script/jQuery.sn.ajax.js ./script/jQuery.sn.conf.js ./script/jQuery.sn.events.js ./script/jQuery.sn.triggers.js > ./js/jQuery.sn.js
-	@uglifyjs ./js/jQuery.sn.js -nc > ./js/jQuery.sn.min.js
+	@cat ./script/jQuery.sn.js ./script/jQuery.sn.ajax.js ./script/jQuery.sn.player.js ./script/jQuery.sn.conf.js ./script/jQuery.sn.events.js ./script/jQuery.sn.triggers.js > ./js/sn.js
+	@uglifyjs ./js/sn.js -nc > ./js/sn.min.js
 	@echo "Compiling and minifying javascript...       ${CHECK} Done"
 
 	@echo "Successfully built."
@@ -55,6 +55,11 @@ build:
 
 	@echo "Compiling and minifying javascript...       ${CHECK} Done"
 	@echo "\n${HR}"
+
+	@uglifyjs ./player/audio.js -nc > ./player/audio.min.js
+	@echo "Compiling javascript for Audio Player...    ${CHECK} Done"
+	@echo "\n${HR}"
+
 
 	@echo "Successfully built at ${DATE}."
 

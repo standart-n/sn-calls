@@ -8,16 +8,19 @@ function __construct() {
 
 function cdr($j=array(),$i=-1) {
 	if (query(sql::cdr(),$ms)) {
-		foreach ($ms as $r) { $i++;
+		foreach ($ms as $r) { $i++; $listen=false;
 			$j[$i]['id']=intval($r->id);
+			$j[$i]['uniqueid']=intval($r->uniqueid);
 			$j[$i]['src']=strval($r->src);
 			$j[$i]['dst']=strval($r->dst);
-			$j[$i]['dt']=strval($r->dt);
+			$j[$i]['post_a']=strval($r->post_a);
+			$j[$i]['post_d']=strval($r->post_d);
+			$j[$i]['post_t']=strval($r->post_t);
 			$j[$i]['uniqueid']=strval($r->uniqueid);
 			$j[$i]['disposition']=strval($r->disposition);
+			$j[$i]['lastapp']=strval($r->lastapp);
 			$j[$i]['status_rus']="Неизвестно";
 			$j[$i]['status_class']="none";
-			$j[$i]['listen']=false;
 	
 			if (intval($r->duration)) {
 				$j[$i]['duration_in']=intval($r->duration)-intval($r->billsec);
@@ -35,11 +38,30 @@ function cdr($j=array(),$i=-1) {
 				$j[$i]['duration_error_pr']=100;
 			}
 			
+			if (isset($r->lastapp)) {
+				$la=trim(strtolower(strval($r->lastapp)));
+				switch ($la) {
+				case "playback":
+					$j[$i]['lastapp_rus']="ИВР";
+				break;
+				case "hangup":
+					$j[$i]['lastapp_rus']="Сброшено";
+				break;
+				case "wait":
+					$j[$i]['lastapp_rus']="Ожидание";
+				break;
+				case "dial":
+					$j[$i]['lastapp_rus']="Вызов";
+				break;
+				default:
+					$j[$i]['lastapp_rus']=$la;
+				}
+			}
+			
 			if ((isset($r->disposition)) && (isset($r->uniqueid))) {
 				switch (trim(strtolower(strval($r->disposition)))) {
 				case "answered":
-					//$s.=file_get_contents("http://calls:yJaBkTn@94.181.119.3:8010/calls/player.php?id=".$r->uniqueid);
-					$j[$i]['listen']=true;
+					$listen=true;
 				break;
 				case "busy":
 					$j[$i]['status_rus']="Занято";
@@ -55,6 +77,12 @@ function cdr($j=array(),$i=-1) {
 				break;
 				}
 			}
+			
+			$j[$i]['listen']=$listen;
+			if ($listen) {
+				$j[$i]['path_player']=project."/flash/player_mp3_maxi.swf";
+				$j[$i]['path_audio']=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
+			}			
 				
 		}
 	}

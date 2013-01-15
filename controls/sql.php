@@ -9,8 +9,9 @@ function __construct() {
 
 function cdr($s="") {
 	$s.="SELECT *, ";
-	$s.="DATE_FORMAT(calldate,'%d%m%Y') as dd, ";
-	$s.="DATE_FORMAT(calldate,'%H:%i <small>%d.%m</small>') as dt ";
+	$s.="DATE_FORMAT(calldate,'%d%m%Y') as post_a, ";
+	$s.="DATE_FORMAT(calldate,'%H:%i') as post_t, ";
+	$s.="DATE_FORMAT(calldate,'%d.%m') as post_d ";
 	$s.="FROM `cdr` ";
 	$s.="WHERE (1=1) ";
 	//$search=iconv("cp1251","UTF8",$search);
@@ -27,6 +28,8 @@ function cdr($s="") {
 		$s.="(dst LIKE '%".calls::$search."%')";
 		$s.=") ";
 	}
+		$s.="ORDER by `calldate` ASC ".
+			"LIMIT 0 , 50 ";
 	return $s;
 }
 

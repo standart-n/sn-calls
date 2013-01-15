@@ -2,3 +2,117 @@ body {
   padding-top: 10px;
   padding-bottom: 20px;
 }
+
+#player-wrap {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: none;
+  height: auto;
+  padding: 7px 0 7px 20px;
+  background-color: #1b1b1b;
+  background-image: -moz-linear-gradient(top, #222222, #111111);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));
+  background-image: -webkit-linear-gradient(top, #222222, #111111);
+  background-image: -o-linear-gradient(top, #222222, #111111);
+  background-image: linear-gradient(to bottom, #222222, #111111);
+  background-repeat: repeat-x;
+  border-color: #252525;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff222222', endColorstr='#ff111111', GradientType=0);
+  *zoom: 1;
+}
+
+.audiojs {
+  height: 22px;
+  background: #404040;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #444444), color-stop(0.5, #555555), color-stop(0.51, #444444), color-stop(1, #444444));
+  background-image: -moz-linear-gradient(center top, #444444 0%, #555555 50%, #444444 51%, #444444 100%);
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+          border-radius: 3px;
+  -webkit-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+     -moz-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+       -o-box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+          box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+.audiojs .play-pause {
+  width: 15px;
+  height: 20px;
+  padding: 0 8px 0px 0px;
+}
+
+.audiojs p {
+  width: 25px;
+  height: 20px;
+  margin: -3px 0 0px -1px;
+}
+
+.audiojs .scrubber {
+  height: 10px;
+  margin: 5px;
+  background: #5a5a5a;
+}
+
+.audiojs .progress {
+  width: 0;
+  height: 10px;
+  background: #ccc;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #cccccc), color-stop(0.5, #dddddd), color-stop(0.51, #cccccc), color-stop(1, #cccccc));
+  background-image: -moz-linear-gradient(center top, #cccccc 0%, #dddddd 50%, #cccccc 51%, #cccccc 100%);
+}
+
+.audiojs .loaded {
+  height: 10px;
+  background: #000;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #222222), color-stop(0.5, #333333), color-stop(0.51, #222222), color-stop(1, #222222));
+  background-image: -moz-linear-gradient(center top, #222222 0%, #333333 50%, #222222 51%, #222222 100%);
+}
+
+.audiojs .time {
+  float: left;
+  height: 25px;
+  line-height: 25px;
+}
+
+.audiojs .error-message {
+  height: 24px;
+  line-height: 24px;
+}
+
+@media (min-width: 1024px) {
+  .audiojs {
+    width: 984px;
+  }
+  .audiojs .scrubber {
+    width: 834px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .audiojs {
+    width: 728px;
+  }
+  .audiojs .scrubber {
+    width: 578px;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767px) {
+  .audiojs {
+    width: 440px;
+  }
+  .audiojs .scrubber {
+    width: 290px;
+  }
+}
+
+@media (max-width: 389px) {
+  .audiojs {
+    width: 280px;
+  }
+  .audiojs .scrubber {
+    width: 130px;
+  }
+}

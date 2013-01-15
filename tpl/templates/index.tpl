@@ -28,6 +28,10 @@
 
 <div id="sn"></div>
 
+<div id="player-wrap">
+	<div id="player"></div>
+</div>
+
 <div id="main">
 
 </div>
@@ -35,7 +39,8 @@
 <div id="script">
 	<script src="sn-project/lib/jQuery.1.8.3.min.js" type="text/javascript"></script>
 	<script src="sn-project/js/bootstrap.min.js" type="text/javascript"></script>
-	<script src="sn-project/js/jQuery.sn.min.js" type="text/javascript"></script>
+	<script src="sn-project/js/sn.min.js" type="text/javascript"></script>
+	<script src="sn-project/player/audio.min.js" type="text/javascript"></script>
 	
 	<script type="text/javascript">
 	$(function(){

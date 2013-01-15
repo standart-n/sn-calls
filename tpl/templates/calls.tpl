@@ -16,7 +16,7 @@
 	<div class="row-fluid">
 	
 			<div class="span12">
-				<div class="well">
+				<div class="well well-small">
 					<form class="form-inline">
 						<div class="input-append">
 							<input type="text" class="input-medium" placeholder="От кого">
@@ -50,9 +50,9 @@
 						<label class="hidden-phone">Выводить по </label>
 						<div class="btn-group">
 							<a href="#" class="btn btn-small">10</a>
-							<a href="#" class="btn btn-small hidden-phone">20</a>
-							<a href="#" class="btn btn-small active">30</a>
-							<a href="#" class="btn btn-small">50</a>
+							<a href="#" class="btn btn-small active">20</a>
+							<a href="#" class="btn btn-small hidden-phone">30</a>
+							<a href="#" class="btn btn-small">40</a>
 						</div>
 						<div class="btn-group">
 							<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
@@ -72,7 +72,7 @@
 					<form class="form-inline">
 						<a href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
 					</form>
-
+					
 				</div>
 			</div>
 
@@ -84,7 +84,7 @@
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
-		<table class="table table-hover table-bordered table-condensed table-striped">
+		<table class="table table-bordered table-condensed table-striped">
 			<thead>
 				<tr>
 					<th>Дата</th>
@@ -101,7 +101,7 @@
 			{if isset($cdr)}
 				{foreach from=$cdr item=key}
 					<tr>
-						<td>{$key.dt}</td>
+						<td>{$key.post_t} <small>{$key.post_d}</small></td>
 						<td>{$key.src}</td>
 						<td class="hidden">{$key.id}</td>
 						<td>{$key.dst}</td>
@@ -109,15 +109,22 @@
 						<td>
 							{if (!$key.listen)}
 								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
-							{/if}
-							{if $key.listen}
-								<a href="#" class="btn btn-primary btn-small"><i class="icon-play icon-white"></i>!!</a>
+							{else}
+								<a href="#" class="btn btn-primary btn-small track" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"></i></a>
+								<a href="#" class="btn btn-small"><i class="icon-download-alt"></i></a>
+								<!--
+								<object type="application/x-shockwave-flash" data="{$key.path_player}" width="100" height="20">
+									<param name="movie" value="{$key.path_player}" />
+									<param name="FlashVars" value="mp3={$key.path_audio}" />
+									<param name="bgcolor" value="#000000" />
+								</object>								
+								-->
 							{/if}
 						</td>
-						<td class="hidden-phone">{$key.id}</td>
+						<td class="hidden-phone"><small>{$key.lastapp_rus}</small></td>
 						<td class="hidden-phone">
 							<div class="progress">
-								<div class="bar bar-warning" style="width:{$key.duration_in_pr}%;">{$key.duration_in}</div>
+								<div class="bar bar-warning" style="width:{$key.duration_in_pr}%;"><small>{$key.duration_in}</small></div>
 								<div class="bar bar-success" style="width:{$key.duration_call_pr}%;"><b>{$key.duration_call}</b></div>
 								<div class="bar bar-danger" style="width:{$key.duration_error_pr}%;">{$key.duration_error}</div>
 							</div>
@@ -148,4 +155,3 @@
 		</div>
 	</div>
 </div>
-

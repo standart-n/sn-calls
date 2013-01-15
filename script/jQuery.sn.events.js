@@ -14,6 +14,7 @@
 						var sn=$(this).data('sn');
 						$('#dp1').datepicker();
 						$('#dp2').datepicker();
+						$(this).snPlayer();
 					break;
 					case "checkCard":
 						var card_val=$("#bonus-area-input input").val();
