@@ -8,6 +8,7 @@ function engine() {
 	
 	
 	load("index.tpl");
+	assign('cdr',calls::cdr());
 	innerHTML("#main",fetch("calls.tpl"));
 	echo html();	
 	

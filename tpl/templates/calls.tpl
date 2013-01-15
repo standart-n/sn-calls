@@ -87,30 +87,41 @@
 		<table class="table table-hover table-bordered table-condensed table-striped">
 			<thead>
 				<tr>
-					<th>Время звонка</th>
-					<th>От кого</th>
+					<th>Дата</th>
+					<th>От_кого</th>
 					<th class="hidden">Номер</th>
 					<th>Кому</th>
 					<th class="hidden">Номер</th>
 					<th>Запись</th>
-					<th></th>
-					<th>Посл. действ.</th>
-					<th>Время</th>
+					<th class="hidden-phone">Действие</th>
+					<th class="hidden-phone">Длит.(c)</th>
 				</tr>
 			</thead>
 			<tbody>
-			{if isset($calls)}
-				{foreach from=$calls item=key}
-					<tr class="{$key.line_class}">
-						<td>{$key.id}</td>
-						<td>{$key.id}</td>
+			{if isset($cdr)}
+				{foreach from=$cdr item=key}
+					<tr>
+						<td>{$key.dt}</td>
+						<td>{$key.src}</td>
 						<td class="hidden">{$key.id}</td>
-						<td>{$key.id}</td>
+						<td>{$key.dst}</td>
 						<td class="hidden">{$key.id}</td>
-						<td>{$key.id}</td>
-						<td>{$key.id}</td>
-						<td>{$key.id}</td>
-						<td>{$key.id}</td>
+						<td>
+							{if (!$key.listen)}
+								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
+							{/if}
+							{if $key.listen}
+								<a href="#" class="btn btn-primary btn-small"><i class="icon-play icon-white"></i>!!</a>
+							{/if}
+						</td>
+						<td class="hidden-phone">{$key.id}</td>
+						<td class="hidden-phone">
+							<div class="progress">
+								<div class="bar bar-warning" style="width:{$key.duration_in_pr}%;">{$key.duration_in}</div>
+								<div class="bar bar-success" style="width:{$key.duration_call_pr}%;"><b>{$key.duration_call}</b></div>
+								<div class="bar bar-danger" style="width:{$key.duration_error_pr}%;">{$key.duration_error}</div>
+							</div>
+						</td>
 					</tr>
 				{/foreach}
 			{/if}
