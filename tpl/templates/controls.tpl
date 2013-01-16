@@ -60,11 +60,11 @@
 						<a href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
 					</form>
 
-					<p id="loading">
+					<div id="loading">
 						<div class="progress progress-striped active">
 							<div class="bar" style="width: 100%;"><strong>Загрузка данных...</strong></div>
 						</div>
-					</p>
+					</div>
 					
 				</div>
 			</div>

@@ -7,6 +7,10 @@ a.pause {
   display: none;
 }
 
+#loading {
+  display: none;
+}
+
 #player {
   display: block;
   float: left;

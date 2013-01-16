@@ -34,7 +34,10 @@
 </div>
 
 <div id="main">
-
+	<div id="controls"></div>
+	<div id="table"></div>
+	<div id="pagination"></div>
+	<div id="stat"></div>
 </div>
 
 <div id="script">

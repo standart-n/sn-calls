@@ -8,9 +8,12 @@ function engine() {
 	
 	
 	load("index.tpl");
+	innerHTML("#controls",fetch("controls.tpl"));
 	assign('cdr',calls::cdr());
+	innerHTML("#table",fetch("table.tpl"));
+	innerHTML("#pagination",fetch("pagination.tpl"));
 	assign('stat',calls::stat());
-	innerHTML("#main",fetch("calls.tpl"));
+	innerHTML("#stat",fetch("stat.tpl"));
 	echo html();	
 	
 }
