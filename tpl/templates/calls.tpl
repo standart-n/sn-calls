@@ -1,16 +1,3 @@
-<!--
-<div class="container-fluid">
-	<div class="row-fluid">
-	
-			<div class="span12">
-				<div class="well">
-					<h4>Учет звонков</h4>
-				</div>
-			</div>
-
-	</div>
-</div>
--->
 
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -72,6 +59,12 @@
 					<form class="form-inline">
 						<a href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
 					</form>
+
+					<p>
+						<div class="progress progress-striped active">
+							<div class="bar" style="width: 100%;"><strong>Загрузка данных...</strong></div>
+						</div>
+					</p>
 					
 				</div>
 			</div>
@@ -98,22 +91,24 @@
 				</tr>
 			</thead>
 			<tbody>
-			{if isset($cdr)}
+			{if $cdr}
 				{foreach from=$cdr item=key}
 					<tr>
 						<td>{$key.post_t} <small>{$key.post_d}</small></td>
-						<td>{$key.src}</td>
+						<td><small>{$key.src_name}</small> <small class="muted">{$key.src}</small></td>
 						<td class="hidden">{$key.id}</td>
-						<td>{$key.dst}</td>
+						<td><small>{$key.dst_name}</small> <small class="muted">{$key.dst}</small></td>
 						<td class="hidden">{$key.id}</td>
 						<td>
 							{if (!$key.listen)}
 								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
 							{else}
-								<a href="#" class="btn btn-primary btn-small play" data-id="{$key.id}" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"> </i></a>
-								<a href="#" class="btn btn-small pause" data-id="{$key.id}"><i class="icon-pause"> </i></a>
-								<a href="#" class="btn btn-small"><i class="icon-download-alt"> </i></a>
+								<div class="btn-group">
+										<a href="#" class="btn btn-primary btn-mini play" data-id="{$key.id}" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"></i></a>
+										<a href="sn-project/mp3/1000.mp3" target="_blank" class="btn btn-mini"><i class="icon-download-alt"></i></a>
+								</div>
 								<!--
+								<a href="#" class="btn btn-small pause" data-id="{$key.id}"><i class="icon-pause"> </i></a>
 								<object type="application/x-shockwave-flash" data="{$key.path_player}" width="100" height="20">
 									<param name="movie" value="{$key.path_player}" />
 									<param name="FlashVars" value="mp3={$key.path_audio}" />
@@ -126,7 +121,7 @@
 						<td class="hidden-phone">
 							<div class="progress">
 								<div class="bar bar-warning" style="width:{$key.duration_in_pr}%;"><small>{$key.duration_in}</small></div>
-								<div class="bar bar-success" style="width:{$key.duration_call_pr}%;"><b>{$key.duration_call}</b></div>
+								<div class="bar bar-success" style="width:{$key.duration_call_pr}%;"><strong>{$key.duration_call}</strong></div>
 								<div class="bar bar-danger" style="width:{$key.duration_error_pr}%;">{$key.duration_error}</div>
 							</div>
 						</td>
@@ -138,6 +133,7 @@
 		</div>
 	</div>
 </div>
+
 
 <div class="container-fluid">
 	<div class="row-fluid">
@@ -154,5 +150,54 @@
 				</ul>
 			</div>
 		</div>
+	</div>
+</div>
+
+{if $stat}
+	{if isset($stat.count_all)}
+		{if ($stat.count_all>0)}
+
+<div class="container-fluid">
+	<div class="row-fluid">
+	
+			<div class="span12">
+				<div class="well well-small">
+					<h4>Статистика</h4>
+
+					<strong>По времени разговора</strong>
+					<div class="progress">
+						<div class="bar bar-danger" style="width: {$stat.pr_limit_1}%;"></div>
+						<div class="bar bar-warning" style="width: {$stat.pr_limit_2}%;"></div>
+						<div class="bar bar-info" style="width: {$stat.pr_limit_3}%;"></div>
+						<div class="bar bar-success" style="width: {$stat.pr_limit_4}%;"></div>
+					</div>
+					<form class="form-inline">
+						<label><span class="badge badge badge-important">{$stat.count_limit_1}</span> <small>0</small></label>
+						<label><span class="badge badge-warning">{$stat.count_limit_2}</span> <small>0-10c.</small></label>
+						<label><span class="badge badge-info">{$stat.count_limit_3}</span> <small>10-30c.</small></label>
+						<label><span class="badge badge-success">{$stat.count_limit_4}</span> <small>>30c.</small></label>
+					</form>
+
+					<strong>По статусам звонков</strong>
+					<div class="progress">
+						<div class="bar bar-danger" style="width: {$stat.pr_failed}%;"></div>
+						<div class="bar bar-warning" style="width: {$stat.pr_busy}%;"></div>
+						<div class="bar bar-info" style="width: {$stat.pr_no_answer}%;"></div>
+						<div class="bar bar-success" style="width: {$stat.pr_answered}%;"></div>
+					</div>
+					<form class="form-inline">
+						<label><span class="badge badge-important">{$stat.count_failed}</span> <small>Отменен</small></label>
+						<label><span class="badge badge-warning">{$stat.count_busy}</span> <small>Занято</small></label>
+						<label><span class="badge badge-info">{$stat.count_no_answer}</span> <small>Не отвечено</small></label>
+						<label><span class="badge badge-success">{$stat.count_answered}</span> <small>Отвечено</small></label>
+					</form>
+
+				</div>				
+			</div>
+
+		{/if}
+	{/if}
+{/if}
+
 	</div>
 </div>

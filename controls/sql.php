@@ -28,10 +28,25 @@ function cdr($s="") {
 		$s.="(dst LIKE '%".calls::$search."%')";
 		$s.=") ";
 	}
-		$s.="ORDER by `calldate` ASC ".
-			"LIMIT 0 , 50 ";
+		$s.="ORDER by `calldate` DESC ".
+			"LIMIT 0 , 20 ";
 	return $s;
 }
 
+function stat($s="") {
+	$s.="SELECT ";
+	$s.="(select count(*) from `cdr` where (disposition='NO ANSWER')) as count_no_answer, ";
+	$s.="(select count(*) from `cdr` where (disposition='ANSWERED')) as count_answered, ";
+	$s.="(select count(*) from `cdr` where (disposition='BUSY')) as count_busy, ";
+	$s.="(select count(*) from `cdr` where (disposition='FAILED')) as count_failed, ";
+	$s.="(select count(*) from `cdr` where (billsec=0)) as count_limit_1, ";
+	$s.="(select count(*) from `cdr` where (billsec>0) and (billsec<=10)) as count_limit_2, ";
+	$s.="(select count(*) from `cdr` where (billsec>10) and (billsec<=30)) as count_limit_3, ";
+	$s.="(select count(*) from `cdr` where (billsec>30)) as count_limit_4, ";
+	$s.="(select count(*) from `cdr` where (1=1)) as count_all ";
+	$s.="FROM `cdr` ";
+	$s.="WHERE (1=1) ";
+	return $s;
+}
 
 } ?>
