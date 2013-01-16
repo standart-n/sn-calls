@@ -3,14 +3,24 @@ body {
   padding-bottom: 20px;
 }
 
+a.pause {
+  display: none;
+}
+
+#player {
+  display: block;
+  float: left;
+  margin: 7px 0 7px 20px;
+}
+
 #player-wrap {
   position: fixed;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 100;
   display: none;
-  height: auto;
-  padding: 7px 0 7px 20px;
+  height: 36px;
   background-color: #1b1b1b;
   background-image: -moz-linear-gradient(top, #222222, #111111);
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#222222), to(#111111));

@@ -110,8 +110,9 @@
 							{if (!$key.listen)}
 								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
 							{else}
-								<a href="#" class="btn btn-primary btn-small track" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"></i></a>
-								<a href="#" class="btn btn-small"><i class="icon-download-alt"></i></a>
+								<a href="#" class="btn btn-primary btn-small play" data-id="{$key.id}" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"> </i></a>
+								<a href="#" class="btn btn-small pause" data-id="{$key.id}"><i class="icon-pause"> </i></a>
+								<a href="#" class="btn btn-small"><i class="icon-download-alt"> </i></a>
 								<!--
 								<object type="application/x-shockwave-flash" data="{$key.path_player}" width="100" height="20">
 									<param name="movie" value="{$key.path_player}" />
