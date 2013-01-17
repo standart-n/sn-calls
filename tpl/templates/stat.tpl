@@ -8,7 +8,7 @@
 	
 			<div class="span12">
 				<div class="well well-small">
-					<h4>Статистика</h4>
+					<h4>Статистика <small></small></h4>
 
 					<strong>По времени разговора</strong>
 					<div class="progress">
@@ -18,7 +18,7 @@
 						<div class="bar bar-success" style="width: {$stat.pr_limit_4}%;"></div>
 					</div>
 					<form class="form-inline">
-						<label><span class="badge badge badge-important">{$stat.count_limit_1}</span> <small>0</small></label>
+						<label><span class="badge badge badge-important">{$stat.count_limit_1}</span> <small>0c.</small></label>
 						<label><span class="badge badge-warning">{$stat.count_limit_2}</span> <small>0-10c.</small></label>
 						<label><span class="badge badge-info">{$stat.count_limit_3}</span> <small>10-30c.</small></label>
 						<label><span class="badge badge-success">{$stat.count_limit_4}</span> <small>>30c.</small></label>

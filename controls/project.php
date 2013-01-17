@@ -8,6 +8,7 @@ function engine() {
 	
 	
 	load("index.tpl");
+	assign('controls',calls::controls());
 	innerHTML("#controls",fetch("controls.tpl"));
 	assign('cdr',calls::cdr());
 	innerHTML("#table",fetch("table.tpl"));

@@ -6,30 +6,30 @@
 				<div class="well well-small">
 					<form class="form-inline">
 						<div class="input-append">
-							<input type="text" class="input-medium" placeholder="От кого">
+							<input id="src" type="text" class="input-medium" placeholder="От кого" value="{$controls.src}">
 							<span class="add-on"><i class="icon-user"></i></span>
 						</div>
 						<div class="input-append">
-							<input type="text" class="input-medium" placeholder="Кому">
+							<input id="dst" type="text" class="input-medium" placeholder="Кому" value="{$controls.dst}">
 							<span class="add-on"><i class="icon-user"></i></span>
 						</div>
 				  	
-				  		<div class="input-append date" id="dp1" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-							<input id="date1" class="input-small" size="16" type="text" value="12-02-2012">
+				  		<div class="input-append date" id="dp1" data-date="{$controls.date1}" data-date-format="dd-mm-yyyy">
+							<input id="date1" class="input-small" size="16" type="text" value="{$controls.date1}">
 							<span class="add-on"><i class="icon-th"></i></span>
 						</div>
-						<div class="input-append date" id="dp2" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
-							<input id="date2" class="input-small" size="16" type="text" value="12-02-2012">
+						<div class="input-append date" id="dp2" data-date="{$controls.date2}" data-date-format="dd-mm-yyyy">
+							<input id="date2" class="input-small" size="16" type="text" value="{$controls.date2}">
 							<span class="add-on"><i class="icon-th"></i></span>
 						</div>
 					</form>
 
 					<form class="form-inline">
 						<label class="checkbox">
-							<input type="checkbox" checked>Показывать неотвеченные
+							<input id="cb_no_answer" type="checkbox" {$controls.cb_no_answer}>Показывать неотвеченные
 						</label>
 						<label class="checkbox">
-							<input type="checkbox" checked>Показывать короткие звонки
+							<input id="cb_short_calls" type="checkbox" {$controls.cb_short_calls}>Показывать короткие звонки
 						</label>
 					</form>
 
@@ -57,7 +57,7 @@
 					</form>
 
 					<form class="form-inline">
-						<a href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
+						<a id="submit" href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
 					</form>
 
 					<div id="loading">

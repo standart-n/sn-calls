@@ -1,9 +1,29 @@
 <?php class calls extends sn {
 
 public static $search;
+public static $src;
+public static $dst;
+public static $src_name;
+public static $dst_name;
+public static $date1;
+public static $date2;
+public static $cb_no_answer;
+public static $cb_short_calls;
 
 function __construct() {
 
+}
+
+function defData() {
+	self::$src="";
+	self::$dst="";
+	self::$src_name="";
+	self::$dst_name="";
+
+	self::$date1=date("d-m-Y",strtotime("+1 day"));
+	self::$date2=date('d-m-Y');
+	self::$cb_no_answer="checked";
+	self::$cb_short_calls="checked";		
 }
 
 function cdr($j=array(),$i=-1) {
@@ -116,6 +136,17 @@ function stat($j=array()) {
 			}
 		}
 	}
+	if (sizeof($j)>0) { return $j; }
+	return false;
+}
+
+function controls($j=array()) {
+	$j['src']=self::$src;
+	$j['dst']=self::$src;
+	$j['date1']=self::$date1;
+	$j['date2']=self::$date2;
+	$j['cb_no_answer']=self::$cb_no_answer;
+	$j['cb_short_calls']=self::$cb_short_calls;
 	if (sizeof($j)>0) { return $j; }
 	return false;
 }
