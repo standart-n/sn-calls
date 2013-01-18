@@ -15,6 +15,7 @@
 			$.extend(true,def,options);
 			return this.each(function(){
 				$(this).data('sn',def);
+				$(this).snTriggers();
 				$(this).snEvents({'href':'#autoload'});
 			});
 		}
@@ -47,8 +48,11 @@
 			var def={
 				'type':'json',
 				'debug':false,
-				'action':'build',
-				'card':''
+				'action':'submit',
+				'src':$('#src').val(),
+				'dst':$('#dst').val(),
+				'date1':$('#date1').val(),
+				'date2':$('#date2').val()
 			};
 			$.extend(true,def,options);
 			if (def.debug) { def.type='text'; }
@@ -58,26 +62,32 @@
 				type:'POST',
 				data:{
 					action:def.action,
-					card:def.card
+					src:def.src,
+					dst:def.dst,
+					date1:def.date1,
+					date2:def.date2
 				},
 				dataType:def.type,
 				timeout:10000,
 				beforeSend:function(){
-					//$("#status").empty().addClass("loading");
+					$("#loading").show();
 				},
 				success:function(s){
-					//$.extend(true,sn.result,s);
-					sn.result=s;
-					if (def.debug) { alert(s); }
-					//$("#status").empty().removeClass("loading");
+					if (typeof s==='object') { 
+						$.extend(true,sn.result,s); 
+					} else { 
+						if (def.debug) { alert(s); }
+						sn.result=s;
+					}
 					$(this).data('sn',sn);
-					//if (sn.result.status) { $("#status").html(sn.result.status); }
-					//if (sn.result.alert) { alert(sn.result.alert); }
-					$(this).snEvents({'href':'#afterCheckCard'});
-					//if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }
+					if (typeof sn.result==='object') {
+						if (sn.result.alert) { alert(sn.result.alert); }
+						if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }					
+					}
+					$("#loading").hide();
 				},
 				error:function(XMLHttpRequest,textStatus,error){ 
-					$("#status").html(error).removeClass("loading");
+					$("#loading").hide();
 				}
 			});
 		}
@@ -215,38 +225,27 @@
 					'href':"none"
 				};
 				$.extend(true,def,options);
+				var sn=$(this).data('sn');
 				var href=def.href;
 				switch (href.replace(/(.*)#(.*)/,"$2")){
 					case "autoload":
-						var sn=$(this).data('sn');
 						$('#dp1').datepicker();
 						$('#dp2').datepicker();
 						$(this).snPlayer();
 					break;
-					case "checkCard":
-						var card_val=$("#bonus-area-input input").val();
-						alert(card_val);
-						/*$(this).snAjax('sendRequest',{'action':'show','card':card_val,'debug':false});*/
+					case "submit":
+						$(this).snAjax('sendRequest',{'action':'submit','debug':false});
 					break;
-					case "afterCheckCard":
-						sn=$(this).data('sn');
-						var rt=false;
-						/*$("#bonus-response-outer").show();*/
+					case "afterSubmit":
 						if (sn.result) {
-							if (sn.result.bonus) {
-								if (sn.result.bonus.exists!==undefined) {
-									$("#bonus-exists").html(sn.result.bonus.exists);
-									$("#bonus-summ").show();
-									$("#bonus-fail").hide();
-									rt=true;
-								}
+							$(this).snPlayer('onClickPlay');
+							if (sn.result.table) {
+								$("#table").html(sn.result.table);
+							}
+							if (sn.result.stat) {
+								$("#stat").html(sn.result.stat);
 							}
 						}
-						if (!rt) {
-							$("#bonus-summ").hide();
-							$("#bonus-fail").show();
-						}
-						$("#bonus-response-outer").slideDown();
 					break;
 					case "close":
 						$(this).hide();
@@ -272,36 +271,14 @@
 	var methods={
 		init:function(options)
 		{
-			return this.each(function(){
-			});
+			$(this).snTriggers('eventLinks');
 		},
-		bonusForm:function()
+		eventLinks:function()
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$("#bonus-area-input input").on("focus",function(){
-				$(this).removeClass("bonus-input-blur").addClass("bonus-input-focus").select();
-				if (sn.bonus.inputText) {
-					if ($(this).val()==sn.bonus.inputText) {
-						$(this).val("");
-					}
-				}
-			});
-			$("#bonus-area-input input").on("blur",function(){
-				$(this).removeClass("bonus-input-focus").addClass("bonus-input-blur");
-				if (sn.bonus.inputText) {
-					if ($(this).val()==="") {
-						$(this).val(sn.bonus.inputText);
-					}
-				}
-			});
-			$("#bonus-link-check").on("click",function(e){
-				e.preventDefault();
-				th.snEvents({'href':'#checkCard'});
-			});
-			$("#bonus-form").on("submit",function(e){
-				e.preventDefault();
-				th.snEvents({'href':'#checkCard'});
+			$("a.event").on("click",function(){
+				th.snEvents({'href':$(this).attr("href")});
 			});
 		}
 	};

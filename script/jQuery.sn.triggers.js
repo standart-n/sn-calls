@@ -3,36 +3,14 @@
 	var methods={
 		init:function(options)
 		{
-			return this.each(function(){
-			});
+			$(this).snTriggers('eventLinks');
 		},
-		bonusForm:function()
+		eventLinks:function()
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$("#bonus-area-input input").on("focus",function(){
-				$(this).removeClass("bonus-input-blur").addClass("bonus-input-focus").select();
-				if (sn.bonus.inputText) {
-					if ($(this).val()==sn.bonus.inputText) {
-						$(this).val("");
-					}
-				}
-			});
-			$("#bonus-area-input input").on("blur",function(){
-				$(this).removeClass("bonus-input-focus").addClass("bonus-input-blur");
-				if (sn.bonus.inputText) {
-					if ($(this).val()==="") {
-						$(this).val(sn.bonus.inputText);
-					}
-				}
-			});
-			$("#bonus-link-check").on("click",function(e){
-				e.preventDefault();
-				th.snEvents({'href':'#checkCard'});
-			});
-			$("#bonus-form").on("submit",function(e){
-				e.preventDefault();
-				th.snEvents({'href':'#checkCard'});
+			$("a.event").on("click",function(){
+				th.snEvents({'href':$(this).attr("href")});
 			});
 		}
 	};

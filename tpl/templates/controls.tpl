@@ -57,7 +57,7 @@
 					</form>
 
 					<form class="form-inline">
-						<a id="submit" href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white"></i> Применить</a>
+						<a id="submit" href="#submit" class="btn btn-primary btn-medium event"><i class="icon-ok icon-white"></i> Применить</a>
 					</form>
 
 					<div id="loading">

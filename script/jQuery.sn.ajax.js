@@ -13,8 +13,11 @@
 			var def={
 				'type':'json',
 				'debug':false,
-				'action':'build',
-				'card':''
+				'action':'submit',
+				'src':$('#src').val(),
+				'dst':$('#dst').val(),
+				'date1':$('#date1').val(),
+				'date2':$('#date2').val()
 			};
 			$.extend(true,def,options);
 			if (def.debug) { def.type='text'; }
@@ -24,26 +27,32 @@
 				type:'POST',
 				data:{
 					action:def.action,
-					card:def.card
+					src:def.src,
+					dst:def.dst,
+					date1:def.date1,
+					date2:def.date2
 				},
 				dataType:def.type,
 				timeout:10000,
 				beforeSend:function(){
-					//$("#status").empty().addClass("loading");
+					$("#loading").show();
 				},
 				success:function(s){
-					//$.extend(true,sn.result,s);
-					sn.result=s;
-					if (def.debug) { alert(s); }
-					//$("#status").empty().removeClass("loading");
+					if (typeof s==='object') { 
+						$.extend(true,sn.result,s); 
+					} else { 
+						if (def.debug) { alert(s); }
+						sn.result=s;
+					}
 					$(this).data('sn',sn);
-					//if (sn.result.status) { $("#status").html(sn.result.status); }
-					//if (sn.result.alert) { alert(sn.result.alert); }
-					$(this).snEvents({'href':'#afterCheckCard'});
-					//if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }
+					if (typeof sn.result==='object') {
+						if (sn.result.alert) { alert(sn.result.alert); }
+						if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }					
+					}
+					$("#loading").hide();
 				},
 				error:function(XMLHttpRequest,textStatus,error){ 
-					$("#status").html(error).removeClass("loading");
+					$("#loading").hide();
 				}
 			});
 		}

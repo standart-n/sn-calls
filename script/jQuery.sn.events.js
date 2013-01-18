@@ -8,38 +8,27 @@
 					'href':"none"
 				};
 				$.extend(true,def,options);
+				var sn=$(this).data('sn');
 				var href=def.href;
 				switch (href.replace(/(.*)#(.*)/,"$2")){
 					case "autoload":
-						var sn=$(this).data('sn');
 						$('#dp1').datepicker();
 						$('#dp2').datepicker();
 						$(this).snPlayer();
 					break;
-					case "checkCard":
-						var card_val=$("#bonus-area-input input").val();
-						alert(card_val);
-						/*$(this).snAjax('sendRequest',{'action':'show','card':card_val,'debug':false});*/
+					case "submit":
+						$(this).snAjax('sendRequest',{'action':'submit','debug':false});
 					break;
-					case "afterCheckCard":
-						sn=$(this).data('sn');
-						var rt=false;
-						/*$("#bonus-response-outer").show();*/
+					case "afterSubmit":
 						if (sn.result) {
-							if (sn.result.bonus) {
-								if (sn.result.bonus.exists!==undefined) {
-									$("#bonus-exists").html(sn.result.bonus.exists);
-									$("#bonus-summ").show();
-									$("#bonus-fail").hide();
-									rt=true;
-								}
+							$(this).snPlayer('onClickPlay');
+							if (sn.result.table) {
+								$("#table").html(sn.result.table);
+							}
+							if (sn.result.stat) {
+								$("#stat").html(sn.result.stat);
 							}
 						}
-						if (!rt) {
-							$("#bonus-summ").hide();
-							$("#bonus-fail").show();
-						}
-						$("#bonus-response-outer").slideDown();
 					break;
 					case "close":
 						$(this).hide();

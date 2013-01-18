@@ -7,11 +7,13 @@ public static $src_name;
 public static $dst_name;
 public static $date1;
 public static $date2;
+public static $date1_format;
+public static $date2_format;
 public static $cb_no_answer;
 public static $cb_short_calls;
 
 function __construct() {
-
+	self::defData();
 }
 
 function defData() {
@@ -19,11 +21,35 @@ function defData() {
 	self::$dst="";
 	self::$src_name="";
 	self::$dst_name="";
-
-	self::$date1=date("d-m-Y",strtotime("+1 day"));
+	//self::$date1=date("d-m-Y",strtotime("-7 day"));
+	self::$date1=date("d-m-Y",strtotime("-365 day"));
 	self::$date2=date('d-m-Y');
 	self::$cb_no_answer="checked";
-	self::$cb_short_calls="checked";		
+	self::$cb_short_calls="checked";
+	self::checkDate();
+}
+
+function getDataFromUrl() {
+	if (isset(url::$src)) { self::$src=url::$src; }
+	if (isset(url::$dst)) { self::$dst=url::$dst; }
+	if (isset(url::$date1)) { self::$date1=url::$date1; }
+	if (isset(url::$date2)) { self::$date2=url::$date2; }
+	if (isset(url::$cb_no_answer)) { self::$cb_no_answer=url::$cb_no_answer; }
+	if (isset(url::$cb_short_calls)) { self::$cb_short_calls=url::$cb_short_calls; }		
+	self::checkDate();
+}
+
+function checkDate() {
+	if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',self::$date1)) {
+		self::$date1_format=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',self::$date1);
+	} else {
+		self::$date1_format=date('Y-m-d H:i:s',strtotime("-365 day"));
+	}
+	if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',self::$date2)) {
+		self::$date2_format=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',self::$date2);
+	} else {
+		self::$date2_format=date('Y-m-d H:i:s');
+	}
 }
 
 function cdr($j=array(),$i=-1) {
@@ -147,8 +173,7 @@ function controls($j=array()) {
 	$j['date2']=self::$date2;
 	$j['cb_no_answer']=self::$cb_no_answer;
 	$j['cb_short_calls']=self::$cb_short_calls;
-	if (sizeof($j)>0) { return $j; }
-	return false;
+	return $j;
 }
 
 function cutName($a="") {

@@ -6,17 +6,17 @@ function __construct() {
 	self::$response=array();
 	if (self::getControls()) {
 		if (self::getAction()) {
-			return self::getResponseString(json_encode(self::$response));
+			echo self::getResponseString(json_encode(self::$response));
 		}
 	}	
 }
 
 function getResponseString($s="") {
-	if ($s!="") {
+	if ($s) {
 		console::write("---");
 		console::write("response:");
 		console::write($s);
-		if (url::$callback) {
+		if (isset(url::$callback)) {
 			return url::$callback."(".$s.");";
 		} else {
 			return $s;
@@ -26,11 +26,12 @@ function getResponseString($s="") {
 }
 
 function getAction() {
-	if (url::$action) {
+	if (isset(url::$action)) {
 		console::write("action: ".url::$action);
+		calls::getDataFromUrl();
 		switch(url::$action) {
 			case "submit":
-				self::$response=project::submit(); return true;
+				self::$response=project::submit(); return true;				
 			break;
 		}
 	}

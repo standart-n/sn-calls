@@ -15,6 +15,7 @@
 			$.extend(true,def,options);
 			return this.each(function(){
 				$(this).data('sn',def);
+				$(this).snTriggers();
 				$(this).snEvents({'href':'#autoload'});
 			});
 		}
