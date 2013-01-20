@@ -23,17 +23,14 @@
 							<span class="add-on"><i class="icon-th"></i></span>
 						</div>
 					</form>
-
+					<!--
 					<form class="form-inline">
-						<!--
 						<label class="checkbox">
-							<input id="cb_no_answer" type="checkbox" {$controls.cb_no_answer}>Показывать неотвеченные
-						</label>
-						-->
-						<label class="checkbox">
-							<input id="cb_short_calls" type="checkbox" {$controls.cb_short_calls}>Показывать короткие звонки
+							<input id="cb_short_calls" data-cb="show_short_calls" class="cb" type="checkbox" checked>Показывать короткие звонки
+							<input id="show_short_calls" type="hidden" value="on">
 						</label>
 					</form>
+					-->
 
 					<form class="form-inline">
 						<label class="hidden-phone">Выводить по </label>

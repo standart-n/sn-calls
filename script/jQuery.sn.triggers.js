@@ -4,6 +4,7 @@
 		init:function(options)
 		{
 			$(this).snTriggers('eventLinks');
+			$(this).snTriggers('cb');
 			$(this).snTriggers('limit');
 			$(this).snTriggers('filters');
 			$(this).snTriggers('sort');
@@ -14,6 +15,19 @@
 			sn=$(this).data('sn');
 			$("a.event").on("click",function(){
 				th.snEvents({'href':$(this).attr("href")});
+			});
+		},
+		cb:function()
+		{
+			th=$(this);
+			sn=$(this).data('sn');
+			$(".cb").on("click",function(){
+				if ($(this).is(':checked')) {
+					$('#'+$(this).data('cb')).val('on');
+				} else {
+					$('#'+$(this).data('cb')).val('off');
+				}				
+				th.snEvents({'href':'#submit'});
 			});
 		},
 		limit:function()

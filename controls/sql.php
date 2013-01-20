@@ -77,6 +77,12 @@ function search($s="") {
 		$s.=") ";
 	}
 
+	if (isset(calls::$show_short_calls)) {
+		if (calls::$show_short_calls=='off') {
+			$s.=" AND (billsec>10) ";
+		}
+	}
+
 	if (isset(calls::$show_answered)) {
 		if (calls::$show_answered=='off') {
 			$s.=" AND (disposition<>'ANSWERED') ";

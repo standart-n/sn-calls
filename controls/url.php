@@ -7,11 +7,12 @@ public static $dst;
 public static $src;
 public static $date1;
 public static $date2;
+public static $page;
 public static $limit;
 public static $order;
 public static $grad;
-public static $cb_no_answer;
-public static $cb_short_calls;
+
+public static $show_short_calls;
 
 public static $show_answered;
 public static $show_no_answer;
@@ -42,12 +43,6 @@ function __construct() {
 	if (isset($_REQUEST["date2"])) {
 		self::$date2=trim(strval($_REQUEST["date2"]));
 	}
-	if (isset($_REQUEST["cb_no_answer"])) {
-		self::$cb_no_answer=trim(strval($_REQUEST["cb_no_answer"]));
-	}
-	if (isset($_REQUEST["cb_short_calls"])) {
-		self::$cb_short_calls=trim(strval($_REQUEST["cb_short_calls"]));
-	}
 	if (isset($_REQUEST["limit"])) {
 		self::$limit=trim(intval($_REQUEST["limit"]));
 	}
@@ -56,6 +51,10 @@ function __construct() {
 	}
 	if (isset($_REQUEST["grad"])) {
 		self::$grad=trim(strtolower(strval($_REQUEST["grad"])));
+	}
+
+	if (isset($_REQUEST["show_short_calls"])) {
+		self::$show_short_calls=trim(strval($_REQUEST["show_short_calls"]));
 	}
 
 	if (isset($_REQUEST["show_answered"])) {

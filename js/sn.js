@@ -56,6 +56,7 @@
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
+				'show_short_calls':$('#show_short_calls').val(),
 				'show_answered':$('#show_answered').val(),
 				'show_no_answer':$('#show_no_answer').val(),
 				'show_busy':$('#show_busy').val(),
@@ -80,6 +81,7 @@
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
+					show_short_calls:def.show_short_calls,
 					show_answered:def.show_answered,
 					show_no_answer:def.show_no_answer,
 					show_busy:def.show_busy,
@@ -296,6 +298,7 @@
 		init:function(options)
 		{
 			$(this).snTriggers('eventLinks');
+			$(this).snTriggers('cb');
 			$(this).snTriggers('limit');
 			$(this).snTriggers('filters');
 			$(this).snTriggers('sort');
@@ -306,6 +309,19 @@
 			sn=$(this).data('sn');
 			$("a.event").on("click",function(){
 				th.snEvents({'href':$(this).attr("href")});
+			});
+		},
+		cb:function()
+		{
+			th=$(this);
+			sn=$(this).data('sn');
+			$(".cb").on("click",function(){
+				if ($(this).is(':checked')) {
+					$('#'+$(this).data('cb')).val('on');
+				} else {
+					$('#'+$(this).data('cb')).val('off');
+				}				
+				th.snEvents({'href':'#submit'});
 			});
 		},
 		limit:function()

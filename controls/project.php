@@ -30,9 +30,9 @@ function submit($j=array()) {
 	$j['table']=fetch("table.tpl");
 	assign('stat',calls::stat());
 	$j['stat']=fetch("stat.tpl");
-	$j['alert']=sql::$request;
 	$j['callback']="afterSubmit";
 	$j['tm']=time();
+	//$j['alert']=sql::$request;
 	return $j;
 }
 

@@ -10,8 +10,8 @@ public static $order;
 public static $grad;
 public static $date1;
 public static $date2;
-public static $cb_no_answer;
-public static $cb_short_calls;
+
+public static $show_short_calls;
 
 public static $show_answered;
 public static $show_no_answer;
@@ -38,8 +38,8 @@ function defData() {
 	//self::$date1=date("d-m-Y",strtotime("-7 day"));
 	self::$date1=date("d-m-Y",strtotime("-365 day"));
 	self::$date2=date('d-m-Y');
-	self::$cb_no_answer="on";
-	self::$cb_short_calls="on";
+
+	self::$show_short_calls="on";
 
 	self::$show_answered="on";
 	self::$show_no_answer="on";
@@ -57,8 +57,6 @@ function getDataFromUrl() {
 	if (isset(url::$src)) { self::$src=url::$src; }
 	if (isset(url::$dst)) { self::$dst=url::$dst; }
 	if (isset(url::$limit)) { self::$limit=url::$limit; }
-	if (isset(url::$cb_no_answer)) { self::$cb_no_answer=url::$cb_no_answer; }
-	if (isset(url::$cb_short_calls)) { self::$cb_short_calls=url::$cb_short_calls; }
 	if (isset(url::$limit)) {
 		if ((intval(url::$limit)>0) && (intval(url::$limit)<100)) { self::$limit=url::$limit; }
 	}
@@ -82,6 +80,8 @@ function getDataFromUrl() {
 			self::$grad=url::$grad;
 		}
 	}
+
+	if (isset(url::$show_short_calls)) { self::$show_short_calls=url::$show_short_calls; }
 
 	if (isset(url::$show_answered)) { self::$show_answered=url::$show_answered; }
 	if (isset(url::$show_no_answer)) { self::$show_no_answer=url::$show_no_answer; }
@@ -214,8 +214,8 @@ function controls($j=array()) {
 	$j['dst']=self::$src;
 	$j['date1']=self::$date1;
 	$j['date2']=self::$date2;
-	$j['cb_no_answer']=self::$cb_no_answer;
-	$j['cb_short_calls']=self::$cb_short_calls;
+	$j['show_no_answer']=self::$show_no_answer;
+	$j['show_short_calls']=self::$show_short_calls;
 	return $j;
 }
 
