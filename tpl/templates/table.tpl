@@ -5,14 +5,68 @@
 		<table class="table table-bordered table-condensed table-striped">
 			<thead>
 				<tr>
-					<th>Дата</th>
-					<th>От_кого</th>
-					<th class="hidden">Номер</th>
-					<th>Кому</th>
-					<th class="hidden">Номер</th>
-					<th>Запись</th>
-					<th class="hidden-phone">Действие</th>
-					<th class="hidden-phone">Длит.(c)</th>
+					<th>
+						{if ($order=="calldate")}
+							<a href="#" class="sort btn btn-mini btn-primary" data-order="calldate" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
+								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Дата
+							</a>
+						{else}
+							<a href="#" class="sort btn btn-mini" data-order="calldate" data-grad="asc">
+								<i class="icon-arrow-up"></i> Дата
+							</a>
+						{/if}
+					</th>
+					<th>
+						{if ($order=="src_name")}
+							<a href="#" class="sort btn btn-mini btn-primary" data-order="src_name" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
+								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> От кого
+							</a>
+						{else}
+							<a href="#" class="sort btn btn-mini" data-order="src_name" data-grad="asc">
+								<i class="icon-arrow-up"></i> От кого
+							</a>
+						{/if}
+					</th>
+					<th class="hidden">
+						Номер
+					</th>
+					<th>
+						{if ($order=="dst_name")}
+							<a href="#" class="sort btn btn-mini btn-primary" data-order="dst_name" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
+								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Кому
+							</a>
+						{else}
+							<a href="#" class="sort btn btn-mini" data-order="dst_name" data-grad="asc">
+								<i class="icon-arrow-up"></i> Кому
+							</a>
+						{/if}
+					</th>
+					<th class="hidden">
+						Номер
+					</th>
+					<th>
+						<a href="#" class="btn btn-mini disabled">
+							Запись
+						</a>
+					</th>
+					<th class="hidden-phone">
+						<a href="#" class="btn btn-mini disabled">
+							Посл. действ.
+						</a>
+					</th>
+					<th class="hidden-phone">
+						{if ($order=="billsec")}
+							<a href="#" class="sort btn btn-mini btn-primary" data-order="billsec" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
+								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Длит. (c)
+							</a>
+						{else}
+							<a href="#" class="sort btn btn-mini" data-order="billsec" data-grad="asc">
+								<i class="icon-arrow-up"></i> Длит. (c)
+							</a>
+						{/if}
+					</th>
+					<input id="order" type="hidden" value="calldate">
+					<input id="grad" type="hidden" value="asc">
 				</tr>
 			</thead>
 			<tbody>

@@ -24,6 +24,8 @@
 							$(this).snPlayer('onClickPlay');
 							if (sn.result.table) {
 								$("#table").html(sn.result.table);
+								$(this).snTriggers('sort');
+								$(this).snPlayer('onClickPlay');
 							}
 							if (sn.result.stat) {
 								$("#stat").html(sn.result.stat);

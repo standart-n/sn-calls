@@ -25,9 +25,11 @@
 					</form>
 
 					<form class="form-inline">
+						<!--
 						<label class="checkbox">
 							<input id="cb_no_answer" type="checkbox" {$controls.cb_no_answer}>Показывать неотвеченные
 						</label>
+						-->
 						<label class="checkbox">
 							<input id="cb_short_calls" type="checkbox" {$controls.cb_short_calls}>Показывать короткие звонки
 						</label>
@@ -35,24 +37,39 @@
 
 					<form class="form-inline">
 						<label class="hidden-phone">Выводить по </label>
-						<div class="btn-group">
-							<a href="#" class="btn btn-small">10</a>
-							<a href="#" class="btn btn-small active">20</a>
-							<a href="#" class="btn btn-small hidden-phone">30</a>
-							<a href="#" class="btn btn-small">40</a>
+						<div class="btn-group limit">
+							<a href="#" class="btn btn-small" data-limit="10">10</a>
+							<a href="#" class="btn btn-small active" data-limit="20">20</a>
+							<a href="#" class="btn btn-small hidden-phone" data-limit="30">30</a>
+							<a href="#" class="btn btn-small" data-limit="40">40</a>
+							<input id="limit" type="hidden" value="20">
 						</div>
 						<div class="btn-group">
 							<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
-								Сортировать по
+								Фильтры
 								<span class="caret"></span>
 							</a>
-							<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-								<li><a tabindex="-1" href="#"><i class="icon-arrow-up"></i> От кого</a></li>
-								<li><a tabindex="-1" href="#"><i class="icon-arrow-down"></i> От кого</a></li>
+							<ul class="dropdown-menu filters" role="menu" aria-labelledby="dLabel">
+								<li class="nav-header">Статусы</li>
+								<li><a data-cb="show_answered" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Отвеченные</a></li>
+								<li><a data-cb="show_no_answer" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Не отвеченные</a></li>
+								<li><a data-cb="show_busy" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Занято</a></li>
+								<li><a data-cb="show_failed" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Отмененные</a></li>
 								<li class="divider"></li>
-								<li><a tabindex="-1" href="#"><i class="icon-arrow-up"></i> Кому</a></li>
-								<li><a tabindex="-1" href="#"><i class="icon-arrow-down"></i> Кому</a></li>
+								<li class="nav-header">Посл. действ.</li>
+								<li><a data-cb="show_dial" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Вызов</a></li>
+								<li><a data-cb="show_playback" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> ИВР</a></li>
+								<li><a data-cb="show_wait" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Ожидание</a></li>
+								<li><a data-cb="show_hangup" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Сброшено</a></li>
 							</ul>
+							<input id="show_answered" type="hidden" value="on">
+							<input id="show_no_answer" type="hidden" value="on">
+							<input id="show_busy" type="hidden" value="on">
+							<input id="show_failed" type="hidden" value="on">
+							<input id="show_hangup" type="hidden" value="on">
+							<input id="show_playback" type="hidden" value="on">
+							<input id="show_dial" type="hidden" value="on">
+							<input id="show_wait" type="hidden" value="on">
 						</div>
 					</form>
 

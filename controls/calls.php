@@ -3,14 +3,25 @@
 public static $search;
 public static $src;
 public static $dst;
+public static $limit;
 public static $src_name;
 public static $dst_name;
+public static $order;
+public static $grad;
 public static $date1;
 public static $date2;
-public static $date1_format;
-public static $date2_format;
 public static $cb_no_answer;
 public static $cb_short_calls;
+
+public static $show_answered;
+public static $show_no_answer;
+public static $show_busy;
+public static $show_failed;
+
+public static $show_playback;
+public static $show_dial;
+public static $show_wait;
+public static $show_hangup;
 
 function __construct() {
 	self::defData();
@@ -19,37 +30,69 @@ function __construct() {
 function defData() {
 	self::$src="";
 	self::$dst="";
+	self::$order="calldate";
+	self::$grad="desc";
+	self::$limit=20;
 	self::$src_name="";
 	self::$dst_name="";
 	//self::$date1=date("d-m-Y",strtotime("-7 day"));
 	self::$date1=date("d-m-Y",strtotime("-365 day"));
 	self::$date2=date('d-m-Y');
-	self::$cb_no_answer="checked";
-	self::$cb_short_calls="checked";
-	self::checkDate();
+	self::$cb_no_answer="on";
+	self::$cb_short_calls="on";
+
+	self::$show_answered="on";
+	self::$show_no_answer="on";
+	self::$show_busy="on";
+	self::$show_failed="on";
+
+	self::$show_playback="on";
+	self::$show_dial="on";
+	self::$show_wait="on";
+	self::$show_hangup="on";
+
 }
 
 function getDataFromUrl() {
 	if (isset(url::$src)) { self::$src=url::$src; }
 	if (isset(url::$dst)) { self::$dst=url::$dst; }
-	if (isset(url::$date1)) { self::$date1=url::$date1; }
-	if (isset(url::$date2)) { self::$date2=url::$date2; }
+	if (isset(url::$limit)) { self::$limit=url::$limit; }
 	if (isset(url::$cb_no_answer)) { self::$cb_no_answer=url::$cb_no_answer; }
-	if (isset(url::$cb_short_calls)) { self::$cb_short_calls=url::$cb_short_calls; }		
-	self::checkDate();
-}
+	if (isset(url::$cb_short_calls)) { self::$cb_short_calls=url::$cb_short_calls; }
+	if (isset(url::$limit)) {
+		if ((intval(url::$limit)>0) && (intval(url::$limit)<100)) { self::$limit=url::$limit; }
+	}
+	if (isset(url::$date1)) {
+		if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',url::$date1)) {
+			self::$date1=url::$date1;
+		}
+	}
+	if (isset(url::$date2)) {
+		if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',url::$date2)) {
+			self::$date2=url::$date2;
+		}
+	}
+	if (isset(url::$order)) {
+		if (in_array(url::$order,array("calldate","src_name","dst_name","billsec"))) {
+			self::$order=url::$order;
+		}
+	}
+	if (isset(url::$grad)) {
+		if (in_array(url::$grad,array("asc","desc"))) {
+			self::$grad=url::$grad;
+		}
+	}
 
-function checkDate() {
-	if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',self::$date1)) {
-		self::$date1_format=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',self::$date1);
-	} else {
-		self::$date1_format=date('Y-m-d H:i:s',strtotime("-365 day"));
-	}
-	if (preg_match('/^[0-9]{2}-[0-9]{2}-[0-9]{4}$/i',self::$date2)) {
-		self::$date2_format=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',self::$date2);
-	} else {
-		self::$date2_format=date('Y-m-d H:i:s');
-	}
+	if (isset(url::$show_answered)) { self::$show_answered=url::$show_answered; }
+	if (isset(url::$show_no_answer)) { self::$show_no_answer=url::$show_no_answer; }
+	if (isset(url::$show_busy)) { self::$show_busy=url::$show_busy; }
+	if (isset(url::$show_failed)) { self::$show_failed=url::$show_failed; }
+
+	if (isset(url::$show_playback)) { self::$show_playback=url::$show_playback; }
+	if (isset(url::$show_dial)) { self::$show_dial=url::$show_dial; }
+	if (isset(url::$show_wait)) { self::$show_wait=url::$show_wait; }
+	if (isset(url::$show_hangup)) { self::$show_hangup=url::$show_hangup; }
+	
 }
 
 function cdr($j=array(),$i=-1) {

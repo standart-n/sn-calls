@@ -17,7 +17,18 @@
 				'src':$('#src').val(),
 				'dst':$('#dst').val(),
 				'date1':$('#date1').val(),
-				'date2':$('#date2').val()
+				'date2':$('#date2').val(),
+				'limit':$('#limit').val(),
+				'order':$('#order').val(),
+				'grad':$('#grad').val(),
+				'show_answered':$('#show_answered').val(),
+				'show_no_answer':$('#show_no_answer').val(),
+				'show_busy':$('#show_busy').val(),
+				'show_failed':$('#show_failed').val(),
+				'show_hangup':$('#show_hangup').val(),
+				'show_playback':$('#show_playback').val(),
+				'show_dial':$('#show_dial').val(),
+				'show_wait':$('#show_wait').val()
 			};
 			$.extend(true,def,options);
 			if (def.debug) { def.type='text'; }
@@ -30,7 +41,18 @@
 					src:def.src,
 					dst:def.dst,
 					date1:def.date1,
-					date2:def.date2
+					date2:def.date2,
+					limit:def.limit,
+					order:def.order,
+					grad:def.grad,
+					show_answered:def.show_answered,
+					show_no_answer:def.show_no_answer,
+					show_busy:def.show_busy,
+					show_failed:def.show_failed,
+					show_hangup:def.show_hangup,
+					show_playback:def.show_playback,
+					show_dial:def.show_dial,
+					show_wait:def.show_wait
 				},
 				dataType:def.type,
 				timeout:10000,

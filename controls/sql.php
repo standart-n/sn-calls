@@ -17,8 +17,8 @@ function cdr($s="") {
 	//$search=htmlspecialchars_decode($search);
 	//$search=urldecode($search);
 	$s.=self::search();
-	$s.="ORDER by `calldate` DESC ".
-		"LIMIT 0 , 20 ";
+	$s.=self::sort();
+	$s.=self::limit();
 	self::$request=$s;
 	return $s;
 }
@@ -38,11 +38,21 @@ function stat($s="") {
 	return $s;
 }
 
+function sort($s="") {
+	$s.="ORDER by `".calls::$order."` ".calls::$grad." ";
+	return $s;
+}
+
+function limit($s="") {
+	$s.="LIMIT 0 , ".calls::$limit." ";
+	return $s;	
+}
+
 function search($s="") {
 	$src=calls::$src;
 	$dst=calls::$dst;
-	$date1=calls::$date1_format;
-	$date2=calls::$date2_format;
+	$date1=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date1);
+	$date2=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date2);
 	if (($src!="") && (strlen($src)>2)) {
 		$s.=" AND (";
 		$s.="(src_name LIKE '%".$src."%')";
@@ -66,6 +76,49 @@ function search($s="") {
 		$s.="calldate between '".$date1."' and '".$date2."'";
 		$s.=") ";
 	}
+
+	if (isset(calls::$show_answered)) {
+		if (calls::$show_answered=='off') {
+			$s.=" AND (disposition<>'ANSWERED') ";
+		}
+	}
+	if (isset(calls::$show_no_answer)) {
+		if (calls::$show_no_answer=='off') {
+			$s.=" AND (disposition<>'NO ANSWER') ";
+		}
+	}
+	if (isset(calls::$show_busy)) {
+		if (calls::$show_busy=='off') {
+			$s.=" AND (disposition<>'BUSY') ";
+		}
+	}
+	if (isset(calls::$show_failed)) {
+		if (calls::$show_failed=='off') {
+			$s.=" AND (disposition<>'FAILED') ";
+		}
+	}
+
+	if (isset(calls::$show_playback)) {
+		if (calls::$show_playback=='off') {
+			$s.=" AND (lastapp<>'Playback') ";
+		}
+	}
+	if (isset(calls::$show_hangup)) {
+		if (calls::$show_hangup=='off') {
+			$s.=" AND (lastapp<>'Hangup') ";
+		}
+	}
+	if (isset(calls::$show_wait)) {
+		if (calls::$show_wait=='off') {
+			$s.=" AND (lastapp<>'Wait') ";
+		}
+	}
+	if (isset(calls::$show_dial)) {
+		if (calls::$show_dial=='off') {
+			$s.=" AND (lastapp<>'Dial') ";
+		}
+	}
+	
 	return $s;
 }
 
