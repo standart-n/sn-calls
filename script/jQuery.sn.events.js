@@ -30,6 +30,10 @@
 							if (sn.result.stat) {
 								$("#stat").html(sn.result.stat);
 							}
+							if (sn.result.pagination) {
+								$("#pagination").html(sn.result.pagination);
+								$(this).snTriggers('list');
+							}
 						}
 					break;
 					case "close":

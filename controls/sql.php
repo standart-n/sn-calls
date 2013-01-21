@@ -8,17 +8,22 @@ function __construct() {
 
 function cdr($s="") {
 	$s.="SELECT *, ";
-	$s.="DATE_FORMAT(calldate,'%d%m%Y') as post_a, ";
-	$s.="DATE_FORMAT(calldate,'%H:%i') as post_t, ";
-	$s.="DATE_FORMAT(calldate,'%d.%m') as post_d ";
+	$s.=self::date_formats();
 	$s.="FROM `cdr` ";
 	$s.="WHERE (1=1) ";
-	//$search=iconv("cp1251","UTF8",$search);
-	//$search=htmlspecialchars_decode($search);
-	//$search=urldecode($search);
 	$s.=self::search();
 	$s.=self::sort();
 	$s.=self::limit();
+	self::$request=$s;
+	return $s;
+}
+
+function pagination($s="") {
+	$s.="SELECT COUNT(*) as count_id ";	
+	$s.="FROM `cdr` ";
+	$s.="WHERE (1=1) ";
+	$s.=self::search();
+	$s.=self::sort();
 	self::$request=$s;
 	return $s;
 }
@@ -44,8 +49,15 @@ function sort($s="") {
 }
 
 function limit($s="") {
-	$s.="LIMIT 0 , ".calls::$limit." ";
+	$s.="LIMIT ".calls::$skip." , ".calls::$limit." ";
 	return $s;	
+}
+
+function date_formats($s="") {
+	$s.="DATE_FORMAT(calldate,'%d%m%Y') as post_a, ";
+	$s.="DATE_FORMAT(calldate,'%H:%i') as post_t, ";
+	$s.="DATE_FORMAT(calldate,'%d.%m') as post_d ";
+	return $s;
 }
 
 function search($s="") {
@@ -124,7 +136,6 @@ function search($s="") {
 			$s.=" AND (lastapp<>'Dial') ";
 		}
 	}
-	
 	return $s;
 }
 

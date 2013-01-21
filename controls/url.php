@@ -37,6 +37,9 @@ function __construct() {
 	if (isset($_REQUEST["dst"])) {
 		self::$dst=trim(strval($_REQUEST["dst"]));
 	}
+	if (isset($_REQUEST["page"])) {
+		self::$page=intval(trim($_REQUEST["page"]));
+	}
 	if (isset($_REQUEST["date1"])) {
 		self::$date1=trim(strval($_REQUEST["date1"]));
 	}

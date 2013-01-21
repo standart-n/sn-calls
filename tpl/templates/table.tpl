@@ -70,7 +70,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			{if $cdr}
+			{if isset($cdr)}
 				{foreach from=$cdr item=key}
 					<tr>
 						<td>{$key.post_t} <small>{$key.post_d}</small></td>

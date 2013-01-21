@@ -53,6 +53,7 @@
 				'dst':$('#dst').val(),
 				'date1':$('#date1').val(),
 				'date2':$('#date2').val(),
+				'page':$('#page').val(),
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
@@ -78,6 +79,7 @@
 					dst:def.dst,
 					date1:def.date1,
 					date2:def.date2,
+					page:def.page,
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
@@ -112,6 +114,7 @@
 				},
 				error:function(XMLHttpRequest,textStatus,error){ 
 					$("#loading").hide();
+					alert(error);
 				}
 			});
 		}
@@ -135,6 +138,7 @@
 		init:function(options)
 		{
 			$(this).snPlayer('onClickPlay');
+			$(this).snPlayer('onClickClose');
 			//$(this).snPlayer('onScrollWindow');
 			//$(this).snPlayer('fixPlayer');
 		},
@@ -143,6 +147,13 @@
 			var th=$(this);
 			$(window).scroll(function(){
 				th.snPlayer('fixPlayer');
+			});
+		},
+		onClickClose:function()
+		{
+			$('#player-close').click(function(e){
+				e.preventDefault();
+				$("#player-wrap").hide();
 			});
 		},
 		onClickPlay:function()
@@ -179,6 +190,10 @@
 						*/
 					});
 					var audio=a[0];
+					$('#player-close').click(function(e){
+						e.preventDefault();
+						audio.pause();
+					});
 					audio.load(src);
 					audio.play();				
 				});
@@ -271,6 +286,10 @@
 							if (sn.result.stat) {
 								$("#stat").html(sn.result.stat);
 							}
+							if (sn.result.pagination) {
+								$("#pagination").html(sn.result.pagination);
+								$(this).snTriggers('list');
+							}
 						}
 					break;
 					case "close":
@@ -299,6 +318,7 @@
 		{
 			$(this).snTriggers('eventLinks');
 			$(this).snTriggers('cb');
+			$(this).snTriggers('list');
 			$(this).snTriggers('limit');
 			$(this).snTriggers('filters');
 			$(this).snTriggers('sort');
@@ -307,7 +327,8 @@
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$("a.event").on("click",function(){
+			$("a.event").on("click",function(e){
+				e.preventDefault();
 				th.snEvents({'href':$(this).attr("href")});
 			});
 		},
@@ -315,7 +336,8 @@
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$(".cb").on("click",function(){
+			$(".cb").on("click",function(e){
+				e.preventDefault();
 				if ($(this).is(':checked')) {
 					$('#'+$(this).data('cb')).val('on');
 				} else {
@@ -324,11 +346,32 @@
 				th.snEvents({'href':'#submit'});
 			});
 		},
+		list:function()
+		{
+			th=$(this);
+			sn=$(this).data('sn');
+			$("a#prev").on("click",function(e){
+				e.preventDefault();
+				$("#page").val(($("#page").val()*1)-1);
+				th.snEvents({'href':'#submit'});
+			});
+			$("a.list").on("click",function(e){
+				e.preventDefault();
+				$("#page").val($(this).data("page"));
+				th.snEvents({'href':'#submit'});
+			});
+			$("a#next").on("click",function(e){
+				e.preventDefault();
+				$("#page").val(($("#page").val()*1)+1);
+				th.snEvents({'href':'#submit'});
+			});
+		},
 		limit:function()
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$(".limit a").on("click",function(){
+			$(".limit a").on("click",function(e){
+				e.preventDefault();
 				$(this).addClass("active").siblings().removeClass("active");
 				$("#limit").val($(this).data("limit"));
 				th.snEvents({'href':'#submit'});
@@ -338,7 +381,8 @@
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$(".filters li a").on("click",function(){
+			$(".filters li a").on("click",function(e){
+				e.preventDefault();
 				if ($(this).data('value')=='on') {
 					$('i',this).removeClass('icon-ok').addClass('icon-none');
 					$(this).data('value','off');
@@ -355,7 +399,8 @@
 		{
 			th=$(this);
 			sn=$(this).data('sn');
-			$("a.sort").on("click",function(){
+			$("a.sort").on("click",function(e){
+				e.preventDefault();
 				$("#order").val($(this).data("order"));
 				$("#grad").val($(this).data("grad"));
 				th.snEvents({'href':'#submit'});

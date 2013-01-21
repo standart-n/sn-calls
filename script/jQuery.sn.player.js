@@ -4,6 +4,7 @@
 		init:function(options)
 		{
 			$(this).snPlayer('onClickPlay');
+			$(this).snPlayer('onClickClose');
 			//$(this).snPlayer('onScrollWindow');
 			//$(this).snPlayer('fixPlayer');
 		},
@@ -12,6 +13,13 @@
 			var th=$(this);
 			$(window).scroll(function(){
 				th.snPlayer('fixPlayer');
+			});
+		},
+		onClickClose:function()
+		{
+			$('#player-close').click(function(e){
+				e.preventDefault();
+				$("#player-wrap").hide();
 			});
 		},
 		onClickPlay:function()
@@ -48,6 +56,10 @@
 						*/
 					});
 					var audio=a[0];
+					$('#player-close').click(function(e){
+						e.preventDefault();
+						audio.pause();
+					});
 					audio.load(src);
 					audio.play();				
 				});

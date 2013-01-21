@@ -3,7 +3,13 @@
 public static $search;
 public static $src;
 public static $dst;
+public static $prev;
+public static $next;
+public static $skip;
+public static $page;
+public static $pages;
 public static $limit;
+public static $records;
 public static $src_name;
 public static $dst_name;
 public static $order;
@@ -30,6 +36,10 @@ function __construct() {
 function defData() {
 	self::$src="";
 	self::$dst="";
+	self::$prev=false;
+	self::$next=false;
+	self::$skip=0;
+	self::$page=1;
 	self::$order="calldate";
 	self::$grad="desc";
 	self::$limit=20;
@@ -56,6 +66,7 @@ function defData() {
 function getDataFromUrl() {
 	if (isset(url::$src)) { self::$src=url::$src; }
 	if (isset(url::$dst)) { self::$dst=url::$dst; }
+	if (isset(url::$page)) { self::$page=url::$page; }
 	if (isset(url::$limit)) { self::$limit=url::$limit; }
 	if (isset(url::$limit)) {
 		if ((intval(url::$limit)>0) && (intval(url::$limit)<100)) { self::$limit=url::$limit; }
@@ -207,6 +218,29 @@ function stat($j=array()) {
 	}
 	if (sizeof($j)>0) { return $j; }
 	return false;
+}
+
+function pagination($list=array(),$i=0) {
+	if (query(sql::pagination(),$ms)) {
+		foreach ($ms as $r) {
+			self::$records=$r->count_id;
+		}
+	}
+	self::$pages=ceil(self::$records/self::$limit);
+	self::$skip=(self::$page-1)*self::$limit;
+	if (((self::$page-4)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $i++; }
+	if (((self::$page-3)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-3; $i++; }
+	if ((self::$page-2)>0) { $list[$i]['page']=self::$page-2; $i++; }
+	if ((self::$page-1)>0) { $list[$i]['page']=self::$page-1; $i++; }
+	$list[$i]['page']=self::$page; $list[$i]['status']="active"; $i++;
+	if ((self::$page+1)<(self::$pages+1)) { $list[$i]['page']=self::$page+1; $i++; }
+	if ((self::$page+2)<(self::$pages+1)) { $list[$i]['page']=self::$page+2; $i++; }
+	if (((self::$page+3)<(self::$pages+1)) && !((self::$page-1)>0)) { $list[$i]['page']=self::$page+3; $i++; }
+	if (((self::$page+4)<(self::$pages+1)) && !((self::$page-2)>0)) { $list[$i]['page']=self::$page+4; $i++; }
+
+	if ((self::$page-1)>0) { self::$prev=true; }
+	if ((self::$page+1)<(self::$pages+1)) { self::$next=true; }
+	return $list;
 }
 
 function controls($j=array()) {

@@ -31,6 +31,9 @@
 
 <div id="player-wrap">
 	<div id="player"></div>
+	<a id="player-close" class="btn btn-mini btn-inverse" href="#">
+		<i class="icon-remove icon-white"></i>
+	</a>
 </div>
 
 <div id="main">

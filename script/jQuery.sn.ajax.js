@@ -18,6 +18,7 @@
 				'dst':$('#dst').val(),
 				'date1':$('#date1').val(),
 				'date2':$('#date2').val(),
+				'page':$('#page').val(),
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
@@ -43,6 +44,7 @@
 					dst:def.dst,
 					date1:def.date1,
 					date2:def.date2,
+					page:def.page,
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
@@ -77,6 +79,7 @@
 				},
 				error:function(XMLHttpRequest,textStatus,error){ 
 					$("#loading").hide();
+					alert(error);
 				}
 			});
 		}

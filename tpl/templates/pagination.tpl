@@ -4,14 +4,17 @@
 		<div class="span12">
 			<div class="pagination pagination-centered">
 				<ul>
-					<li class="disabled"><a href="#">«</a></li>
-					<li class="hidden-phone active"><a href="#">1</a></li>
-					<li class="hidden-phone"><a href="#">2</a></li>
-					<li class="hidden-phone"><a href="#">3</a></li>
-					<li class="hidden-phone"><a href="#">4</a></li>
-					<li class="hidden-phone"><a href="#">5</a></li>
-					<li><a href="#">»</a></li>
+					<li {if isset($prev)}{if (!$prev)}class="disabled"{/if}{/if}><a id="prev" href="#">«</a></li>
+					{if isset($pagination)}
+						{foreach from=$pagination item=key}
+							<li class="hidden-phone {if isset($key.status)}{$key.status}{/if}">
+								<a class="list" data-page="{if isset($key.page)}{$key.page}{/if}" href="#">{if isset($key.page)}{$key.page}{/if}</a>
+							</li>
+						{/foreach}
+					{/if}
+					<li {if isset($next)}{if (!$next)}class="disabled"{/if}{/if}><a id="next" href="#">»</a></li>
 				</ul>
+				<input id="page" type="hidden" value="{if isset($page)}{$page}{/if}">
 			</div>
 		</div>
 	</div>

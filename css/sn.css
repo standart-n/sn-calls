@@ -17,6 +17,11 @@ a.pause {
   margin: 7px 0 7px 20px;
 }
 
+#player-close {
+  float: right;
+  margin: 7px 7px 0 0;
+}
+
 #player-wrap {
   position: fixed;
   right: 0;
@@ -106,27 +111,27 @@ a.pause {
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .audiojs {
-    width: 728px;
+    width: 698px;
   }
   .audiojs .scrubber {
-    width: 578px;
+    width: 548px;
   }
 }
 
 @media (min-width: 480px) and (max-width: 767px) {
   .audiojs {
-    width: 440px;
+    width: 410px;
   }
   .audiojs .scrubber {
-    width: 290px;
+    width: 260px;
   }
 }
 
 @media (max-width: 389px) {
   .audiojs {
-    width: 280px;
+    width: 250px;
   }
   .audiojs .scrubber {
-    width: 130px;
+    width: 100px;
   }
 }

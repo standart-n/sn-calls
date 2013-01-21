@@ -70,15 +70,17 @@
 						</div>
 					</form>
 
-					<form class="form-inline">
-						<a id="submit" href="#submit" class="btn btn-primary btn-medium event"><i class="icon-ok icon-white"></i> Применить</a>
-					</form>
+						<a id="submit" href="#submit" class="btn btn-primary btn-medium event"><i class="icon-ok icon-white">
+							</i> Применить
+						</a>
 
-					<div id="loading">
-						<div class="progress progress-striped active">
-							<div class="bar" style="width: 100%;"><strong>Загрузка данных...</strong></div>
+						<!--
+						<div id="loading">
+							<div class="progress progress-striped active">
+								<div class="bar" style="width: 100%;"><strong>Загрузка данных...</strong></div>
+							</div>
 						</div>
-					</div>
+						-->
 					
 				</div>
 			</div>
