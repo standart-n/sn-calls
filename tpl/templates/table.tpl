@@ -51,22 +51,22 @@
 					</th>
 					<th class="hidden-phone">
 						<a href="#" class="btn btn-mini disabled">
-							Посл. действ.
+							Действие
 						</a>
 					</th>
 					<th class="hidden-phone">
 						{if ($order=="billsec")}
 							<a href="#" class="sort btn btn-mini btn-primary" data-order="billsec" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
-								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Длит. (c)
+								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Длит.(c)
 							</a>
 						{else}
 							<a href="#" class="sort btn btn-mini" data-order="billsec" data-grad="asc">
-								<i class="icon-arrow-up"></i> Длит. (c)
+								<i class="icon-arrow-up"></i> Длит.(c)
 							</a>
 						{/if}
 					</th>
-					<input id="order" type="hidden" value="calldate">
-					<input id="grad" type="hidden" value="asc">
+					<input id="order" type="hidden" value="{$order}">
+					<input id="grad" type="hidden" value="{$grad}">
 				</tr>
 			</thead>
 			<tbody>
@@ -82,18 +82,12 @@
 							{if (!$key.listen)}
 								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
 							{else}
-								<div class="btn-group">
-										<a href="#" class="btn btn-primary btn-mini play" data-id="{$key.id}" data-src="sn-project/mp3/1000.mp3"><i class="icon-play icon-white"></i></a>
-										<a href="sn-project/mp3/1000.mp3" target="_blank" class="btn btn-mini"><i class="icon-download-alt"></i></a>
-								</div>
-								<!--
-								<a href="#" class="btn btn-small pause" data-id="{$key.id}"><i class="icon-pause"> </i></a>
-								<object type="application/x-shockwave-flash" data="{$key.path_player}" width="100" height="20">
-									<param name="movie" value="{$key.path_player}" />
-									<param name="FlashVars" value="mp3={$key.path_audio}" />
-									<param name="bgcolor" value="#000000" />
-								</object>								
-								-->
+								{if isset($ket.path_audio)}
+									<div class="btn-group">
+										<a href="#" class="btn btn-primary btn-mini play" data-id="{$key.id}" data-src="{$key.path_audio}"><i class="icon-play icon-white"></i></a>
+										<a href="{$key.path_audio}" target="_blank" class="btn btn-mini"><i class="icon-download-alt"></i></a>
+									</div>
+								{/if}
 							{/if}
 						</td>
 						<td class="hidden-phone"><small>{$key.lastapp_rus}</small></td>

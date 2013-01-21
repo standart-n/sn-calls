@@ -163,8 +163,16 @@ function cdr($j=array(),$i=-1) {
 			if ((isset($r->disposition)) && (isset($r->uniqueid))) {
 				switch (trim(strtolower(strval($r->disposition)))) {
 				case "answered":
-					$j[$i]['path_audio']=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
-					$listen=true;
+					$path=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
+					if (isset($path)) {
+						if (file_exists($path)) {
+							$listen=true;
+						}
+					}
+					if (!$listen) {
+						$j[$i]['status_rus']="Нет файла";
+						$j[$i]['status_class']="";
+					}
 				break;
 				case "busy":
 					$j[$i]['status_rus']="Занято";
@@ -183,7 +191,7 @@ function cdr($j=array(),$i=-1) {
 			
 			$j[$i]['listen']=$listen;
 			if ($listen) {
-				$j[$i]['path_audio']=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
+				$j[$i]['path_audio']=$path;
 			}			
 				
 		}
@@ -232,15 +240,19 @@ function pagination($list=array(),$i=0) {
 	if (self::$page<1) { self::$page=1; }
 	if (self::$page>self::$pages) { self::$page=self::$pages; }
 	
-	if (((self::$page-4)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $i++; }
-	if (((self::$page-3)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-3; $i++; }
+	if (((self::$page-6)>0) && !((self::$page+3)<(self::$pages+1))) { $list[$i]['page']=self::$page-6; $i++; }
+	if (((self::$page-5)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-5; $i++; }
+	if (((self::$page-4)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $i++; }
+	if ((self::$page-3)>0) { $list[$i]['page']=self::$page-3; $i++; }
 	if ((self::$page-2)>0) { $list[$i]['page']=self::$page-2; $i++; }
 	if ((self::$page-1)>0) { $list[$i]['page']=self::$page-1; $i++; }
 	$list[$i]['page']=self::$page; $list[$i]['status']="active"; $i++;
 	if ((self::$page+1)<(self::$pages+1)) { $list[$i]['page']=self::$page+1; $i++; }
 	if ((self::$page+2)<(self::$pages+1)) { $list[$i]['page']=self::$page+2; $i++; }
-	if (((self::$page+3)<(self::$pages+1)) && !((self::$page-1)>0)) { $list[$i]['page']=self::$page+3; $i++; }
-	if (((self::$page+4)<(self::$pages+1)) && !((self::$page-2)>0)) { $list[$i]['page']=self::$page+4; $i++; }
+	if ((self::$page+3)<(self::$pages+1)) { $list[$i]['page']=self::$page+3; $i++; }
+	if (((self::$page+4)<(self::$pages+1)) && !((self::$page-1)>0)) { $list[$i]['page']=self::$page+4; $i++; }
+	if (((self::$page+5)<(self::$pages+1)) && !((self::$page-2)>0)) { $list[$i]['page']=self::$page+5; $i++; }
+	if (((self::$page+6)<(self::$pages+1)) && !((self::$page-3)>0)) { $list[$i]['page']=self::$page+6; $i++; }
 
 	if ((self::$page-1)>0) { self::$prev=true; }
 	if ((self::$page+1)<(self::$pages+1)) { self::$next=true; }
