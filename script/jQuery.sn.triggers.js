@@ -4,11 +4,22 @@
 		init:function(options)
 		{
 			$(this).snTriggers('eventLinks');
+			$(this).snTriggers('controls');
 			$(this).snTriggers('cb');
 			$(this).snTriggers('list');
 			$(this).snTriggers('limit');
 			$(this).snTriggers('filters');
 			$(this).snTriggers('sort');
+		},
+		controls:function()
+		{
+			th=$(this);
+			sn=$(this).data('sn');
+			$("#control_panel_1").on("submit",function(e){
+				e.preventDefault();
+				$("#page").val(1);
+				th.snEvents({'href':'#submit'});
+			});
 		},
 		eventLinks:function()
 		{
@@ -16,6 +27,7 @@
 			sn=$(this).data('sn');
 			$("a.event").on("click",function(e){
 				e.preventDefault();
+				$("#page").val(1);
 				th.snEvents({'href':$(this).attr("href")});
 			});
 		},
@@ -30,6 +42,7 @@
 				} else {
 					$('#'+$(this).data('cb')).val('off');
 				}				
+				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});
 		},
@@ -61,6 +74,7 @@
 				e.preventDefault();
 				$(this).addClass("active").siblings().removeClass("active");
 				$("#limit").val($(this).data("limit"));
+				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});
 		},
@@ -79,6 +93,7 @@
 					$(this).data('value','on');
 					$('#'+$(this).data('cb')).val('on');
 				}
+				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});
 		},
@@ -90,6 +105,7 @@
 				e.preventDefault();
 				$("#order").val($(this).data("order"));
 				$("#grad").val($(this).data("grad"));
+				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});
 		}

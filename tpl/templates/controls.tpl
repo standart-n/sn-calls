@@ -4,7 +4,7 @@
 	
 			<div class="span12">
 				<div class="well well-small">
-					<form class="form-inline">
+					<form id="control_panel_1" class="form-inline">
 						<div class="input-append">
 							<input id="src" type="text" class="input-medium" placeholder="От кого" value="{$controls.src}">
 							<span class="add-on"><i class="icon-user"></i></span>
@@ -22,6 +22,7 @@
 							<input id="date2" class="input-small" size="16" type="text" value="{$controls.date2}">
 							<span class="add-on"><i class="icon-th"></i></span>
 						</div>
+						<input class="hidden" type="submit">
 					</form>
 					<!--
 					<form class="form-inline">

@@ -163,6 +163,7 @@ function cdr($j=array(),$i=-1) {
 			if ((isset($r->disposition)) && (isset($r->uniqueid))) {
 				switch (trim(strtolower(strval($r->disposition)))) {
 				case "answered":
+					$j[$i]['path_audio']=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
 					$listen=true;
 				break;
 				case "busy":
@@ -182,7 +183,6 @@ function cdr($j=array(),$i=-1) {
 			
 			$j[$i]['listen']=$listen;
 			if ($listen) {
-				$j[$i]['path_player']=project."/flash/player_mp3_maxi.swf";
 				$j[$i]['path_audio']=project."/mp3/".$r->post_a."/".$r->uniqueid.".mp3";
 			}			
 				
@@ -228,6 +228,10 @@ function pagination($list=array(),$i=0) {
 	}
 	self::$pages=ceil(self::$records/self::$limit);
 	self::$skip=(self::$page-1)*self::$limit;
+	
+	if (self::$page<1) { self::$page=1; }
+	if (self::$page>self::$pages) { self::$page=self::$pages; }
+	
 	if (((self::$page-4)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $i++; }
 	if (((self::$page-3)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-3; $i++; }
 	if ((self::$page-2)>0) { $list[$i]['page']=self::$page-2; $i++; }
