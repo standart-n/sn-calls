@@ -63,7 +63,7 @@ function defData() {
 
 }
 
-function getDataFromUrl() {
+public static function getDataFromUrl() {
 	if (isset(url::$src)) { self::$src=url::$src; }
 	if (isset(url::$dst)) { self::$dst=url::$dst; }
 	if (isset(url::$page)) { self::$page=url::$page; }

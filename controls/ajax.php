@@ -11,7 +11,7 @@ function __construct() {
 	}	
 }
 
-public static function getResponseString($s="") {
+function getResponseString($s="") {
 	if ($s) {
 		console::write("---");
 		console::write("response:");
@@ -25,7 +25,7 @@ public static function getResponseString($s="") {
 	return false;
 }
 
-public static function getAction() {
+function getAction() {
 	if (isset(url::$action)) {
 		console::write("action: ".url::$action);
 		calls::getDataFromUrl();
