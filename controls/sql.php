@@ -6,7 +6,7 @@ function __construct() {
 
 }
 
-function cdr($s="") {
+public static function cdr($s="") {
 	$s.="SELECT *, ";
 	$s.=self::date_formats();
 	$s.="FROM `cdr` ";
@@ -18,7 +18,7 @@ function cdr($s="") {
 	return $s;
 }
 
-function pagination($s="") {
+public static function pagination($s="") {
 	$s.="SELECT COUNT(*) as count_id ";	
 	$s.="FROM `cdr` ";
 	$s.="WHERE (1=1) ";
@@ -28,7 +28,7 @@ function pagination($s="") {
 	return $s;
 }
 
-function stat($s="") {
+public static function stat($s="") {
 	$s.="SELECT ";
 	$s.="(select count(*) from `cdr` where (disposition='NO ANSWER') ".self::search().") as count_no_answer, ";
 	$s.="(select count(*) from `cdr` where (disposition='ANSWERED') ".self::search().") as count_answered, ";
@@ -43,24 +43,24 @@ function stat($s="") {
 	return $s;
 }
 
-function sort($s="") {
+public static function sort($s="") {
 	$s.="ORDER by `".calls::$order."` ".calls::$grad." ";
 	return $s;
 }
 
-function limit($s="") {
+public static function limit($s="") {
 	$s.="LIMIT ".calls::$skip." , ".calls::$limit." ";
 	return $s;	
 }
 
-function date_formats($s="") {
+public static function date_formats($s="") {
 	$s.="DATE_FORMAT(calldate,'%d%m%Y') as post_a, ";
 	$s.="DATE_FORMAT(calldate,'%H:%i') as post_t, ";
 	$s.="DATE_FORMAT(calldate,'%d.%m') as post_d ";
 	return $s;
 }
 
-function search($s="") {
+public static function search($s="") {
 	$src=calls::$src;
 	$dst=calls::$dst;
 	$date1=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date1);

@@ -4,7 +4,7 @@ function __construct() {
 
 }
 
-function engine() {	
+public static function engine() {	
 	load("index.tpl");
 	assign('controls',calls::controls());
 	innerHTML("#controls",fetch("controls.tpl"));
@@ -20,9 +20,9 @@ function engine() {
 	assign('stat',calls::stat());
 	innerHTML("#stat",fetch("stat.tpl"));
 	echo html();
-}
+}	
 
-function submit($j=array()) {
+public static function submit($j=array()) {
 	calls::getDataFromUrl();
 	$j['src']=calls::$src;
 	$j['dst']=calls::$dst;

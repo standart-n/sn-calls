@@ -106,7 +106,7 @@ function getDataFromUrl() {
 	
 }
 
-function cdr($j=array(),$i=-1) {
+public static function cdr($j=array(),$i=-1) {
 	if (query(sql::cdr(),$ms)) {
 		foreach ($ms as $r) { $i++; $listen=false;
 			$j[$i]['id']=intval($r->id);
@@ -200,7 +200,7 @@ function cdr($j=array(),$i=-1) {
 	return false;
 }
 
-function stat($j=array()) {
+public static function stat($j=array()) {
 	if (query(sql::stat(),$ms)) {
 		foreach ($ms as $r) {
 			$j['count_all']=intval($r->count_all);
@@ -228,7 +228,7 @@ function stat($j=array()) {
 	return false;
 }
 
-function pagination($list=array(),$i=0) {
+public static function pagination($list=array(),$i=0) {
 	if (query(sql::pagination(),$ms)) {
 		foreach ($ms as $r) {
 			self::$records=$r->count_id;
@@ -259,7 +259,7 @@ function pagination($list=array(),$i=0) {
 	return $list;
 }
 
-function controls($j=array()) {
+public static function controls($j=array()) {
 	$j['src']=self::$src;
 	$j['dst']=self::$src;
 	$j['date1']=self::$date1;
