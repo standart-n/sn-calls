@@ -269,7 +269,7 @@ public static function controls($j=array()) {
 	return $j;
 }
 
-function cutName($a="") {
+public static function cutName($a="") {
 	$s=trim(iconv("UTF-8","cp1251",$a));
 	if ($s!="") {
 		$nm=explode(" ",$s);

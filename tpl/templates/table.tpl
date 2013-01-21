@@ -82,7 +82,7 @@
 							{if (!$key.listen)}
 								<span class="label label-{$key.status_class}">{$key.status_rus}</span>
 							{else}
-								{if isset($ket.path_audio)}
+								{if isset($key.path_audio)}
 									<div class="btn-group">
 										<a href="#" class="btn btn-primary btn-mini play" data-id="{$key.id}" data-src="{$key.path_audio}"><i class="icon-play icon-white"></i></a>
 										<a href="{$key.path_audio}" target="_blank" class="btn btn-mini"><i class="icon-download-alt"></i></a>

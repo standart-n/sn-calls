@@ -17,7 +17,7 @@
 						$(this).snPlayer();
 					break;
 					case "submit":
-						$(this).snAjax('sendRequest',{'action':'submit','debug':true});
+						$(this).snAjax('sendRequest',{'action':'submit','debug':false});
 					break;
 					case "afterSubmit":
 						if (sn.result) {
