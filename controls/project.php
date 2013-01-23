@@ -16,9 +16,11 @@ public static function engine() {
 	assign('cdr',calls::cdr());
 	assign('order',calls::$order);
 	assign('grad',calls::$grad);
+	assign('phones',calls::$phones);
 	innerHTML("#table",fetch("table.tpl"));
 	assign('stat',calls::stat());
 	innerHTML("#stat",fetch("stat.tpl"));
+	//echo sql::$request;
 	echo html();
 }	
 
@@ -36,10 +38,20 @@ public static function submit($j=array()) {
 	assign('cdr',calls::cdr());
 	assign('order',calls::$order);
 	assign('grad',calls::$grad);
+	assign('phones',calls::$phones);
 	$j['table']=fetch("table.tpl");
 	assign('stat',calls::stat());
 	$j['stat']=fetch("stat.tpl");
 	$j['callback']="afterSubmit";
+	$j['tm']=time();
+	//$j['alert']=sql::$request;
+	return $j;
+}
+
+public static function fbRequest($j=array()) {
+	calls::getDataFromUrl();
+	$j['response']=calls::fbRequest();
+	$j['callback']="afterFbRequest";
 	$j['tm']=time();
 	//$j['alert']=sql::$request;
 	return $j;

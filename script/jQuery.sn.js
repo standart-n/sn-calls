@@ -17,6 +17,7 @@
 				$(this).data('sn',def);
 				$(this).snTriggers();
 				$(this).snEvents({'href':'#autoload'});
+				$(this).snEvents({'href':'#fbRequest'});
 			});
 		}
 	};		

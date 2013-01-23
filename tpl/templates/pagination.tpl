@@ -7,7 +7,7 @@
 					<li {if isset($prev)}{if (!$prev)}class="disabled"{/if}{/if}><a id="prev" href="#">«</a></li>
 					{if isset($pagination)}
 						{foreach from=$pagination item=key}
-							<li class="hidden-phone {if isset($key.status)}{$key.status}{/if}">
+							<li class="{if isset($key.hidden)}hidden-phone{/if} {if isset($key.active)}active{/if}">
 								<a class="list" data-page="{if isset($key.page)}{$key.page}{/if}" href="#">{if isset($key.page)}{$key.page}{/if}</a>
 							</li>
 						{/foreach}

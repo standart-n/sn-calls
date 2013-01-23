@@ -8,22 +8,22 @@
 					<th>
 						{if ($order=="calldate")}
 							<a href="#" class="sort btn btn-mini btn-primary" data-order="calldate" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
-								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Дата
+								<i class="hidden-phone icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Дата
 							</a>
 						{else}
 							<a href="#" class="sort btn btn-mini" data-order="calldate" data-grad="asc">
-								<i class="icon-arrow-up"></i> Дата
+								<i class="hidden-phone icon-arrow-up"></i> Дата
 							</a>
 						{/if}
 					</th>
 					<th>
 						{if ($order=="src_name")}
 							<a href="#" class="sort btn btn-mini btn-primary" data-order="src_name" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
-								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> От кого
+								<i class="hidden-phone icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> От_кого
 							</a>
 						{else}
 							<a href="#" class="sort btn btn-mini" data-order="src_name" data-grad="asc">
-								<i class="icon-arrow-up"></i> От кого
+								<i class="hidden-phone icon-arrow-up"></i> От_кого
 							</a>
 						{/if}
 					</th>
@@ -33,11 +33,11 @@
 					<th>
 						{if ($order=="dst_name")}
 							<a href="#" class="sort btn btn-mini btn-primary" data-order="dst_name" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
-								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Кому
+								<i class="hidden-phone icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Кому
 							</a>
 						{else}
 							<a href="#" class="sort btn btn-mini" data-order="dst_name" data-grad="asc">
-								<i class="icon-arrow-up"></i> Кому
+								<i class="hidden-phone icon-arrow-up"></i> Кому
 							</a>
 						{/if}
 					</th>
@@ -57,11 +57,11 @@
 					<th class="hidden-phone">
 						{if ($order=="billsec")}
 							<a href="#" class="sort btn btn-mini btn-primary" data-order="billsec" data-grad="{if ($grad=="asc")}desc{else}asc{/if}">
-								<i class="icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Длит.(c)
+								<i class="hidden-phone icon-arrow-{if ($grad=="asc")}up{else}down{/if} icon-white"></i> Длит.(c)
 							</a>
 						{else}
 							<a href="#" class="sort btn btn-mini" data-order="billsec" data-grad="asc">
-								<i class="icon-arrow-up"></i> Длит.(c)
+								<i class="hidden-phone icon-arrow-up"></i> Длит.(c)
 							</a>
 						{/if}
 					</th>
@@ -74,9 +74,9 @@
 				{foreach from=$cdr item=key}
 					<tr>
 						<td>{$key.post_t} <small>{$key.post_d}</small></td>
-						<td><small>{$key.src_name}</small> <small class="muted">{$key.src}</small></td>
+						<td><small><div class="fb-name {$key.src_hash}">{$key.src_name}</div></small> <small class="muted">{$key.src}</small></td>
 						<td class="hidden">{$key.id}</td>
-						<td><small>{$key.dst_name}</small> <small class="muted">{$key.dst}</small></td>
+						<td><small><div class="fb-name {$key.dst_hash}">{$key.dst_name}</div></small> <small class="muted">{$key.dst}</small></td>
 						<td class="hidden">{$key.id}</td>
 						<td>
 							{if (!$key.listen)}
@@ -103,6 +103,13 @@
 			{/if}
 			</tbody>
 		</table>		
+		</div>
+		<div class="hidden">
+			{if isset($phones)}
+				{foreach from=$phones item=key}
+					<input class="no-fb" type="hidden" value="{$key}">
+				{/foreach}
+			{/if}
 		</div>
 	</div>
 </div>

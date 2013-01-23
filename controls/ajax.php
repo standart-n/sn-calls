@@ -33,6 +33,9 @@ function getAction() {
 			case "submit":
 				self::$response=project::submit(); return true;				
 			break;
+			case "fbRequest":
+				self::$response=project::fbRequest(); return true;				
+			break;
 		}
 	}
 	return false;

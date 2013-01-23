@@ -64,7 +64,7 @@ public static function search($s="") {
 	$src=calls::$src;
 	$dst=calls::$dst;
 	$date1=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date1);
-	$date2=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date2);
+	$date2=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 23:59:59',calls::$date2);
 	if (($src!="") && (strlen($src)>2)) {
 		$s.=" AND (";
 		$s.="(src_name LIKE '%".$src."%')";
@@ -136,6 +136,21 @@ public static function search($s="") {
 			$s.=" AND (lastapp<>'Dial') ";
 		}
 	}
+	return $s;
+}
+
+public static function cdrUpdate($type="src",$s="") {
+	$s.="UPDATE `cdr` ";
+	$s.="SET `".$type."_name`='".calls::$caption."' ";
+	$s.="WHERE (`".$type."`='".calls::$phone."') ";
+	return $s;
+}
+
+public static function fbRequest($s="") {
+	$s.="SELECT * ";
+	$s.="FROM PHONE_LIST ";
+	$s.="WHERE PHONE='".calls::$phone."' ";
+	self::$request=$s;
 	return $s;
 }
 

@@ -8,6 +8,7 @@ public static $src;
 public static $date1;
 public static $date2;
 public static $page;
+public static $phone;
 public static $limit;
 public static $order;
 public static $grad;
@@ -54,6 +55,9 @@ function __construct() {
 	}
 	if (isset($_REQUEST["grad"])) {
 		self::$grad=trim(strtolower(strval($_REQUEST["grad"])));
+	}
+	if (isset($_REQUEST["phone"])) {
+		self::$phone=trim(strval($_REQUEST["phone"]));
 	}
 
 	if (isset($_REQUEST["show_short_calls"])) {

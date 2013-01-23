@@ -22,7 +22,9 @@
 							<input id="date2" class="input-small" size="16" type="text" value="{$controls.date2}">
 							<span class="add-on"><i class="icon-th"></i></span>
 						</div>
-						<input class="hidden" type="submit">
+						<div class="hidden">
+							<input type="submit">
+						</div>
 					</form>
 					<!--
 					<form class="form-inline">
@@ -40,8 +42,8 @@
 							<a href="#" class="btn btn-small active" data-limit="20">20</a>
 							<a href="#" class="btn btn-small hidden-phone" data-limit="30">30</a>
 							<a href="#" class="btn btn-small" data-limit="40">40</a>
-							<input id="limit" type="hidden" value="20">
 						</div>
+							<input id="limit" type="hidden" value="20">
 						<div class="btn-group">
 							<a class="btn btn-small dropdown-toggle" data-toggle="dropdown" href="#">
 								Фильтры

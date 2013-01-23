@@ -8,6 +8,7 @@
 					'href':"none"
 				};
 				$.extend(true,def,options);
+				var th=$(this);
 				var sn=$(this).data('sn');
 				var href=def.href;
 				switch (href.replace(/(.*)#(.*)/,"$2")){
@@ -21,7 +22,6 @@
 					break;
 					case "afterSubmit":
 						if (sn.result) {
-							$(this).snPlayer('onClickPlay');
 							if (sn.result.table) {
 								$("#table").html(sn.result.table);
 								$(this).snTriggers('sort');
@@ -34,8 +34,26 @@
 								$("#pagination").html(sn.result.pagination);
 								$(this).snTriggers('list');
 							}
+							$(this).snEvents({'href':'#fbRequest'});
 						}
 					break;
+					case "fbRequest":
+						$('.no-fb').each(function(){
+							if ($(this).val()!=="") {
+								th.snAjax('sendRequest',{'action':'fbRequest','phone':$(this).val(),'debug':false});
+								$(this).removeClass("no-fb");
+							}
+						});
+					break;
+					case "afterFbRequest":
+						if (sn.result) {
+							if (sn.result.response) {
+								if (sn.result.response.hash) {
+									$("."+sn.result.response.hash).html(sn.result.response.caption);
+								}
+							}
+						}
+					break;					
 					case "close":
 						$(this).hide();
 					break;

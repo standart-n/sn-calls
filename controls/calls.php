@@ -16,6 +16,9 @@ public static $order;
 public static $grad;
 public static $date1;
 public static $date2;
+public static $caption;
+public static $phone;
+public static $phones;
 
 public static $show_short_calls;
 
@@ -45,9 +48,12 @@ function defData() {
 	self::$limit=20;
 	self::$src_name="";
 	self::$dst_name="";
-	//self::$date1=date("d-m-Y",strtotime("-7 day"));
-	self::$date1=date("d-m-Y",strtotime("-365 day"));
+	self::$date1=date("d-m-Y",strtotime("-7 day"));
+	//self::$date1=date("d-m-Y",strtotime("-365 day"));
 	self::$date2=date('d-m-Y');
+	self::$caption="";
+	self::$phone="";
+	self::$phones=array();
 
 	self::$show_short_calls="on";
 
@@ -67,7 +73,7 @@ public static function getDataFromUrl() {
 	if (isset(url::$src)) { self::$src=url::$src; }
 	if (isset(url::$dst)) { self::$dst=url::$dst; }
 	if (isset(url::$page)) { self::$page=url::$page; }
-	if (isset(url::$limit)) { self::$limit=url::$limit; }
+	if (isset(url::$phone)) { self::$phone=url::$phone; }
 	if (isset(url::$limit)) {
 		if ((intval(url::$limit)>0) && (intval(url::$limit)<100)) { self::$limit=url::$limit; }
 	}
@@ -106,23 +112,28 @@ public static function getDataFromUrl() {
 	
 }
 
-public static function cdr($j=array(),$i=-1) {
+public static function cdr($j=array(),$p=array(),$i=-1) {
 	if (query(sql::cdr(),$ms)) {
 		foreach ($ms as $r) { $i++; $listen=false;
 			$j[$i]['id']=intval($r->id);
-			$j[$i]['uniqueid']=intval($r->uniqueid);
+			$j[$i]['uniqueid']=strval($r->uniqueid);
+			$j[$i]['key']=sha1($r->uniqueid);
 			$j[$i]['src']=strval($r->src);
 			$j[$i]['dst']=strval($r->dst);
+			$j[$i]['src_hash']=substr(sha1($r->src),0,6);
+			$j[$i]['dst_hash']=substr(sha1($r->dst),0,6);
 			$j[$i]['src_name']=self::cutName(strval($r->src_name));
 			$j[$i]['dst_name']=self::cutName(strval($r->dst_name));
 			$j[$i]['post_a']=strval($r->post_a);
 			$j[$i]['post_d']=strval($r->post_d);
 			$j[$i]['post_t']=strval($r->post_t);
-			$j[$i]['uniqueid']=strval($r->uniqueid);
 			$j[$i]['disposition']=strval($r->disposition);
 			$j[$i]['lastapp']=strval($r->lastapp);
 			$j[$i]['status_rus']="Неизвестно";
 			$j[$i]['status_class']="none";
+			
+			if ((strlen($r->src_name)<1) && (!in_array($r->src,array("7777","reklama"))) && (!in_array($r->src,$p))) { $p[]=$r->src; }
+			if ((strlen($r->dst_name)<1) && (!in_array($r->dst,array("7777","reklama"))) && (!in_array($r->dst,$p))) { $p[]=$r->dst; }
 	
 			if (intval($r->duration)) {
 				$j[$i]['duration_in']=intval($r->duration)-intval($r->billsec);
@@ -196,12 +207,13 @@ public static function cdr($j=array(),$i=-1) {
 				
 		}
 	}
+	if (sizeof($p)>0) { self::$phones=$p; }
 	if (sizeof($j)>0) { return $j; }
 	return false;
 }
 
 public static function stat($j=array()) {
-	if (query(sql::stat(),$ms)) {
+	if (query(array("sql"=>sql::stat(),"connection"=>"mysql"),$ms)) {
 		foreach ($ms as $r) {
 			$j['count_all']=intval($r->count_all);
 			$j['count_answered']=intval($r->count_answered);
@@ -240,19 +252,19 @@ public static function pagination($list=array(),$i=0) {
 	if (self::$page<1) { self::$page=1; }
 	if (self::$page>self::$pages) { self::$page=self::$pages; }
 	
-	if (((self::$page-6)>0) && !((self::$page+3)<(self::$pages+1))) { $list[$i]['page']=self::$page-6; $i++; }
-	if (((self::$page-5)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-5; $i++; }
-	if (((self::$page-4)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $i++; }
-	if ((self::$page-3)>0) { $list[$i]['page']=self::$page-3; $i++; }
-	if ((self::$page-2)>0) { $list[$i]['page']=self::$page-2; $i++; }
-	if ((self::$page-1)>0) { $list[$i]['page']=self::$page-1; $i++; }
-	$list[$i]['page']=self::$page; $list[$i]['status']="active"; $i++;
-	if ((self::$page+1)<(self::$pages+1)) { $list[$i]['page']=self::$page+1; $i++; }
-	if ((self::$page+2)<(self::$pages+1)) { $list[$i]['page']=self::$page+2; $i++; }
-	if ((self::$page+3)<(self::$pages+1)) { $list[$i]['page']=self::$page+3; $i++; }
-	if (((self::$page+4)<(self::$pages+1)) && !((self::$page-1)>0)) { $list[$i]['page']=self::$page+4; $i++; }
-	if (((self::$page+5)<(self::$pages+1)) && !((self::$page-2)>0)) { $list[$i]['page']=self::$page+5; $i++; }
-	if (((self::$page+6)<(self::$pages+1)) && !((self::$page-3)>0)) { $list[$i]['page']=self::$page+6; $i++; }
+	if (((self::$page-6)>0) && !((self::$page+3)<(self::$pages+1))) { $list[$i]['page']=self::$page-6; $list[$i]['hidden']=true; $i++; }
+	if (((self::$page-5)>0) && !((self::$page+2)<(self::$pages+1))) { $list[$i]['page']=self::$page-5; $list[$i]['hidden']=true; $i++; }
+	if (((self::$page-4)>0) && !((self::$page+1)<(self::$pages+1))) { $list[$i]['page']=self::$page-4; $list[$i]['hidden']=true; $i++; }
+	if ((self::$page-3)>0) { $list[$i]['page']=self::$page-3; $list[$i]['hidden']=true; $i++; }
+	if ((self::$page-2)>0) { $list[$i]['page']=self::$page-2; $list[$i]['hidden']=true; $i++; }
+	if ((self::$page-1)>0) { $list[$i]['page']=self::$page-1; $list[$i]['hidden']=true; $i++; }
+	$list[$i]['page']=self::$page; $list[$i]['active']=true; $i++;
+	if ((self::$page+1)<(self::$pages+1)) { $list[$i]['page']=self::$page+1; $list[$i]['hidden']=true; $i++; }
+	if ((self::$page+2)<(self::$pages+1)) { $list[$i]['page']=self::$page+2; $list[$i]['hidden']=true; $i++; }
+	if ((self::$page+3)<(self::$pages+1)) { $list[$i]['page']=self::$page+3; $list[$i]['hidden']=true; $i++; }
+	if (((self::$page+4)<(self::$pages+1)) && !((self::$page-1)>0)) { $list[$i]['page']=self::$page+4; $list[$i]['hidden']=true; $i++; }
+	if (((self::$page+5)<(self::$pages+1)) && !((self::$page-2)>0)) { $list[$i]['page']=self::$page+5; $list[$i]['hidden']=true; $i++; }
+	if (((self::$page+6)<(self::$pages+1)) && !((self::$page-3)>0)) { $list[$i]['page']=self::$page+6; $list[$i]['hidden']=true; $i++; }
 
 	if ((self::$page-1)>0) { self::$prev=true; }
 	if ((self::$page+1)<(self::$pages+1)) { self::$next=true; }
@@ -283,5 +295,27 @@ public static function cutName($a="") {
 	$s=iconv("cp1251","UTF-8",$s);	
 	return $s;
 }
+
+public static function fbRequest($list=array(),$i=0) {
+	if (query(array("sql"=>sql::fbRequest(),"connection"=>"fb"),$ms)) {
+		foreach ($ms as $r) {
+			self::$caption=self::cutName(iconv("cp1251","UTF-8",$r->CAPTION));
+		}
+	}
+	if (self::$caption!="") {
+		if (query(sql::cdrUpdate("src"))) {
+			$list['src_update']=true;
+		}
+		if (query(sql::cdrUpdate("dst"))) {
+			$list['dst_update']=true;
+		}
+		$list['phone']=self::$phone;
+		$list['hash']=substr(sha1(self::$phone),0,6);
+		$list['caption']="!".self::$caption."!";
+		return $list;
+	}
+	return false;
+}
+
 
 } ?>

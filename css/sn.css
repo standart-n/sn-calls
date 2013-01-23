@@ -11,6 +11,10 @@ a.pause {
   display: none;
 }
 
+.fb-name {
+  display: inline;
+}
+
 #player {
   display: block;
   float: left;

@@ -59,6 +59,7 @@
 					$('#player-close').click(function(e){
 						e.preventDefault();
 						audio.pause();
+						$("#player").html('');
 					});
 					audio.load(src);
 					audio.play();				

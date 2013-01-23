@@ -22,6 +22,7 @@
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
+				'phone':'',
 				'show_short_calls':$('#show_short_calls').val(),
 				'show_answered':$('#show_answered').val(),
 				'show_no_answer':$('#show_no_answer').val(),
@@ -48,6 +49,7 @@
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
+					phone:def.phone,
 					show_short_calls:def.show_short_calls,
 					show_answered:def.show_answered,
 					show_no_answer:def.show_no_answer,
@@ -73,13 +75,13 @@
 					$(this).data('sn',sn);
 					if (typeof sn.result==='object') {
 						if (sn.result.alert) { alert(sn.result.alert); }
-						if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }					
+						if (sn.result.callback) { $(this).snEvents({'href':'#'+sn.result.callback}); }
 					}
 					$("#loading").hide();
 				},
 				error:function(XMLHttpRequest,textStatus,error){ 
-					$("#loading").hide();
-					alert(error);
+					//$("#loading").hide();
+					//alert(textStatus);
 				}
 			});
 		}
