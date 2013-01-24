@@ -298,7 +298,7 @@
 								$('#dp1').datepicker();
 								$('#dp2').datepicker();
 								$(this).snPlayer();
-								$(this).snEvents({'href':'#submit'});
+								$(this).snAjax('sendRequest',{'action':'submit','debug':false});
 							} else {
 								$("#inputLogin").val('');
 								$("#inputPassword").val('');

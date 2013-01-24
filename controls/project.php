@@ -1,7 +1,7 @@
 <?php class project extends sn {
 
 function __construct() {
-
+	session_start();
 }
 
 public static function engine() {
@@ -34,7 +34,7 @@ public static function engine() {
 public static function signin($j=array()) {
 	if (signin::check()) {
 		$j['response']=true;
-		$j['key']=signin::$key;
+		//$j['key']=signin::$key;
 		assign('controls',calls::controls());
 		$j['controls']=fetch("controls.tpl");
 	} else {
