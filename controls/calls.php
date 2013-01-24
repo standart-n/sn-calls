@@ -311,7 +311,7 @@ public static function fbRequest($list=array(),$i=0) {
 		}
 		$list['phone']=self::$phone;
 		$list['hash']=substr(sha1(self::$phone),0,6);
-		$list['caption']="!".self::$caption."!";
+		$list['caption']=self::$caption;
 		return $list;
 	}
 	return false;

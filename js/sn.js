@@ -5,19 +5,19 @@
 		{
 			if (!options) { options={}; }
 			def={
-				'bonus':
-				{
-					'inputText':'Введите номер карты'
-				},
 				'content':{},
-				'result':{}
+				'result':
+				{
+					'key':''
+				}
 			};
 			$.extend(true,def,options);
 			return this.each(function(){
 				$(this).data('sn',def);
 				$(this).snTriggers();
-				$(this).snEvents({'href':'#autoload'});
-				$(this).snEvents({'href':'#fbRequest'});
+				if ($("#controls").html()!=="") {
+					$(this).snEvents({'href':'#autoload'});
+				}
 			});
 		}
 	};		
@@ -58,6 +58,8 @@
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
+				'login':$('#inputLogin').val(),
+				'password':$('#inputPassword').val(),
 				'phone':'',
 				'show_short_calls':$('#show_short_calls').val(),
 				'show_answered':$('#show_answered').val(),
@@ -85,6 +87,8 @@
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
+					login:def.login,
+					password:def.password,
 					phone:def.phone,
 					show_short_calls:def.show_short_calls,
 					show_answered:def.show_answered,
@@ -94,7 +98,8 @@
 					show_hangup:def.show_hangup,
 					show_playback:def.show_playback,
 					show_dial:def.show_dial,
-					show_wait:def.show_wait
+					show_wait:def.show_wait,
+					key:sn.result.key
 				},
 				dataType:def.type,
 				timeout:10000,
@@ -145,13 +150,13 @@
 			//$(this).snPlayer('onScrollWindow');
 			//$(this).snPlayer('fixPlayer');
 		},
-		onScrollWindow:function()
+		/*onScrollWindow:function()
 		{
 			var th=$(this);
 			$(window).scroll(function(){
 				th.snPlayer('fixPlayer');
 			});
-		},
+		},*/
 		onClickClose:function()
 		{
 			$('#player-close').click(function(e){
@@ -276,6 +281,27 @@
 						$('#dp1').datepicker();
 						$('#dp2').datepicker();
 						$(this).snPlayer();
+						$(this).snEvents({'href':'#fbRequest'});
+					break;
+					case "signin":
+						$("#signin-error").hide();
+						$(this).snAjax('sendRequest',{'action':'signin','debug':false});
+					break;
+					case "afterSignin":
+						if (sn.result) {
+							if (sn.result.response) {
+								if (sn.result.controls) {
+									$("#controls").html(sn.result.controls);
+								}
+								$("#signin").empty();
+								$(this).snTriggers('controls');
+								$(this).snEvents({'href':'#submit'});
+							} else {
+								$("#inputLogin").val('');
+								$("#inputPassword").val('');
+								$("#signin-error").show();
+							}
+						}
 					break;
 					case "submit":
 						$(this).snAjax('sendRequest',{'action':'submit','debug':false});
@@ -338,38 +364,54 @@
 	var methods={
 		init:function(options)
 		{
-			$(this).snTriggers('eventLinks');
-			$(this).snTriggers('controls');
-			$(this).snTriggers('cb');
-			$(this).snTriggers('list');
-			$(this).snTriggers('limit');
-			$(this).snTriggers('filters');
-			$(this).snTriggers('sort');
+			if ($("#controls").html()!=="")	{
+				$(this).snTriggers('submit');
+				$(this).snTriggers('cb');
+				$(this).snTriggers('limit');
+				$(this).snTriggers('filters');
+			}
+			if ($("#talbe").html()!=="") {
+				$(this).snTriggers('sort');
+			}
+			if ($("#pagination").html()!=="")	{
+				$(this).snTriggers('list');
+			}
+			if ($("#signin").html()!=="")	{
+				$(this).snTriggers('signin');
+			}
 		},
 		controls:function()
 		{
+			$(this).snTriggers('submit');
+			$(this).snTriggers('cb');
+			$(this).snTriggers('limit');
+			$(this).snTriggers('filters');
+		},
+		signin:function()
+		{
 			th=$(this);
-			sn=$(this).data('sn');
-			$("#control_panel_1").on("submit",function(e){
+			$("#fSignin").on("submit",function(e){
+				e.preventDefault();
+				th.snEvents({'href':'#signin'});
+			});
+		},
+		submit:function()
+		{
+			th=$(this);
+			$("#fSubmit").on("submit",function(e){
+				e.preventDefault();
+				$("#page").val(1);
+				th.snEvents({'href':'#submit'});
+			});
+			$("#submit").on("click",function(e){
 				e.preventDefault();
 				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});
 		},
-		eventLinks:function()
-		{
-			th=$(this);
-			sn=$(this).data('sn');
-			$("a.event").on("click",function(e){
-				e.preventDefault();
-				$("#page").val(1);
-				th.snEvents({'href':$(this).attr("href")});
-			});
-		},
 		cb:function()
 		{
 			th=$(this);
-			sn=$(this).data('sn');
 			$(".cb").on("click",function(e){
 				e.preventDefault();
 				if ($(this).is(':checked')) {
@@ -378,26 +420,6 @@
 					$('#'+$(this).data('cb')).val('off');
 				}				
 				$("#page").val(1);
-				th.snEvents({'href':'#submit'});
-			});
-		},
-		list:function()
-		{
-			th=$(this);
-			sn=$(this).data('sn');
-			$("a#prev").on("click",function(e){
-				e.preventDefault();
-				$("#page").val(($("#page").val()*1)-1);
-				th.snEvents({'href':'#submit'});
-			});
-			$("a.list").on("click",function(e){
-				e.preventDefault();
-				$("#page").val($(this).data("page"));
-				th.snEvents({'href':'#submit'});
-			});
-			$("a#next").on("click",function(e){
-				e.preventDefault();
-				$("#page").val(($("#page").val()*1)+1);
 				th.snEvents({'href':'#submit'});
 			});
 		},
@@ -416,7 +438,6 @@
 		filters:function()
 		{
 			th=$(this);
-			sn=$(this).data('sn');
 			$(".filters li a").on("click",function(e){
 				e.preventDefault();
 				if ($(this).data('value')=='on') {
@@ -435,12 +456,30 @@
 		sort:function()
 		{
 			th=$(this);
-			sn=$(this).data('sn');
 			$("a.sort").on("click",function(e){
 				e.preventDefault();
 				$("#order").val($(this).data("order"));
 				$("#grad").val($(this).data("grad"));
 				$("#page").val(1);
+				th.snEvents({'href':'#submit'});
+			});
+		},
+		list:function()
+		{
+			th=$(this);
+			$("a#prev").on("click",function(e){
+				e.preventDefault();
+				$("#page").val(($("#page").val()*1)-1);
+				th.snEvents({'href':'#submit'});
+			});
+			$("a.list").on("click",function(e){
+				e.preventDefault();
+				$("#page").val($(this).data("page"));
+				th.snEvents({'href':'#submit'});
+			});
+			$("a#next").on("click",function(e){
+				e.preventDefault();
+				$("#page").val(($("#page").val()*1)+1);
 				th.snEvents({'href':'#submit'});
 			});
 		}

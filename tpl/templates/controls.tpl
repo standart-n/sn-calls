@@ -4,7 +4,7 @@
 	
 			<div class="span12">
 				<div class="well well-small">
-					<form id="control_panel_1" class="form-inline">
+					<form id="fSubmit" class="form-inline">
 						<div class="input-append">
 							<input id="src" type="text" class="input-medium" placeholder="От кого" value="{$controls.src}">
 							<span class="add-on"><i class="icon-user"></i></span>
@@ -73,7 +73,7 @@
 						</div>
 					</form>
 
-						<a id="submit" href="#submit" class="btn btn-primary btn-medium event"><i class="icon-ok icon-white">
+						<a id="submit" href="#" class="btn btn-primary btn-medium"><i class="icon-ok icon-white">
 							</i> Применить
 						</a>
 

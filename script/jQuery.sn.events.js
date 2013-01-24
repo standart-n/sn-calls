@@ -16,6 +16,27 @@
 						$('#dp1').datepicker();
 						$('#dp2').datepicker();
 						$(this).snPlayer();
+						$(this).snEvents({'href':'#fbRequest'});
+					break;
+					case "signin":
+						$("#signin-error").hide();
+						$(this).snAjax('sendRequest',{'action':'signin','debug':false});
+					break;
+					case "afterSignin":
+						if (sn.result) {
+							if (sn.result.response) {
+								if (sn.result.controls) {
+									$("#controls").html(sn.result.controls);
+								}
+								$("#signin").empty();
+								$(this).snTriggers('controls');
+								$(this).snEvents({'href':'#submit'});
+							} else {
+								$("#inputLogin").val('');
+								$("#inputPassword").val('');
+								$("#signin-error").show();
+							}
+						}
 					break;
 					case "submit":
 						$(this).snAjax('sendRequest',{'action':'submit','debug':false});

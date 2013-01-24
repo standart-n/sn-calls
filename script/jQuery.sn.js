@@ -5,19 +5,19 @@
 		{
 			if (!options) { options={}; }
 			def={
-				'bonus':
-				{
-					'inputText':'Введите номер карты'
-				},
 				'content':{},
-				'result':{}
+				'result':
+				{
+					'key':''
+				}
 			};
 			$.extend(true,def,options);
 			return this.each(function(){
 				$(this).data('sn',def);
 				$(this).snTriggers();
-				$(this).snEvents({'href':'#autoload'});
-				$(this).snEvents({'href':'#fbRequest'});
+				if ($("#controls").html()!=="") {
+					$(this).snEvents({'href':'#autoload'});
+				}
 			});
 		}
 	};		

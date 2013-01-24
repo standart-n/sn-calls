@@ -1,5 +1,6 @@
 <?php class url extends sn {
 	
+public static $key;
 public static $action;
 public static $callback;
 
@@ -11,6 +12,8 @@ public static $page;
 public static $phone;
 public static $limit;
 public static $order;
+public static $login;
+public static $password;
 public static $grad;
 
 public static $show_short_calls;
@@ -26,6 +29,11 @@ public static $show_wait;
 public static $show_hangup;
 
 function __construct() {
+
+	if (isset($_REQUEST["key"])) {
+		self::$key=trim(strval($_REQUEST["key"]));
+	}
+
 	if (isset($_REQUEST["action"])) {
 		self::$action=trim(strval($_REQUEST["action"]));
 	}
@@ -58,6 +66,13 @@ function __construct() {
 	}
 	if (isset($_REQUEST["phone"])) {
 		self::$phone=trim(strval($_REQUEST["phone"]));
+	}
+
+	if (isset($_REQUEST["login"])) {
+		self::$login=trim(strval($_REQUEST["login"]));
+	}
+	if (isset($_REQUEST["password"])) {
+		self::$password=trim(strval($_REQUEST["password"]));
 	}
 
 	if (isset($_REQUEST["show_short_calls"])) {

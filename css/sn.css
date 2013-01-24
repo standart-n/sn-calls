@@ -11,6 +11,10 @@ a.pause {
   display: none;
 }
 
+#signin-error {
+  display: none;
+}
+
 .fb-name {
   display: inline;
 }

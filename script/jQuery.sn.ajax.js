@@ -22,6 +22,8 @@
 				'limit':$('#limit').val(),
 				'order':$('#order').val(),
 				'grad':$('#grad').val(),
+				'login':$('#inputLogin').val(),
+				'password':$('#inputPassword').val(),
 				'phone':'',
 				'show_short_calls':$('#show_short_calls').val(),
 				'show_answered':$('#show_answered').val(),
@@ -49,6 +51,8 @@
 					limit:def.limit,
 					order:def.order,
 					grad:def.grad,
+					login:def.login,
+					password:def.password,
 					phone:def.phone,
 					show_short_calls:def.show_short_calls,
 					show_answered:def.show_answered,
@@ -58,7 +62,8 @@
 					show_hangup:def.show_hangup,
 					show_playback:def.show_playback,
 					show_dial:def.show_dial,
-					show_wait:def.show_wait
+					show_wait:def.show_wait,
+					key:sn.result.key
 				},
 				dataType:def.type,
 				timeout:10000,

@@ -37,13 +37,14 @@
 </div>
 
 <div id="main">
+	<div id="signin"></div>
 	<div id="controls"></div>
 	<div id="table"></div>
 	<div id="pagination"></div>
 	<div id="stat"></div>
 </div>
 
-<div id="script">
+<div id="js">
 	<script src="sn-project/lib/jQuery.1.8.3.min.js" type="text/javascript"></script>
 	<script src="sn-project/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="sn-project/js/sn.min.js" type="text/javascript"></script>

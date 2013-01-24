@@ -8,13 +8,13 @@
 			//$(this).snPlayer('onScrollWindow');
 			//$(this).snPlayer('fixPlayer');
 		},
-		onScrollWindow:function()
+		/*onScrollWindow:function()
 		{
 			var th=$(this);
 			$(window).scroll(function(){
 				th.snPlayer('fixPlayer');
 			});
-		},
+		},*/
 		onClickClose:function()
 		{
 			$('#player-close').click(function(e){
