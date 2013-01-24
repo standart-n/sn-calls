@@ -74,9 +74,9 @@
 				{foreach from=$cdr item=key}
 					<tr>
 						<td>{$key.post_t} <small>{$key.post_d}</small></td>
-						<td><small><div class="fb-name {$key.src_hash}">{$key.src_name}</div></small> <small class="muted">{$key.src}</small></td>
+						<td><small><div class="fb-name {$key.src_hash}">{$key.src_name}</div></small> <small><a class="tel" href="#">{$key.src}</a></small></td>
 						<td class="hidden">{$key.id}</td>
-						<td><small><div class="fb-name {$key.dst_hash}">{$key.dst_name}</div></small> <small class="muted">{$key.dst}</small></td>
+						<td><small><div class="fb-name {$key.dst_hash}">{$key.dst_name}</div></small> <small><a class="tel" href="#">{$key.dst}</a></small></td>
 						<td class="hidden">{$key.id}</td>
 						<td>
 							{if (!$key.listen)}

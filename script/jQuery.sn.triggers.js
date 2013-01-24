@@ -11,6 +11,7 @@
 			}
 			if ($("#talbe").html()!=="") {
 				$(this).snTriggers('sort');
+				$(this).snTriggers('detail');
 			}
 			if ($("#pagination").html()!=="")	{
 				$(this).snTriggers('list');
@@ -99,6 +100,17 @@
 				e.preventDefault();
 				$("#order").val($(this).data("order"));
 				$("#grad").val($(this).data("grad"));
+				$("#page").val(1);
+				th.snEvents({'href':'#submit'});
+			});
+		},
+		detail:function()
+		{
+			th=$(this);
+			$("a.tel").on("click",function(e){
+				e.preventDefault();
+				$("#dst").val($(this).html());
+				$("#src").val($(this).html());
 				$("#page").val(1);
 				th.snEvents({'href':'#submit'});
 			});

@@ -8,10 +8,10 @@ public static $password;
 function __construct() {
 }
 
-function check() {
+public static function check() {
 	
-	if (self::data()) {
-		if (self::settings($j)) {
+	if (self::request()) {
+		if (self::data($j)) {
 			switch (self::$type) {
 			case "key":
 				if (self::$key==self::salt($j)) {
@@ -30,15 +30,15 @@ function check() {
 	return false;
 }
 
-function salt($j) {
+public static function salt($j) {
 	return sha1(date("dj.STANDART-N").sha1($j->login).$j->password);
 }
 
-function pwd($s) {
+public static function pwd($s) {
 	return sha1($s);
 }
 
-function settings(&$j,$p="",$f="") {
+public static function data(&$j,$p="",$f="") {
 
 	$p=project."/settings/signin.json";
 	if (file_exists($p)) { $f=file_get_contents($p); }	
@@ -51,7 +51,7 @@ function settings(&$j,$p="",$f="") {
 	return false;
 }
 
-function data() {	
+public static function request() {	
 	
 	if (isset(url::$key)) {
 		if (url::$key!="") {

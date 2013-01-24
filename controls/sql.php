@@ -65,24 +65,36 @@ public static function search($s="") {
 	$dst=calls::$dst;
 	$date1=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 00:00:00',calls::$date1);
 	$date2=preg_replace('/([0-9]{2})-([0-9]{2})-([0-9]{4})/i','$3-$2-$1 23:59:59',calls::$date2);
-	if (($src!="") && (strlen($src)>2)) {
-		$s.=" AND (";
-		$s.="(src_name LIKE '%".$src."%')";
-		if (intval($src)>0) {
-			$s.=" OR ";
-			$s.="(src LIKE '%".$src."%')";
+
+	if ($dst!=$src) {
+		if (($src!="") && (strlen($src)>2)) {
+			$s.=" AND (";
+			$s.="(src_name LIKE '%".$src."%')";
+			if (intval($src)>0) {
+				$s.=" OR ";
+				$s.="(src LIKE '%".$src."%')";
+			}
+			$s.=") ";
 		}
-		$s.=") ";
-	}
-	if (($dst!="") && (strlen($dst)>2)) {
-		$s.=" AND (";
-		$s.="(dst_name LIKE '%".$dst."%')";
-		if (intval($dst)>0) {
-			$s.=" OR ";
-			$s.="(src LIKE '%".$dst."%')";
+		if (($dst!="") && (strlen($dst)>2)) {
+			$s.=" AND (";
+			$s.="(dst_name LIKE '%".$dst."%')";
+			if (intval($dst)>0) {
+				$s.=" OR ";
+				$s.="(src LIKE '%".$dst."%')";
+			}
+			$s.=") ";
 		}
-		$s.=") ";
+	} else {
+		if (($dst!="") && ($src!="")) {
+			$s.=" AND (";
+			$s.="(src='".$src."')";
+			$s.=" OR ";
+			$s.="(dst='".$dst."')";
+			$s.=") ";
+		}
 	}
+
 	if (($date1!="") && ($date2!="")) {
 		$s.=" AND (";
 		$s.="calldate between '".$date1."' and '".$date2."'";

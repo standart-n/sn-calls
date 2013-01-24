@@ -30,6 +30,9 @@
 								}
 								$("#signin").empty();
 								$(this).snTriggers('controls');
+								$('#dp1').datepicker();
+								$('#dp2').datepicker();
+								$(this).snPlayer();
 								$(this).snEvents({'href':'#submit'});
 							} else {
 								$("#inputLogin").val('');
@@ -46,6 +49,7 @@
 							if (sn.result.table) {
 								$("#table").html(sn.result.table);
 								$(this).snTriggers('sort');
+								$(this).snTriggers('detail');
 								$(this).snPlayer('onClickPlay');
 							}
 							if (sn.result.stat) {
