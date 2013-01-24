@@ -1,3 +1,3 @@
 <?php
-echo sha1("aster0id");
+echo sha1("password");
 ?>
