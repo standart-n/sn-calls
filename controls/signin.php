@@ -21,7 +21,7 @@ public static function check() {
 				}
 			break;
 			case "login":
-				if ((self::$login==$j->login) && (self::pwd(self::$password)==$j->password)) {
+				if ((self::$login==strtolower($j->login)) && (self::pwd(self::$password)==$j->password)) {
 					self::$key=self::salt($j);
 					self::updSession();
 					return true;

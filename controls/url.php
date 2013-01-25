@@ -69,7 +69,7 @@ function __construct() {
 	}
 
 	if (isset($_REQUEST["login"])) {
-		self::$login=trim(strval($_REQUEST["login"]));
+		self::$login=strtolower(trim(strval($_REQUEST["login"])));
 	}
 	if (isset($_REQUEST["password"])) {
 		self::$password=trim(strval($_REQUEST["password"]));
