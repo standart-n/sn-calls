@@ -38,10 +38,10 @@
 					<form class="form-inline">
 						<label class="hidden-phone">Выводить по </label>
 						<div class="btn-group limit">
-							<a href="#" class="btn btn-small" data-limit="10">10</a>
-							<a href="#" class="btn btn-small active" data-limit="20">20</a>
-							<a href="#" class="btn btn-small hidden-phone" data-limit="30">30</a>
-							<a href="#" class="btn btn-small" data-limit="40">40</a>
+							<a href="#" class="btn btn-small {if ($controls.limit==10)}active{/if}" data-limit="10">10</a>
+							<a href="#" class="btn btn-small {if ($controls.limit==20)}active{/if}" data-limit="20">20</a>
+							<a href="#" class="btn btn-small {if ($controls.limit==30)}active{/if} hidden-phone" data-limit="30">30</a>
+							<a href="#" class="btn btn-small {if ($controls.limit==40)}active{/if}" data-limit="40">40</a>
 						</div>
 							<input id="limit" type="hidden" value="20">
 						<div class="btn-group">
@@ -51,25 +51,105 @@
 							</a>
 							<ul class="dropdown-menu filters" role="menu" aria-labelledby="dLabel">
 								<li class="nav-header">Статусы</li>
-								<li><a data-cb="show_answered" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Отвеченные</a></li>
-								<li><a data-cb="show_no_answer" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Не отвеченные</a></li>
-								<li><a data-cb="show_busy" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Занято</a></li>
-								<li><a data-cb="show_failed" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Отмененные</a></li>
+								<li>
+									{if ($controls.show_answered!='off')}
+										<a data-cb="show_answered" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Отвеченные
+										</a>
+									{else}
+										<a data-cb="show_answered" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Отвеченные
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_no_answer!='off')}
+										<a data-cb="show_no_answer" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Не отвеченные
+										</a>
+									{else}
+										<a data-cb="show_no_answer" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Не отвеченные
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_busy!='off')}
+										<a data-cb="show_busy" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Занято
+										</a>
+									{else}
+										<a data-cb="show_busy" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Занято
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_failed!='off')}
+										<a data-cb="show_failed" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Отмененные
+										</a>
+									{else}
+										<a data-cb="show_failed" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Отмененные
+										</a>
+									{/if}
+								</li>
 								<li class="divider"></li>
 								<li class="nav-header">Посл. действ.</li>
-								<li><a data-cb="show_dial" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Вызов</a></li>
-								<li><a data-cb="show_playback" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> ИВР</a></li>
-								<li><a data-cb="show_wait" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Ожидание</a></li>
-								<li><a data-cb="show_hangup" data-value="on" tabindex="-1" href="#"><i class="icon-ok"></i> Сброшено</a></li>
+								<li>
+									{if ($controls.show_dial!='off')}
+										<a data-cb="show_dial" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Вызов
+										</a>
+									{else}
+										<a data-cb="show_dial" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Вызов
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_playback!='off')}
+										<a data-cb="show_playback" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> ИВР
+										</a>
+									{else}
+										<a data-cb="show_playback" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> ИВР
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_wait!='off')}
+										<a data-cb="show_wait" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Ожидание
+										</a>
+									{else}
+										<a data-cb="show_wait" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Ожидание
+										</a>
+									{/if}
+								</li>
+								<li>
+									{if ($controls.show_hangup!='off')}
+										<a data-cb="show_hangup" data-value="on" tabindex="-1" href="#">
+											<i class="icon-ok"></i> Сброшено
+										</a>
+									{else}
+										<a data-cb="show_hangup" data-value="off" tabindex="-1" href="#">
+											<i class="icon-none"></i> Сброшено
+										</a>
+									{/if}
+								</li>
 							</ul>
-							<input id="show_answered" type="hidden" value="on">
-							<input id="show_no_answer" type="hidden" value="on">
-							<input id="show_busy" type="hidden" value="on">
-							<input id="show_failed" type="hidden" value="on">
-							<input id="show_hangup" type="hidden" value="on">
-							<input id="show_playback" type="hidden" value="on">
-							<input id="show_dial" type="hidden" value="on">
-							<input id="show_wait" type="hidden" value="on">
+							<input id="show_answered" type="hidden" value="{if ($controls.show_answered!='off')}on{else}off{/if}">
+							<input id="show_no_answer" type="hidden" value="{if ($controls.show_no_answer!='off')}on{else}off{/if}">
+							<input id="show_busy" type="hidden" value="{if ($controls.show_busy!='off')}on{else}off{/if}">
+							<input id="show_failed" type="hidden" value="{if ($controls.show_failed!='off')}on{else}off{/if}">
+							<input id="show_hangup" type="hidden" value="{if ($controls.show_hangup!='off')}on{else}off{/if}">
+							<input id="show_playback" type="hidden" value="{if ($controls.show_playback!='off')}on{else}off{/if}">
+							<input id="show_dial" type="hidden" value="{if ($controls.show_dial!='off')}on{else}off{/if}">
+							<input id="show_wait" type="hidden" value="{if ($controls.show_wait!='off')}on{else}off{/if}">
 						</div>
 					</form>
 

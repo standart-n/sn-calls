@@ -6,6 +6,7 @@ function __construct() {
 
 public static function engine() {
 	if (signin::check()) {
+		calls::getDataFromUrl();
 		load("index.tpl");
 		assign('controls',calls::controls());
 		innerHTML("#controls",fetch("controls.tpl"));

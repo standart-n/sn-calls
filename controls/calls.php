@@ -151,8 +151,7 @@ public static function cdr($j=array(),$p=array(),$i=-1) {
 				$j[$i]['duration_error_pr']=100;
 			}
 			
-			if (isset($r->lastapp)) {
-				$la=trim(strtolower(strval($r->lastapp)));
+			if (isset($r->lastapp)) {				$la=trim(strtolower(strval($r->lastapp)));
 				switch ($la) {
 				case "playback":
 					$j[$i]['lastapp_rus']="ИВР";
@@ -273,11 +272,22 @@ public static function pagination($list=array(),$i=0) {
 
 public static function controls($j=array()) {
 	$j['src']=self::$src;
-	$j['dst']=self::$src;
+	$j['dst']=self::$dst;
 	$j['date1']=self::$date1;
 	$j['date2']=self::$date2;
+	$j['limit']=self::$limit;
 	$j['show_no_answer']=self::$show_no_answer;
 	$j['show_short_calls']=self::$show_short_calls;
+
+	$j['show_answered']=self::$show_answered;
+	$j['show_no_answer']=self::$show_no_answer;
+	$j['show_busy']=self::$show_busy;
+	$j['show_failed']=self::$show_failed;
+
+	$j['show_playback']=self::$show_playback;
+	$j['show_dial']=self::$show_dial;
+	$j['show_wait']=self::$show_wait;
+	$j['show_hangup']=self::$show_hangup;
 	return $j;
 }
 
