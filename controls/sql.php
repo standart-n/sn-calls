@@ -81,7 +81,7 @@ public static function search($s="") {
 			$s.="(dst_name LIKE '%".$dst."%')";
 			if (intval($dst)>0) {
 				$s.=" OR ";
-				$s.="(src LIKE '%".$dst."%')";
+				$s.="(dst LIKE '%".$dst."%')";
 			}
 			$s.=") ";
 		}
