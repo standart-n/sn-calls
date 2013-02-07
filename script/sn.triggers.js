@@ -52,6 +52,20 @@ $(function() {
         });
       });
     },
+    limit: function() {
+      var sn, th;
+      th = $(this);
+      sn = $(this).data('sn');
+      return $(".limit a").on("click", function(e) {
+        e.preventDefault();
+        $(this).addClass('active').siblings().removeClass('active');
+        $('#limit').val($(this).data('limit'));
+        $("page").val(1);
+        return th.snEvents({
+          href: '#submit'
+        });
+      });
+    },
     cb: function() {
       var th;
       th = $(this);
@@ -68,7 +82,7 @@ $(function() {
         });
       });
     },
-    limit: function() {
+    filters: function() {
       var sn, th;
       th = $(this);
       sn = $(this).data('sn');

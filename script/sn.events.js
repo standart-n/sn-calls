@@ -14,8 +14,8 @@ $(function() {
       href = def.href;
       switch (href.replace(/(.*)#(.*)/, '$2')) {
         case "autoload":
-          $("#dp1").datePicker();
-          $("#dp2").datePicker();
+          $("#dp1").datepicker();
+          $("#dp2").datepicker();
           $(this).snEvents({
             href: '#fbRequest'
           });
@@ -34,8 +34,8 @@ $(function() {
               }
               $("#signin").empty();
               $(this).snTriggers('controls');
-              $("#dp1").datePicker();
-              $("#dp2").datePicker();
+              $("#dp1").datepicker();
+              $("#dp2").datepicker();
               $(this).snAjax('sendRequest', {
                 action: 'submit',
                 debug: false
@@ -51,7 +51,7 @@ $(function() {
         case "submit":
           return $(this).snAjax('sendRequest', {
             action: 'submit',
-            debug: false
+            debug: true
           });
         case "afterSubmit":
           if (sn.result) {
@@ -76,7 +76,7 @@ $(function() {
         case "fbRequest":
           return $(".no-fb").each(function() {
             if ($(this).val() !== "") {
-              th.snAjax('fbRequest', {
+              th.snAjax('sendRequest', {
                 action: 'phone',
                 phone: $(this).val(),
                 debug: false

@@ -30,6 +30,18 @@ $ ->
 				do e.preventDefault
 				$("page").val 1
 				th.snEvents href:'#submit'
+		limit: ->
+			th=$(this)
+			sn=$(this).data 'sn'
+			$(".limit a").on "click",(e) ->
+				do e.preventDefault
+				$(this)
+					.addClass('active')
+					.siblings()
+					.removeClass('active')
+				$('#limit').val $(this).data 'limit'
+				$("page").val 1
+				th.snEvents href:'#submit'
 		cb: ->
 			th=$(this)
 			$(".cb").on "click",(e) ->
@@ -40,7 +52,7 @@ $ ->
 					$('#'+$(this).data 'cb').val 'off'
 				$("#page").val 1
 				th.snEvents href:"#submit"
-		limit: ->
+		filters: ->
 			th=$(this)
 			sn=$(this).data 'sn'
 			$(".filters li a").on "click",(e) ->

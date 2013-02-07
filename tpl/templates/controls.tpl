@@ -2,7 +2,7 @@
   <div class='row-fluid'>
     <div class='span12'>
       <div class='well well-small'>
-        <div class='form-inline' id='fSubmit'>
+        <form class='form-inline' id='fSubmit'>
           <div class='input-append'>
             <input class='input-medium' id='src' placeholder='От кого' type='text' value='{$controls.src}' />
             <span class='add-on'>
@@ -15,11 +15,12 @@
               <i class='icon-user'></i>
             </span>
           </div>
-          <div class='input-append date' data-date-format='dd-mm-yyyy' data-date='{$controls.date1}' id='dp1'></div>
-          <input class='input-small' id='date1' size='16' type='text' value='{$controls.date1}' />
-          <span class='add-on'>
-            <i class='icon-th'></i>
-          </span>
+          <div class='input-append date' data-date-format='dd-mm-yyyy' data-date='{$controls.date1}' id='dp1'>
+            <input class='input-small' id='date1' size='16' type='text' value='{$controls.date1}' />
+            <span class='add-on'>
+              <i class='icon-th'></i>
+            </span>
+          </div>
           <div class='input-append date' data-date-format='dd-mm-yyyy' data-date='{$controls.date2}' id='dp2'>
             <input class='input-small' id='date2' size='16' type='text' value='{$controls.date2}' />
             <span class='add-on'>
@@ -29,7 +30,7 @@
           <div class='hidden'>
             <input type='submit' />
           </div>
-        </div>
+        </form>
         <!--
           <form class='form-inline'>
             <label class='checkbox'>
@@ -107,8 +108,8 @@
                 </a>
                 {/if}
               </li>
-              <li class="divider"></li>
-              <li class="nav-header">Посл. действ.</li>
+              <li class='divider'></li>
+              <li class='nav-header'>Посл. действ.</li>
               <li>
                 {if ($controls.show_dial!='off')}
                 <a data-cb='show_dial' data-value='on' href='#' tabindex='-1'>
@@ -170,29 +171,29 @@
                 {/if}
               </li>
             </ul>
-            <input id='show_answered' type='hidden' value="{if ($controls.show_answered!='off')}on{else}off{/if}" />
-            <input id='show_no_answer' type='hidden' value="{if ($controls.show_no_answer!='off')}on{else}off{/if}" />
-            <input id='show_busy' type='hidden' value="{if ($controls.show_busy!='off')}on{else}off{/if}" />
-            <input id='show_failed' type='hidden' value="{if ($controls.show_failed!='off')}on{else}off{/if}" />
-            <input id='show_hangup' type='hidden' value="{if ($controls.show_hangup!='off')}on{else}off{/if}" />
-            <input id='show_playback' type='hidden' value="{if ($controls.show_playback!='off')}on{else}off{/if}" />
-            <input id='show_dial' type='hidden' value="{if ($controls.show_dial!='off')}on{else}off{/if}" />
-            <input id='show_wait' type='hidden' value="{if ($controls.show_wait!='off')}on{else}off{/if}" />
           </div>
-          <a class='btn btn-primary btn-medium' href='#' id='submit'>
-            <i class='icon-ok icon-white'></i>
-            Применить
-          </a>
-          <!--
-            <div id='loading'>
-              <div class='progress progress-striped active'>
-                <div class='bar' style='width: 100%;'>
-                  <strong>Загрузка данных...</strong>
-                </div>
+          <input id='show_answered' type='hidden' value="{if ($controls.show_answered!='off')}on{else}off{/if}" />
+          <input id='show_no_answer' type='hidden' value="{if ($controls.show_no_answer!='off')}on{else}off{/if}" />
+          <input id='show_busy' type='hidden' value="{if ($controls.show_busy!='off')}on{else}off{/if}" />
+          <input id='show_failed' type='hidden' value="{if ($controls.show_failed!='off')}on{else}off{/if}" />
+          <input id='show_hangup' type='hidden' value="{if ($controls.show_hangup!='off')}on{else}off{/if}" />
+          <input id='show_playback' type='hidden' value="{if ($controls.show_playback!='off')}on{else}off{/if}" />
+          <input id='show_dial' type='hidden' value="{if ($controls.show_dial!='off')}on{else}off{/if}" />
+          <input id='show_wait' type='hidden' value="{if ($controls.show_wait!='off')}on{else}off{/if}" />
+        </form>
+        <a class='btn btn-primary btn-medium' href='#' id='submit'>
+          <i class='icon-ok icon-white'></i>
+          Применить
+        </a>
+        <!--
+          <div id='loading'>
+            <div class='progress progress-striped active'>
+              <div class='bar' style='width: 100%;'>
+                <strong>Загрузка данных...</strong>
               </div>
             </div>
-          -->
-        </form>
+          </div>
+        -->
       </div>
     </div>
   </div>

@@ -9,8 +9,8 @@ $ ->
 			href=def.href
 			switch href.replace /(.*)#(.*)/,'$2'
 				when "autoload"
-					$("#dp1").datePicker()
-					$("#dp2").datePicker()
+					$("#dp1").datepicker()
+					$("#dp2").datepicker()
 					$(@).snEvents href:'#fbRequest'
 					$(@).snPlayer()
 				when "signin"
@@ -23,8 +23,8 @@ $ ->
 								$('#controls').html sn.result.controls
 							$("#signin").empty()
 							$(@).snTriggers 'controls'
-							$("#dp1").datePicker()
-							$("#dp2").datePicker()
+							$("#dp1").datepicker()
+							$("#dp2").datepicker()
 							$(this).snAjax 'sendRequest',(action:'submit',debug:false)
 							$(@).snPlayer()
 						else
@@ -32,7 +32,7 @@ $ ->
 							$("#inputPassword").val ''
 							$("#signin-error").show()
 				when "submit"
-					$(this).snAjax 'sendRequest',(action:'submit',debug:false)
+					$(this).snAjax 'sendRequest',(action:'submit',debug:true)
 				when "afterSubmit"
 					if sn.result
 						if sn.result.table
@@ -49,7 +49,7 @@ $ ->
 				when "fbRequest"
 					$(".no-fb").each ->
 						if $(@).val() != ""
-							th.snAjax 'fbRequest',(action:'phone',phone:$(this).val(),debug:false)
+							th.snAjax 'sendRequest',(action:'phone',phone:$(this).val(),debug:false)
 							$(this).removeCLass 'no-fb'
 				when "afterFbRequest"
 					if sn.result

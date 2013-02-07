@@ -4,7 +4,7 @@
 	
 		.span12
 			.well.well-small
-				#fSubmit.form-inline
+				%form#fSubmit.form-inline
 					.input-append
 						%input#src.input-medium{:type => "text", :placeholder => "От кого", :value => "{$controls.src}"}
 						%span.add-on
@@ -16,9 +16,9 @@
 							%i.icon-user
 
 					#dp1.input-append.date{:data => {:date => "{$controls.date1}", :"date-format" => "dd-mm-yyyy"}}
-					%input#date1.input-small{:size => "16", :type => "text", :value => "{$controls.date1}"}
-					%span.add-on
-						%i.icon-th
+						%input#date1.input-small{:size => "16", :type => "text", :value => "{$controls.date1}"}
+						%span.add-on
+							%i.icon-th
 
 					#dp2.input-append.date{:data => {:date => "{$controls.date2}", :"date-format" => "dd-mm-yyyy"}}
 						%input#date2.input-small{:size => "16", :type => "text", :value => "{$controls.date2}"}
@@ -93,8 +93,8 @@
 									%i.icon-none
 									Отмененные
 								{/if}
-							<li class="divider"></li>
-							<li class="nav-header">Посл. действ.</li>
+							%li.divider
+							%li.nav-header Посл. действ.
 							%li
 								{if ($controls.show_dial!='off')}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_dial", :value => "on"}}
@@ -136,21 +136,21 @@
 										Сброшено
 								{/if}
 						
-						%input#show_answered{:type => "hidden", :value => "{if ($controls.show_answered!='off')}on{else}off{/if}"}
-						%input#show_no_answer{:type => "hidden", :value => "{if ($controls.show_no_answer!='off')}on{else}off{/if}"}
-						%input#show_busy{:type => "hidden", :value => "{if ($controls.show_busy!='off')}on{else}off{/if}"}
-						%input#show_failed{:type => "hidden", :value => "{if ($controls.show_failed!='off')}on{else}off{/if}"}
-						%input#show_hangup{:type => "hidden", :value => "{if ($controls.show_hangup!='off')}on{else}off{/if}"}
-						%input#show_playback{:type => "hidden", :value => "{if ($controls.show_playback!='off')}on{else}off{/if}"}
-						%input#show_dial{:type => "hidden", :value => "{if ($controls.show_dial!='off')}on{else}off{/if}"}
-						%input#show_wait{:type => "hidden", :value => "{if ($controls.show_wait!='off')}on{else}off{/if}"}
+					%input#show_answered{:type => "hidden", :value => "{if ($controls.show_answered!='off')}on{else}off{/if}"}
+					%input#show_no_answer{:type => "hidden", :value => "{if ($controls.show_no_answer!='off')}on{else}off{/if}"}
+					%input#show_busy{:type => "hidden", :value => "{if ($controls.show_busy!='off')}on{else}off{/if}"}
+					%input#show_failed{:type => "hidden", :value => "{if ($controls.show_failed!='off')}on{else}off{/if}"}
+					%input#show_hangup{:type => "hidden", :value => "{if ($controls.show_hangup!='off')}on{else}off{/if}"}
+					%input#show_playback{:type => "hidden", :value => "{if ($controls.show_playback!='off')}on{else}off{/if}"}
+					%input#show_dial{:type => "hidden", :value => "{if ($controls.show_dial!='off')}on{else}off{/if}"}
+					%input#show_wait{:type => "hidden", :value => "{if ($controls.show_wait!='off')}on{else}off{/if}"}
 
-					%a#submit.btn.btn-primary.btn-medium{:href => "#"}
-						%i.icon-ok.icon-white
-						Применить
+				%a#submit.btn.btn-primary.btn-medium{:href => "#"}
+					%i.icon-ok.icon-white
+					Применить
 
-					/
-						#loading
-							.progress.progress-striped.active
-								.bar{:style => "width: 100%;"}
-									%strong Загрузка данных...
+				/
+					#loading
+						.progress.progress-striped.active
+							.bar{:style => "width: 100%;"}
+								%strong Загрузка данных...
