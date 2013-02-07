@@ -1,0 +1,82 @@
+
+{if $stat}
+{if isset($stat.count_all)}
+{if ($stat.count_all>0)}
+
+.container-fluid
+	.row-fluid
+	
+		.span12
+			.well.well-small
+				%h4 
+					Статистика 
+					%small звонков: {$stat.count_all}
+
+				%strong По времени разговора
+				.progress
+					.bar.bar-danger{:style => "width: {$stat.pr_limit_1}%"}
+					.bar.bar-warning{:style => "width: {$stat.pr_limit_2}%"}
+					.bar.bar-info{:style => "width: {$stat.pr_limit_3}%"}
+					.bar.bar-success{:style => "width: {$stat.pr_limit_4}%"}
+				%form.form-inline
+					{if $stat.count_limit_1>0}
+					%label
+						%span.badge.badge-important
+							{$stat.count_limit_1}
+						%small 0c.
+					{/if}
+					{if $stat.count_limit_2>0}
+					%label
+						%span.badge.badge-warning
+							{$stat.count_limit_2}
+						%small 0-10c.
+					{/if}
+					{if $stat.count_limit_3>0}
+					%label
+						%span.badge.badge-info
+							{$stat.count_limit_3}
+						%small 10-30c.
+					{/if}
+					{if $stat.count_limit_4>0}
+					%label
+						%span.badge.badge-success
+							{$stat.count_limit_4}
+						%small >30c.
+					{/if}
+
+				%strong По статусам звонков
+				.progress
+					.bar.bar-danger{:style => "width: {$stat.pr_failed}%"}
+					.bar.bar-warning{:style => "width: {$stat.pr_busy}%"}
+					.bar.bar-info{:style => "width: {$stat.pr_no_answer}%"}
+					.bar.bar-success{:style => "width: {$stat.pr_answered}%"}
+
+				%form.form-inline
+					{if $stat.count_failed>0}
+					%label
+						%span.badge.badge-important
+							{$stat.count_failed}
+						%small Отменен
+					{/if}
+					{if $stat.count_busy>0}
+					%label
+						%span.badge.badge-warning
+							{$stat.count_busy}
+						%small Занято
+					{/if}
+					{if $stat.count_no_answer>0}
+					%label
+						%span.badge.badge-info
+							{$stat.count_no_answer}
+						%small Не отвечено
+					{/if}
+					{if $stat.count_answered>0}
+					%label
+						%span.badge.badge-success
+							{$stat.count_answered}
+						%small Отвечено
+					{/if}
+
+{/if}
+{/if}
+{/if}					

@@ -1,0 +1,120 @@
+
+.container-fluid
+	.row-fluid
+		.span12
+			%table.table.table-bordered.table-condensed.table-striped
+				%thead
+					%tr
+						%th
+							{if ($order=="calldate")}
+							%a.sort.btn.btn-mini.btn-primary{:href => "#", 
+								:data => {:order => "calldate", :grad => "{if ($grad=='asc')}desc{else}asc{/if}"}}
+								%i{:class => "hidden-phone icon-arrow-{if ($grad=='asc')}up{else}down{/if} icon-white"}
+								Дата
+							{else}
+							%a.sort.btn.btn-mini{:href => "#", :data => {:order => "calldate", :grad => "asc"}}
+								%i{:class => "hidden-phone icon-arrow-up"}
+								Дата
+							{/if}
+
+						%th
+							{if ($order=="src_name")}
+							%a.sort.btn.btn-mini.btn-primary{:href => "#", 
+								:data => {:order => "src_name", :grad => "{if ($grad=='asc')}desc{else}asc{/if}"}}
+								%i{:class => "hidden-phone icon-arrow-{if ($grad=='asc')}up{else}down{/if} icon-white"}
+								От_кого
+							{else}
+							%a.sort.btn.btn-mini{:href => "#", :data => {:order => "src_name", :grad => "asc"}}
+								%i{:class => "hidden-phone icon-arrow-up"}
+								От_кого
+							{/if}
+
+						%th
+							{if ($order=="dst_name")}
+							%a.sort.btn.btn-mini.btn-primary{:href => "#", 
+								:data => {:order => "dst_name", :grad => "{if ($grad=='asc')}desc{else}asc{/if}"}}
+								%i{:class => "hidden-phone icon-arrow-{if ($grad=='asc')}up{else}down{/if} icon-white"}
+								Кому
+							{else}
+							%a.sort.btn.btn-mini{:href => "#", :data => {:order => "dst_name", :grad => "asc"}}
+								%i{:class => "hidden-phone icon-arrow-up"}
+								Кому
+							{/if}
+
+						%th
+							%a.btn.btn-mini.disabled{:href => "#"}
+								Запись
+
+						%th.hidden-phone
+							%a.btn.btn-mini.disabled{:href => "#"}
+								Действие
+
+						%th.hidden-phone
+							{if ($order=="billsec")}
+							%a.sort.btn.btn-mini.btn-primary{:href => "#", 
+								:data => {:order => "billsec", :grad => "{if ($grad=='asc')}desc{else}asc{/if}"}}
+								%i{:class => "hidden-phone icon-arrow-{if ($grad=='asc')}up{else}down{/if} icon-white"}
+								Длит.(с)
+							{else}
+							%a.sort.btn.btn-mini{:href => "#", :data => {:order => "billsec", :grad => "asc"}}
+								%i{:class => "hidden-phone icon-arrow-up"}
+								Длит.(с)
+							{/if}
+
+						%input#order{:type => "hidden", :value => "{$order}"}
+						%input#grad{:type => "hidden", :value => "{$grad}"}
+
+				%tbody
+					{if isset($cdr)}
+					{foreach from=$cdr item=key}
+					%tr
+						%td 
+							{$key.post_t} 
+							%small {$key.post_d}
+						%td
+							%small
+								%div{:class => "fb-name {$key.src_hash}"} {$key.src_name}
+							%small
+								%a.tel{:href => "#"} {$key.src}
+
+						%td
+							%small
+								%div{:class => "fb-name {$key.dst_hash}"} {$key.dst_name}
+							%small
+								%a.tel{:href => "#"} {$key.dst}
+						
+						%td
+							{if (!$key.listen)}
+							%span{:class => "label label-{$key.status_class}"} {$key.status_rus}
+							{else}
+							{if isset($key.path_audio)}
+							.btn-group
+								%a.btn.btn-primary.btn-mini.play{:href => "#",:data => {:id => "{$key.id}", :src => "{$key.path_audio}"}}
+									%i.icon-play.icon-white
+								%a.btn.btn-mini{:href => "{$key.path_audio}", :target => "_blank"}
+									%i.icon-download-alt
+							{/if}
+							{/if}
+
+						%td.hidden-phone
+							%small {$key.lastapp_rus}
+						
+						%td.hidden-phone
+							.progress
+								.bar.bar-warning{:style => "width:{$key.duration_in_pr}%;"}
+									%small {$key.duration_in}
+								.bar.bar-success{:style => "width:{$key.duration_call_pr}%;"}
+									%strong {$key.duration_call}
+								.bar.bar-danger{:style => "width:{$key.duration_error_pr}%;"}
+									{$key.duration_error}
+
+					{/foreach}
+					{/if}
+
+
+			.hidden
+				{if isset($phones)}
+				{foreach from=$phones item=key}
+				%input.no-fb{:type => "hidden", :value => "{$key}"}
+				{/foreach}
+				{/if}
