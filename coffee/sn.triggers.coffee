@@ -24,11 +24,11 @@ $ ->
 			th=$(this)
 			$("#fSubmit").on "submit",(e) ->
 				do e.preventDefault
-				$("page").val 1
+				$("#page").val '1'
 				th.snEvents href:'#submit'
 			$("#submit").on "click",(e) ->
 				do e.preventDefault
-				$("page").val 1
+				$("#page").val '1'
 				th.snEvents href:'#submit'
 		limit: ->
 			th=$(this)
@@ -40,7 +40,7 @@ $ ->
 					.siblings()
 					.removeClass('active')
 				$('#limit').val $(this).data 'limit'
-				$("page").val 1
+				$("#page").val '1'
 				th.snEvents href:'#submit'
 		cb: ->
 			th=$(this)
@@ -50,7 +50,7 @@ $ ->
 					$('#'+$(this).data 'cb').val 'on'
 				else 
 					$('#'+$(this).data 'cb').val 'off'
-				$("#page").val 1
+				$("#page").val '1'
 				th.snEvents href:"#submit"
 		filters: ->
 			th=$(this)
@@ -69,7 +69,7 @@ $ ->
 						.addClass('icon-ok')
 					$(this).data 'value','on'
 					$('#'+$(this).data('cb')).val 'on'
-				$("#page").val 1
+				$("#page").val '1'
 				th.snEvents href:"#submit"
 		detail: ->
 			th=$(this)
@@ -77,36 +77,30 @@ $ ->
 				do e.preventDefault
 				$("#dst").val do $(this).html
 				$("#src").val do $(this).html
-				$("#page").val 1
+				$("#page").val '1'
 				th.snEvents href:"#submit"
 		sort: ->
 			th=$(this)
 			$("a.sort").on "click",(e) ->
-				do e.preventDefault
-				$("#order").val $(this).val 'order'
-				$("#grad").val $(this).val 'grad'
-				$("#page").val 1
+				do e.preventDefault				
+				$("#order").val $(this).data 'order'
+				$("#grad").val $(this).data 'grad'
+				$("#page").val '1'
 				th.snEvents href:"#submit"
 		pagination: ->
 			th=$(this)
 			$("a#prev").on "click",(e) ->
 				do e.preventDefault
-				$("#page").val $("#page").val()*1-1
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				$("#page").val ($("#page").val()*1)-1
+				th.snEvents href:"#submit"
 			$("a.list").on "click",(e) ->
 				do e.preventDefault
 				$("#page").val $(this).data "page"
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				th.snEvents href:"#submit"
 			$("a#next").on "click",(e) ->
 				do e.preventDefault
-				$("#page").val $("#page").val()*1+1
-				th.snAjax 'sendRequest'
-						action:'signin'
-						debug:false
+				$("#page").val ($("#page").val()*1)+1
+				th.snEvents href:"#submit"
 
 	$.fn.snTriggers= (sn) ->
 		sn={} if !sn

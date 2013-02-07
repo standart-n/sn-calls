@@ -300,7 +300,7 @@ $(function() {
         case "submit":
           return $(this).snAjax('sendRequest', {
             action: 'submit',
-            debug: true
+            debug: false
           });
         case "afterSubmit":
           if (sn.result) {
@@ -326,11 +326,11 @@ $(function() {
           return $(".no-fb").each(function() {
             if ($(this).val() !== "") {
               th.snAjax('sendRequest', {
-                action: 'phone',
+                action: 'fbRequest',
                 phone: $(this).val(),
                 debug: false
               });
-              return $(this).removeCLass('no-fb');
+              return $(this).removeClass('no-fb');
             }
           });
         case "afterFbRequest":
@@ -403,14 +403,14 @@ $(function() {
       th = $(this);
       $("#fSubmit").on("submit", function(e) {
         e.preventDefault();
-        $("page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: '#submit'
         });
       });
       return $("#submit").on("click", function(e) {
         e.preventDefault();
-        $("page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: '#submit'
         });
@@ -424,7 +424,7 @@ $(function() {
         e.preventDefault();
         $(this).addClass('active').siblings().removeClass('active');
         $('#limit').val($(this).data('limit'));
-        $("page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: '#submit'
         });
@@ -440,7 +440,7 @@ $(function() {
         } else {
           $('#' + $(this).data('cb')).val('off');
         }
-        $("#page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: "#submit"
         });
@@ -461,7 +461,7 @@ $(function() {
           $(this).data('value', 'on');
           $('#' + $(this).data('cb')).val('on');
         }
-        $("#page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: "#submit"
         });
@@ -474,7 +474,7 @@ $(function() {
         e.preventDefault();
         $("#dst").val($(this).html());
         $("#src").val($(this).html());
-        $("#page").val(1);
+        $("#page").val('1');
         return th.snEvents({
           href: "#submit"
         });
@@ -485,9 +485,9 @@ $(function() {
       th = $(this);
       return $("a.sort").on("click", function(e) {
         e.preventDefault();
-        $("#order").val($(this).val('order'));
-        $("#grad").val($(this).val('grad'));
-        $("#page").val(1);
+        $("#order").val($(this).data('order'));
+        $("#grad").val($(this).data('grad'));
+        $("#page").val('1');
         return th.snEvents({
           href: "#submit"
         });
@@ -498,26 +498,23 @@ $(function() {
       th = $(this);
       $("a#prev").on("click", function(e) {
         e.preventDefault();
-        $("#page").val($("#page").val() * 1 - 1);
-        return th.snAjax('sendRequest', {
-          action: 'signin',
-          debug: false
+        $("#page").val(($("#page").val() * 1) - 1);
+        return th.snEvents({
+          href: "#submit"
         });
       });
       $("a.list").on("click", function(e) {
         e.preventDefault();
         $("#page").val($(this).data("page"));
-        return th.snAjax('sendRequest', {
-          action: 'signin',
-          debug: false
+        return th.snEvents({
+          href: "#submit"
         });
       });
       return $("a#next").on("click", function(e) {
         e.preventDefault();
-        $("#page").val($("#page").val() * 1 + 1);
-        return th.snAjax('sendRequest', {
-          action: 'signin',
-          debug: false
+        $("#page").val(($("#page").val() * 1) + 1);
+        return th.snEvents({
+          href: "#submit"
         });
       });
     }

@@ -51,7 +51,7 @@ $(function() {
         case "submit":
           return $(this).snAjax('sendRequest', {
             action: 'submit',
-            debug: true
+            debug: false
           });
         case "afterSubmit":
           if (sn.result) {
@@ -77,11 +77,11 @@ $(function() {
           return $(".no-fb").each(function() {
             if ($(this).val() !== "") {
               th.snAjax('sendRequest', {
-                action: 'phone',
+                action: 'fbRequest',
                 phone: $(this).val(),
                 debug: false
               });
-              return $(this).removeCLass('no-fb');
+              return $(this).removeClass('no-fb');
             }
           });
         case "afterFbRequest":

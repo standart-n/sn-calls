@@ -68,7 +68,6 @@ public static function submit($j=array()) {
 		$j['stat']=fetch("stat.tpl");
 		$j['callback']="afterSubmit";
 		$j['tm']=time();
-		//$j['alert']=sql::$request;
 		$j['response']=true;
 	} else {
 		$j['response']=false;

@@ -32,7 +32,7 @@ $ ->
 							$("#inputPassword").val ''
 							$("#signin-error").show()
 				when "submit"
-					$(this).snAjax 'sendRequest',(action:'submit',debug:true)
+					$(this).snAjax 'sendRequest',(action:'submit',debug:false)
 				when "afterSubmit"
 					if sn.result
 						if sn.result.table
@@ -49,8 +49,8 @@ $ ->
 				when "fbRequest"
 					$(".no-fb").each ->
 						if $(@).val() != ""
-							th.snAjax 'sendRequest',(action:'phone',phone:$(this).val(),debug:false)
-							$(this).removeCLass 'no-fb'
+							th.snAjax 'sendRequest',(action:'fbRequest',phone:$(this).val(),debug:false)
+							$(this).removeClass 'no-fb'
 				when "afterFbRequest"
 					if sn.result
 						if sn.result.response
