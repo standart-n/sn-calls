@@ -88,7 +88,7 @@ $(function() {
       sn = $(this).data('sn');
       return $(".filters li a").on("click", function(e) {
         e.preventDefault();
-        if ($(this).data('value' === 'on')) {
+        if ($(this).data('value') === 'on') {
           $('i', this).removeClass('icon-ok').addClass('icon-none');
           $(this).data('value', 'off');
           $('#' + $(this).data('cb')).val('off');

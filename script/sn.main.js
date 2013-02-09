@@ -4,7 +4,7 @@ function main(require){
 		jq=require("jquery");
 		standart=require("sn");
 		bs=require("bootstrap");
-		au=require("audiojs");
+		/*au=require("audiojs");*/
 		$(function(){
 			$("#sn").sn();
 		});

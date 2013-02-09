@@ -38,6 +38,7 @@
     </div>
     <div id='js'>
       <script src='sn-project/js/dev.lmd.js' type='text/javascript'></script>
+      <script src='sn-project/player/audio.min.js' type='text/javascript'></script>
     </div>
   </body>
 </html>

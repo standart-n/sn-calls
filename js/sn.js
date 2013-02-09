@@ -57,17 +57,15 @@ $(function() {
     onClickPlay: function() {
       return $("a.play").on("click", function(e) {
         var id, src;
-        e.prevEventDefault();
         id = $(this).data('id');
         src = $(this).data('src');
         $("#player-wrap").show();
-        $("#player").html('<audio/>'.data('id', id));
+        $("#player").html('<audio/>').data('id', id);
         return audiojs.events.ready(function() {
           var a, audio;
           a = audiojs.createAll();
           audio = a[0];
           $("#player-close").on("click", function(e) {
-            e.prevEventDefault();
             audio.pause();
             return $("#player").html('');
           });
@@ -452,7 +450,7 @@ $(function() {
       sn = $(this).data('sn');
       return $(".filters li a").on("click", function(e) {
         e.preventDefault();
-        if ($(this).data('value' === 'on')) {
+        if ($(this).data('value') === 'on') {
           $('i', this).removeClass('icon-ok').addClass('icon-none');
           $(this).data('value', 'off');
           $('#' + $(this).data('cb')).val('off');

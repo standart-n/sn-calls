@@ -36,7 +36,8 @@
 							%input#show_short_calls{:type => "hidden", :value => "on"}
 
 				%form.form-inline
-					%label.hidden-phone Выводить по
+					%label.hidden-phone
+						%small Выводить
 					.btn-group.limit
 						%a{:href => "#", :class => "btn btn-small {if ($controls.limit==10)}active{/if}", 
 							:data => {:limit => "10"}} 10
@@ -99,41 +100,41 @@
 								{if ($controls.show_dial!='off')}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_dial", :value => "on"}}
 									%i.icon-ok
-										Вызов
+									Вызов
 								{else}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_dial", :value => "off"}}
 									%i.icon-none
-										Вызов
+									Вызов
 								{/if}
 							%li
 								{if ($controls.show_playback!='off')}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_playback", :value => "off"}}
 									%i.icon-ok
-										ИВР
+									ИВР
 								{else}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_playback", :value => "off"}}
 									%i.icon-none
-										ИВР
+									ИВР
 								{/if}
 							%li
 								{if ($controls.show_wait!='off')}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_wait", :value => "on"}}
 									%i.icon-ok
-										Ожидание
+									Ожидание
 								{else}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_wait", :value => "off"}}
 									%i.icon-none
-										Ожидание
+									Ожидание
 								{/if}
 							%li
 								{if ($controls.show_hangup!='off')}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_hangup", :value => "on"}}
 									%i.icon-ok
-										Сброшено
+									Сброшено
 								{else}
 								%a{:tabindex => "-1", :href => "#", :data => {:cb => "show_hangup", :value => "off"}}
 									%i.icon-none
-										Сброшено
+									Сброшено
 								{/if}
 						
 					%input#show_answered{:type => "hidden", :value => "{if ($controls.show_answered!='off')}on{else}off{/if}"}

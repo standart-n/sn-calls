@@ -18,36 +18,20 @@
         </div>
         <form class='form-inline'>
           {if $stat.count_limit_1>0}
-          <label>
-            <span class='badge badge-important'>
-              {$stat.count_limit_1}
-            </span>
-            <small>0c.</small>
-          </label>
+          <span class='badge badge-important'>{$stat.count_limit_1}</span>
+          <small>0c.</small>
           {/if}
           {if $stat.count_limit_2>0}
-          <label>
-            <span class='badge badge-warning'>
-              {$stat.count_limit_2}
-            </span>
-            <small>0-10c.</small>
-          </label>
+          <span class='badge badge-warning'>{$stat.count_limit_2}</span>
+          <small>0-10c.</small>
           {/if}
           {if $stat.count_limit_3>0}
-          <label>
-            <span class='badge badge-info'>
-              {$stat.count_limit_3}
-            </span>
-            <small>10-30c.</small>
-          </label>
+          <span class='badge badge-info'>{$stat.count_limit_3}</span>
+          <small>10-30c.</small>
           {/if}
           {if $stat.count_limit_4>0}
-          <label>
-            <span class='badge badge-success'>
-              {$stat.count_limit_4}
-            </span>
-            <small>>30c.</small>
-          </label>
+          <span class='badge badge-success'>{$stat.count_limit_4}</span>
+          <small>>30c.</small>
           {/if}
         </form>
         <strong>По статусам звонков</strong>
@@ -59,36 +43,20 @@
         </div>
         <form class='form-inline'>
           {if $stat.count_failed>0}
-          <label>
-            <span class='badge badge-important'>
-              {$stat.count_failed}
-            </span>
-            <small>Отменен</small>
-          </label>
+          <span class='badge badge-important'>{$stat.count_failed}</span>
+          <small>Отменен</small>
           {/if}
           {if $stat.count_busy>0}
-          <label>
-            <span class='badge badge-warning'>
-              {$stat.count_busy}
-            </span>
-            <small>Занято</small>
-          </label>
+          <span class='badge badge-warning'>{$stat.count_busy}</span>
+          <small>Занято</small>
           {/if}
           {if $stat.count_no_answer>0}
-          <label>
-            <span class='badge badge-info'>
-              {$stat.count_no_answer}
-            </span>
-            <small>Не отвечено</small>
-          </label>
+          <span class='badge badge-info'>{$stat.count_no_answer}</span>
+          <small>Не отвечено</small>
           {/if}
           {if $stat.count_answered>0}
-          <label>
-            <span class='badge badge-success'>
-              {$stat.count_answered}
-            </span>
-            <small>Отвечено</small>
-          </label>
+          <span class='badge badge-success'>{$stat.count_answered}</span>
+          <small>Отвечено</small>
           {/if}
         </form>
       </div>

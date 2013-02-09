@@ -11,18 +11,18 @@ $ ->
 
 		onClickPlay: ->
 			$("a.play").on "click",(e) ->
-				e.prevEventDefault()
+				# do e.prevEventDefault
 				id=$(this).data 'id'
 				src=$(this).data 'src'
 				$("#player-wrap").show()
 				$("#player")
-					.html '<audio/>'
-					.data 'id',id
+					.html('<audio/>')
+					.data('id',id)
 				audiojs.events.ready ->
 					a=audiojs.createAll()
 					audio=a[0]
 					$("#player-close").on "click",(e) ->
-						e.prevEventDefault()
+						# do e.prevEventDefault
 						audio.pause()
 						$("#player").html ''
 					audio.load src

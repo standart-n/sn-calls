@@ -41,7 +41,9 @@
           </form>
         -->
         <form class='form-inline'>
-          <label class='hidden-phone'>Выводить по</label>
+          <label class='hidden-phone'>
+            <small>Выводить</small>
+          </label>
           <div class='btn-group limit'>
             <a class='btn btn-small {if ($controls.limit==10)}active{/if}' data-limit='10' href='#'>10</a>
             <a class='btn btn-small {if ($controls.limit==20)}active{/if}' data-limit='20' href='#'>20</a>
@@ -113,60 +115,52 @@
               <li>
                 {if ($controls.show_dial!='off')}
                 <a data-cb='show_dial' data-value='on' href='#' tabindex='-1'>
-                  <i class='icon-ok'>
-                    Вызов
-                  </i>
+                  <i class='icon-ok'></i>
+                  Вызов
                 </a>
                 {else}
                 <a data-cb='show_dial' data-value='off' href='#' tabindex='-1'>
-                  <i class='icon-none'>
-                    Вызов
-                  </i>
+                  <i class='icon-none'></i>
+                  Вызов
                 </a>
                 {/if}
               </li>
               <li>
                 {if ($controls.show_playback!='off')}
                 <a data-cb='show_playback' data-value='off' href='#' tabindex='-1'>
-                  <i class='icon-ok'>
-                    ИВР
-                  </i>
+                  <i class='icon-ok'></i>
+                  ИВР
                 </a>
                 {else}
                 <a data-cb='show_playback' data-value='off' href='#' tabindex='-1'>
-                  <i class='icon-none'>
-                    ИВР
-                  </i>
+                  <i class='icon-none'></i>
+                  ИВР
                 </a>
                 {/if}
               </li>
               <li>
                 {if ($controls.show_wait!='off')}
                 <a data-cb='show_wait' data-value='on' href='#' tabindex='-1'>
-                  <i class='icon-ok'>
-                    Ожидание
-                  </i>
+                  <i class='icon-ok'></i>
+                  Ожидание
                 </a>
                 {else}
                 <a data-cb='show_wait' data-value='off' href='#' tabindex='-1'>
-                  <i class='icon-none'>
-                    Ожидание
-                  </i>
+                  <i class='icon-none'></i>
+                  Ожидание
                 </a>
                 {/if}
               </li>
               <li>
                 {if ($controls.show_hangup!='off')}
                 <a data-cb='show_hangup' data-value='on' href='#' tabindex='-1'>
-                  <i class='icon-ok'>
-                    Сброшено
-                  </i>
+                  <i class='icon-ok'></i>
+                  Сброшено
                 </a>
                 {else}
                 <a data-cb='show_hangup' data-value='off' href='#' tabindex='-1'>
-                  <i class='icon-none'>
-                    Сброшено
-                  </i>
+                  <i class='icon-none'></i>
+                  Сброшено
                 </a>
                 {/if}
               </li>

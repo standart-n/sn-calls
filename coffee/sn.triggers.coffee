@@ -18,23 +18,23 @@ $ ->
 		signin: ->
 			th=$(this)
 			$("#fSignin").on "submit",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				th.snEvents href:'#signin'
 		submit: ->
 			th=$(this)
 			$("#fSubmit").on "submit",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$("#page").val '1'
 				th.snEvents href:'#submit'
 			$("#submit").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$("#page").val '1'
 				th.snEvents href:'#submit'
 		limit: ->
 			th=$(this)
 			sn=$(this).data 'sn'
 			$(".limit a").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$(this)
 					.addClass('active')
 					.siblings()
@@ -45,7 +45,7 @@ $ ->
 		cb: ->
 			th=$(this)
 			$(".cb").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				if $(this).is(':checked')
 					$('#'+$(this).data 'cb').val 'on'
 				else 
@@ -56,8 +56,8 @@ $ ->
 			th=$(this)
 			sn=$(this).data 'sn'
 			$(".filters li a").on "click",(e) ->
-				do e.preventDefault
-				if $(this).data 'value' == 'on'
+				e.preventDefault()
+				if $(this).data('value') == 'on'
 					$('i',this)
 						.removeClass('icon-ok')
 						.addClass('icon-none')
@@ -74,15 +74,15 @@ $ ->
 		detail: ->
 			th=$(this)
 			$("a.tel").on "click",(e) ->
-				do e.preventDefault
-				$("#dst").val do $(this).html
-				$("#src").val do $(this).html
+				e.preventDefault()
+				$("#dst").val $(this).html()
+				$("#src").val $(this).html()
 				$("#page").val '1'
 				th.snEvents href:"#submit"
 		sort: ->
 			th=$(this)
 			$("a.sort").on "click",(e) ->
-				do e.preventDefault				
+				e.preventDefault()
 				$("#order").val $(this).data 'order'
 				$("#grad").val $(this).data 'grad'
 				$("#page").val '1'
@@ -90,15 +90,15 @@ $ ->
 		pagination: ->
 			th=$(this)
 			$("a#prev").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$("#page").val ($("#page").val()*1)-1
 				th.snEvents href:"#submit"
 			$("a.list").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$("#page").val $(this).data "page"
 				th.snEvents href:"#submit"
 			$("a#next").on "click",(e) ->
-				do e.preventDefault
+				e.preventDefault()
 				$("#page").val ($("#page").val()*1)+1
 				th.snEvents href:"#submit"
 
