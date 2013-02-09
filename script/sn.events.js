@@ -14,12 +14,48 @@ $(function() {
       href = def.href;
       switch (href.replace(/(.*)#(.*)/, '$2')) {
         case "autoload":
-          $("#dp1").datepicker();
-          $("#dp2").datepicker();
-          $(this).snEvents({
-            href: '#fbRequest'
-          });
-          return $(this).snPlayer();
+          if ($("#controls").html() !== "") {
+            $("#dp1").datepicker();
+            $("#dp2").datepicker();
+          }
+          if ($("#table").html() !== "") {
+            $(this).snEvents({
+              href: '#fbRequest'
+            });
+            return $(this).snPlayer();
+          }
+          break;
+        case "ajaxloader":
+          if ($("#signin").html() === "" && $("#controls").html() === "") {
+            return $(this).snAjax('sendRequest', {
+              action: 'ajaxloader',
+              debug: false
+            });
+          }
+          break;
+        case "afterAjaxloader":
+          if (sn.result) {
+            if (sn.result.signin) {
+              $("#signin").html(sn.result.signin);
+            }
+            if (sn.result.controls) {
+              $("#controls").html(sn.result.controls);
+            }
+            if (sn.result.table) {
+              $("#table").html(sn.result.table);
+            }
+            if (sn.result.stat) {
+              $("#stat").html(sn.result.stat);
+            }
+            if (sn.result.pagination) {
+              $("#pagination").html(sn.result.pagination);
+            }
+            $(this).snTriggers();
+            return $(this).snEvents({
+              href: '#autoload'
+            });
+          }
+          break;
         case "signin":
           $("#signin-error").hide();
           return $(this).snAjax('sendRequest', {
@@ -60,17 +96,17 @@ $(function() {
               $(this).snTriggers('sort');
               $(this).snTriggers('detail');
               $(this).snPlayer('onClickPlay');
+              $(this).snEvents({
+                href: '#fbRequest'
+              });
             }
             if (sn.result.stat) {
               $("#stat").html(sn.result.stat);
             }
             if (sn.result.pagination) {
               $("#pagination").html(sn.result.pagination);
-              $(this).snTriggers('pagination');
+              return $(this).snTriggers('pagination');
             }
-            return $(this).snEvents({
-              href: '#fbRequest'
-            });
           }
           break;
         case "fbRequest":

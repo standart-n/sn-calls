@@ -32,6 +32,33 @@ public static function engine() {
 	}
 }	
 
+public static function ajaxloader() {
+	if (signin::check()) {
+		$j['response']=true;
+		calls::getDataFromUrl();
+		assign('controls',calls::controls());
+		$j['controls']=fetch("controls.tpl");
+		assign('pagination',calls::pagination());
+		assign('prev',calls::$prev);
+		assign('next',calls::$next);
+		assign('page',calls::$page);
+		$j['pagination']=fetch("pagination.tpl");
+		assign('cdr',calls::cdr());
+		assign('order',calls::$order);
+		assign('grad',calls::$grad);
+		assign('phones',calls::$phones);
+		$j['table']=fetch("table.tpl");
+		assign('stat',calls::stat());
+		$j['stat']=fetch("stat.tpl");
+	} else {
+		$j['response']=false;
+		$j['signin']=fetch("signin.tpl");
+	}
+	$j['tm']=time();
+	$j['callback']="afterAjaxloader";
+	return $j;
+}	
+
 public static function signin($j=array()) {
 	if (signin::check()) {
 		$j['response']=true;

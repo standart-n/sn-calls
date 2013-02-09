@@ -9,7 +9,7 @@ HR=\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\#\
 # BUILD DOCS
 #
 
-all: start coffee-js js css img haml-tpl finish
+all: start coffee-js js css img haml-tpl ajaxloader finish 
 
 sn: sn-css coffee-js sn-js lmd
 
@@ -21,27 +21,30 @@ css: sn-css bs-css main-css
 
 img: bs-img
 
+ajaxloader:
+	@echo "\najaxloader...\n"
+	@cat ./tpl/templates/index.tpl > ./index.html
+
 lmd:
-	@echo "lmd\n"
 	@lmd build dev
 
 haml-tpl:
-	@echo "haml...\n"
-	@./.bin/haml.sh
+	@echo "\nhaml...\n"
+	@./.bin/haml.sh	
 
 coffee-js:
-	@echo "coffee...\n"
+	@echo "\ncoffee...\n"
 	@coffee -o ./script/ -cb ./coffee/*.coffee
 
 main-css:
 	@cat ./css/bootstrap.css ./css/bootstrap-responsive.css ./css/sn.css > ./css/style.css
 
 sn-css:
-	@echo "sn: compiling LESS with Recess\n"
+	@echo "\nsn: compiling LESS with Recess\n"
 	@recess --compile ./less/sn.less > ./css/sn.css
 
 sn-js:
-	@echo "sn: compiling and minifying javascript...\n"
+	@echo "\nsn: compiling and minifying javascript...\n"
 	@cat ./script/sn.js ./script/sn.player.js ./script/sn.ajax.js ./script/sn.conf.js ./script/sn.events.js ./script/sn.triggers.js > ./js/sn.js
 	@cp ./.lmd/main ./script/sn.main.js
 	@cp ./script/sn.main.js ./js/sn.main.js
@@ -57,12 +60,12 @@ bs-img:
 	@cp ./${BS}/img/* ./img/
 
 bs-css:
-	@echo "bs: compiling LESS with Recess...\n"
+	@echo "\nbs: compiling LESS with Recess...\n"
 	@recess --compile ./${BS}/less/bootstrap.less > ./css/bootstrap.css
 	@recess --compile ./${BS}/less/responsive.less > ./css/bootstrap-responsive.css
 
 bs-js:
-	@echo "bs: running JSHint on javascript...\n"
+	@echo "\nbs: running JSHint on javascript...\n"
 	@jshint ./${BS}/js/*.js --config ./${BS}/js/.jshintrc
 	@echo "bs: compiling and minifying javascript...\n"
 	@cat ./${BS}/js/${BS}-transition.js ./${BS}/js/${BS}-datepicker.js ./${BS}/js/${BS}-alert.js ./${BS}/js/${BS}-button.js ./${BS}/js/${BS}-carousel.js ./${BS}/js/${BS}-collapse.js ./${BS}/js/${BS}-dropdown.js ./${BS}/js/${BS}-modal.js ./${BS}/js/${BS}-tooltip.js ./${BS}/js/${BS}-popover.js ./${BS}/js/${BS}-scrollspy.js ./${BS}/js/${BS}-tab.js ./${BS}/js/${BS}-typeahead.js ./${BS}/js/${BS}-affix.js > ./js/bootstrap.js
@@ -76,7 +79,7 @@ start:
 	@echo "standart-n: \n"
 
 finish:
-	@echo "Successfully built at ${DATE}."
+	@echo "\nSuccessfully built at ${DATE}."
 
 
 #	@echo "${HR}\n"

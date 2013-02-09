@@ -30,6 +30,9 @@ function getAction() {
 		console::write("action: ".url::$action);
 		calls::getDataFromUrl();
 		switch(url::$action) {
+			case "ajaxloader":
+				self::$response=project::ajaxloader(); return true;				
+			break;
 			case "signin":
 				self::$response=project::signin(); return true;				
 			break;

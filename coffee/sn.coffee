@@ -1,4 +1,4 @@
-$ ->
+	$ ->
 	methods= 
 		init:(options) ->
 			options={} if !options
@@ -8,9 +8,9 @@ $ ->
 					key:''
 			$.extend true,def,options
 			$(@).data 'sn',def
-			do $(@).snTriggers
-			if $("#controls").html() != ""
-				$(@).snEvents 'href':'#autoload'
+			$(@).snTriggers()
+			$(@).snEvents 'href':'#autoload'
+			$(@).snEvents 'href':'#ajaxloader'
 
 	$.fn.sn= (sn) ->
 		sn={} if !sn

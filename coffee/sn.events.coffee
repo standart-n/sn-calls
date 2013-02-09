@@ -9,10 +9,29 @@ $ ->
 			href=def.href
 			switch href.replace /(.*)#(.*)/,'$2'
 				when "autoload"
-					$("#dp1").datepicker()
-					$("#dp2").datepicker()
-					$(@).snEvents href:'#fbRequest'
-					$(@).snPlayer()
+					if $("#controls").html() != ""
+						$("#dp1").datepicker()
+						$("#dp2").datepicker()
+					if $("#table").html() != ""
+						$(@).snEvents href:'#fbRequest'
+						$(@).snPlayer()
+				when "ajaxloader"
+					if $("#signin").html() == "" && $("#controls").html() == ""
+						$(this).snAjax 'sendRequest',(action:'ajaxloader',debug:false)
+				when "afterAjaxloader"
+					if sn.result
+						if sn.result.signin
+							$("#signin").html sn.result.signin
+						if sn.result.controls
+							$("#controls").html sn.result.controls
+						if sn.result.table
+							$("#table").html sn.result.table
+						if sn.result.stat
+							$("#stat").html sn.result.stat
+						if sn.result.pagination
+							$("#pagination").html sn.result.pagination
+						$(@).snTriggers()
+						$(@).snEvents href:'#autoload'
 				when "signin"
 					$("#signin-error").hide()
 					$(this).snAjax 'sendRequest',(action:'signin',debug:false)
@@ -40,12 +59,12 @@ $ ->
 							$(this).snTriggers 'sort'
 							$(this).snTriggers 'detail'
 							$(this).snPlayer 'onClickPlay'
+							$(@).snEvents href:'#fbRequest'
 						if sn.result.stat
 							$("#stat").html sn.result.stat
 						if sn.result.pagination
 							$("#pagination").html sn.result.pagination
 							$(@).snTriggers 'pagination'
-						$(@).snEvents href:'#fbRequest'
 				when "fbRequest"
 					$(".no-fb").each ->
 						if $(@).val() != ""
