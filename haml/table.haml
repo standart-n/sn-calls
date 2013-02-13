@@ -85,7 +85,8 @@
 						
 						%td
 							{if (!$key.listen)}
-							%span{:class => "label label-{$key.status_class}"} {$key.status_rus}
+							%span{:class => "label label-{$key.status_class}"} 
+								%small {$key.status_rus}
 							{else}
 							{if isset($key.path_audio)}
 							.btn-group

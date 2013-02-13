@@ -96,7 +96,9 @@
             </td>
             <td>
               {if (!$key.listen)}
-              <span class='label label-{$key.status_class}'>{$key.status_rus}</span>
+              <span class='label label-{$key.status_class}'>
+                <small>{$key.status_rus}</small>
+              </span>
               {else}
               {if isset($key.path_audio)}
               <div class='btn-group'>
