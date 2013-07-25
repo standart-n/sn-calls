@@ -1,3 +1,4 @@
+"use strict"
 $ ->
 	methods=
 		init:(options) ->
@@ -22,6 +23,8 @@ $ ->
 					if sn.result
 						if sn.result.signin
 							$("#signin").html sn.result.signin
+						if sn.result.bar
+							$("#bar").html sn.result.bar
 						if sn.result.controls
 							$("#controls").html sn.result.controls
 						if sn.result.table

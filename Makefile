@@ -49,9 +49,6 @@ sn-js:
 	@cp ./.lmd/main ./script/sn.main.js
 	@cp ./script/sn.main.js ./js/sn.main.js
 
-	@echo "sn: running JSHint on javascript...\n"
-	@jshint ./script/*.js --config ./script/.jshintrc
-
 	@echo "sn: uglifyjs...\n"
 	@uglifyjs ./js/sn.js -nc > ./js/sn.min.js
 	@uglifyjs ./js/sn.main.js -nc > ./js/sn.main.min.js
@@ -65,8 +62,6 @@ bs-css:
 	@recess --compile ./${BS}/less/responsive.less > ./css/bootstrap-responsive.css
 
 bs-js:
-	@echo "\nbs: running JSHint on javascript...\n"
-	@jshint ./${BS}/js/*.js --config ./${BS}/js/.jshintrc
 	@echo "bs: compiling and minifying javascript...\n"
 	@cat ./${BS}/js/${BS}-transition.js ./${BS}/js/${BS}-datepicker.js ./${BS}/js/${BS}-alert.js ./${BS}/js/${BS}-button.js ./${BS}/js/${BS}-carousel.js ./${BS}/js/${BS}-collapse.js ./${BS}/js/${BS}-dropdown.js ./${BS}/js/${BS}-modal.js ./${BS}/js/${BS}-tooltip.js ./${BS}/js/${BS}-popover.js ./${BS}/js/${BS}-scrollspy.js ./${BS}/js/${BS}-tab.js ./${BS}/js/${BS}-typeahead.js ./${BS}/js/${BS}-affix.js > ./js/bootstrap.js
 	@uglifyjs ./js/bootstrap.js -nc > ./js/bootstrap.min.tmp.js

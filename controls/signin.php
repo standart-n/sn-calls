@@ -6,9 +6,11 @@ public static $login;
 public static $name;
 public static $password;
 public static $mask;
+public static $region;
 
 function __construct() {
 	self::$mask="%";
+	self::$region="Регионы";
 }
 
 
@@ -25,6 +27,9 @@ public static function check() {
 						if (isset($j->mask)) {
 							self::$mask=$j->mask;
 						}
+						if (isset($j->region)) {
+							self::$region=$j->region;
+						}
 						self::updSession();
 						return true;
 					}
@@ -36,6 +41,9 @@ public static function check() {
 						self::$login=$j->login;
 						if (isset($j->mask)) {
 							self::$mask=$j->mask;
+						}
+						if (isset($j->region)) {
+							self::$region=$j->region;
 						}
 						self::updSession();
 						return true;

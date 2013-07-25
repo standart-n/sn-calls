@@ -31,6 +31,7 @@
     </div>
     <div id='main'>
       <div id='signin'></div>
+      <div id='bar'></div>
       <div id='controls'></div>
       <div id='table'></div>
       <div id='pagination'></div>

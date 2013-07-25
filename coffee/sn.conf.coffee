@@ -1,3 +1,4 @@
+"use strict"
 $ ->
 	methods=
 		init:(options) ->

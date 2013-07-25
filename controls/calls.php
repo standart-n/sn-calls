@@ -305,6 +305,11 @@ public static function pagination($list=array(),$i=0) {
 	return $list;
 }
 
+public static function bar($j=array()) {
+	$j['region']=signin::$region;
+	return $j;
+}
+
 public static function controls($j=array()) {
 	$j['src']=self::$src;
 	$j['dst']=self::$dst;

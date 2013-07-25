@@ -1,4 +1,5 @@
-	$ ->
+"use strict"
+$ ->
 	methods= 
 		init:(options) ->
 			options={} if !options

@@ -1,0 +1,13 @@
+.container-fluid
+	.row-fluid
+		.span12
+			#bar-inner.navbar
+				.navbar-inner
+					.pull-left
+						%a#region.brand{:href => ""} {$bar.region}
+
+					.pull-right
+						%a#logout.btn{:href => "#"}
+							%i.icon-off
+							Выход
+
