@@ -3,36 +3,70 @@
 public static $key;
 public static $type;
 public static $login;
+public static $name;
 public static $password;
 
 function __construct() {
 	
 }
 
+
 public static function check() {
 	
 	if (self::request()) {
-		if (self::data($j)) {
-			switch (self::$type) {
-			case "key":
-				if (self::$key==self::salt($j)) {
-					self::updSession();
-					return true;
+		if (self::data($ms)) {
+			foreach ($ms->users as $j) {
+				switch (self::$type) {
+				case "key":
+					if (self::$key==self::salt($j)) {
+						self::$name=$j->name;
+						self::$login=$j->login;
+						self::updSession();
+						return true;
+					}
+				break;
+				case "login":
+					if ((self::$login==strtolower($j->login)) && (self::pwd(self::$password)==$j->password)) {
+						self::$key=self::salt($j);
+						self::$name=$j->name;
+						self::$login=$j->login;
+						self::updSession();
+						return true;
+					}
+				break;
 				}
-			break;
-			case "login":
-				if ((self::$login==strtolower($j->login)) && (self::pwd(self::$password)==$j->password)) {
-					self::$key=self::salt($j);
-					self::updSession();
-					return true;
-				}
-			break;
-			}				
+			}
 		}
 	}
 	self::unsetSession();
 	return false;
 }
+
+
+// public static function check() {
+	
+// 	if (self::request()) {
+// 		if (self::data($j)) {
+// 			switch (self::$type) {
+// 			case "key":
+// 				if (self::$key==self::salt($j)) {
+// 					self::updSession();
+// 					return true;
+// 				}
+// 			break;
+// 			case "login":
+// 				if ((self::$login==strtolower($j->login)) && (self::pwd(self::$password)==$j->password)) {
+// 					self::$key=self::salt($j);
+// 					self::updSession();
+// 					return true;
+// 				}
+// 			break;
+// 			}				
+// 		}
+// 	}
+// 	self::unsetSession();
+// 	return false;
+// }
 
 public static function unsetSession() {
 	unset($_SESSION['key']);
@@ -54,18 +88,34 @@ public static function pwd($s) {
 	return sha1($s);
 }
 
+// public static function data(&$j,$p="",$f="") {
+
+// 	$p=project."/settings/signin.json";
+// 	if (file_exists($p)) { $f=file_get_contents($p); }	
+// 	if ($f!="") { 
+// 		$j=json_decode($f);
+// 		if (($j->login) && ($j->password)) {
+// 			return true;
+// 		}		
+// 	}
+// 	return false;
+// }
+
 public static function data(&$j,$p="",$f="") {
 
 	$p=project."/settings/signin.json";
 	if (file_exists($p)) { $f=file_get_contents($p); }	
 	if ($f!="") { 
-		$j=json_decode($f);
-		if (($j->login) && ($j->password)) {
-			return true;
+		$j=json_decode($f);	
+		if ($j->users) {
+			if (sizeof($j->users)>0) {
+				return true;
+			}
 		}		
 	}
 	return false;
 }
+
 
 public static function request() {	
 	
