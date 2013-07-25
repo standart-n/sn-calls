@@ -11,10 +11,26 @@ public static function cdr($s="") {
 	$s.=self::date_formats();
 	$s.="FROM `cdr` ";
 	$s.="WHERE (1=1) ";
+	// $s.=self::laws();
 	$s.=self::search();
 	$s.=self::sort();
 	$s.=self::limit();
 	self::$request=$s;
+	return $s;
+}
+
+public static function laws($s="") {
+	if (signin::$mask !== '%') {
+		$s.="AND (";
+		$s.="(src LIKE '".signin::$mask."' ";
+		$s.="OR ";
+		$s.="dst LIKE '".signin::$mask."') ";
+		$s.="OR ";
+		$s.="(src REGEXP '[0-9]{6,10}' ";
+		$s.="AND ";
+		$s.="dst REGEXP '[0-9]{6,10}') ";
+		$s.=") ";
+	}
 	return $s;
 }
 
@@ -147,6 +163,17 @@ public static function search($s="") {
 		if (calls::$show_dial=='off') {
 			$s.=" AND (lastapp<>'Dial') ";
 		}
+	}
+	if (signin::$mask !== '%') {
+		$s.=" AND (";
+		$s.="(src LIKE '".signin::$mask."' ";
+		$s.="OR ";
+		$s.="dst LIKE '".signin::$mask."') ";
+		$s.="OR ";
+		$s.="(src REGEXP '[0-9]{6,10}' ";
+		$s.="AND ";
+		$s.="dst REGEXP '[0-9]{6,10}') ";
+		$s.=") ";
 	}
 	return $s;
 }

@@ -114,7 +114,42 @@ public static function getDataFromUrl() {
 
 public static function cdr($j=array(),$p=array(),$i=-1) {
 	if (query(sql::cdr(),$ms)) {
-		foreach ($ms as $r) { $i++; $listen=false;
+		foreach ($ms as $r) { $allow=false;
+			
+			// if (signin::$login == 'izhevsk') {
+			// 	if (((strlen(strval($r->src)) == 4) and (preg_match("/1\d{3}/", strval($r->src))))
+			// 	  or ((strlen(strval($r->dst)) == 4) and (preg_match("/1\d{3}/", strval($r->dst))))) {
+			// 		$allow=true;
+			// 	}
+			// 	if ((strlen(strval($r->src)) > 4) and (strlen(strval($r->dst)) > 4)) {
+			// 		$allow=true;
+			// 	}
+			// }
+
+			// if (signin::$login == 'piter') {
+			// 	if (((strlen(strval($r->src)) == 4) and (preg_match("/2\d{3}/", strval($r->src))))
+			// 	  or ((strlen(strval($r->dst)) == 4) and (preg_match("/2\d{3}/", strval($r->dst))))) {
+			// 		$allow=true;
+			// 	}
+			// 	if ((strlen(strval($r->src)) > 4) and (strlen(strval($r->dst)) > 4)) {
+			// 		$allow=true;
+			// 	}
+			// }
+
+			// if (signin::$login == 'samara') {
+			// 	if (((strlen(strval($r->src)) == 4) and (preg_match("/3\d{3}/", strval($r->src))))
+			// 	  or ((strlen(strval($r->dst)) == 4) and (preg_match("/3\d{3}/", strval($r->dst))))) {
+			// 		$allow=true;
+			// 	}
+			// 	if ((strlen(strval($r->src)) > 4) and (strlen(strval($r->dst)) > 4)) {
+			// 		$allow=true;
+			// 	}
+			// }
+
+			// if ($allow==false) { continue; }
+			
+			$i++;
+			$listen=false; 
 			$j[$i]['id']=intval($r->id);
 			$j[$i]['uniqueid']=strval($r->uniqueid);
 			$j[$i]['key']=sha1($r->uniqueid);

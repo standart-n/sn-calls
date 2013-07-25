@@ -5,9 +5,10 @@ public static $type;
 public static $login;
 public static $name;
 public static $password;
+public static $mask;
 
 function __construct() {
-	
+	self::$mask="%";
 }
 
 
@@ -21,6 +22,9 @@ public static function check() {
 					if (self::$key==self::salt($j)) {
 						self::$name=$j->name;
 						self::$login=$j->login;
+						if (isset($j->mask)) {
+							self::$mask=$j->mask;
+						}
 						self::updSession();
 						return true;
 					}
@@ -30,6 +34,9 @@ public static function check() {
 						self::$key=self::salt($j);
 						self::$name=$j->name;
 						self::$login=$j->login;
+						if (isset($j->mask)) {
+							self::$mask=$j->mask;
+						}
 						self::updSession();
 						return true;
 					}

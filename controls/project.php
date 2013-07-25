@@ -55,6 +55,7 @@ public static function ajaxloader() {
 		$j['signin']=fetch("signin.tpl");
 	}
 	$j['tm']=time();
+	//$j['alert']=sql::$request;
 	$j['callback']="afterAjaxloader";
 	return $j;
 }	
