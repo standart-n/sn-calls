@@ -41,9 +41,12 @@ $ ->
 				when "afterSignin"
 					if sn.result
 						if sn.result.response
+							if sn.result.bar
+								$("#bar").html sn.result.bar
 							if sn.result.controls
 								$('#controls').html sn.result.controls
 							$("#signin").empty()
+							$(@).snTriggers 'bar'
 							$(@).snTriggers 'controls'
 							$("#dp1").datepicker()
 							$("#dp2").datepicker()
@@ -53,6 +56,10 @@ $ ->
 							$("#inputLogin").val ''
 							$("#inputPassword").val ''
 							$("#signin-error").show()
+				when "logout"
+					$(this).snAjax 'sendRequest',(action:'logout',debug:false)
+				when "afterLogout"
+					window.location = 'index.html'
 				when "submit"
 					$(this).snAjax 'sendRequest',(action:'submit',debug:false)
 				when "afterSubmit"

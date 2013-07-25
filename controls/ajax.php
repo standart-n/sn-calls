@@ -36,6 +36,9 @@ function getAction() {
 			case "signin":
 				self::$response=project::signin(); return true;				
 			break;
+			case "logout":
+				self::$response=project::logout(); return true;				
+			break;
 			case "submit":
 				self::$response=project::submit(); return true;				
 			break;

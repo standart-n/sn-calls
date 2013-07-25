@@ -78,6 +78,17 @@ public static function signin($j=array()) {
 	return $j;
 }
 
+public static function logout($j=array()) {
+	if (signin::logout()) {
+		$j['response']=true;
+	} else {
+		$j['response']=false;
+	}
+	$j['tm']=time();
+	$j['callback']="afterLogout";
+	return $j;
+}
+
 
 public static function submit($j=array()) {
 	if (signin::check()) {

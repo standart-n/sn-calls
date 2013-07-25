@@ -2,6 +2,8 @@
 $ ->
 	methods=
 		init: ->
+			if $("#bar").html()!=""
+				$(this).snTriggers 'bar'
 			if $("#controls").html()!=""
 				$(this).snTriggers 'controls'
 			if $("#table").html()!=""
@@ -11,6 +13,9 @@ $ ->
 				$(this).snTriggers 'pagination'
 			if $("#signin").html()!=""
 				$(this).snTriggers 'signin'
+
+		bar: ->
+			$(this).snTriggers 'logout'
 		controls: ->
 			$(this).snTriggers 'submit'
 			$(this).snTriggers 'cb'
@@ -21,6 +26,11 @@ $ ->
 			$("#fSignin").on "submit",(e) ->
 				e.preventDefault()
 				th.snEvents href:'#signin'
+		logout: ->
+			th=$(this)
+			$("#logout").on "click",(e) ->
+				e.preventDefault()
+				th.snEvents href:'#logout'
 		submit: ->
 			th=$(this)
 			$("#fSubmit").on "submit",(e) ->

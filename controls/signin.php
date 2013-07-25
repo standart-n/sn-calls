@@ -83,6 +83,11 @@ public static function check() {
 // 	return false;
 // }
 
+public static function logout() {
+	self::unsetSession();
+	return true;
+}
+
 public static function unsetSession() {
 	unset($_SESSION['key']);
 	unset($_SESSION['login']);

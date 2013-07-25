@@ -169,6 +169,7 @@ $(function() {
           return $("#loading").show();
         },
         success: function(s) {
+          console.log(s);
           if (typeof s === 'object') {
             $.extend(true, sn.result, s);
           } else {
@@ -316,10 +317,14 @@ $(function() {
         case "afterSignin":
           if (sn.result) {
             if (sn.result.response) {
+              if (sn.result.bar) {
+                $("#bar").html(sn.result.bar);
+              }
               if (sn.result.controls) {
                 $('#controls').html(sn.result.controls);
               }
               $("#signin").empty();
+              $(this).snTriggers('bar');
               $(this).snTriggers('controls');
               $("#dp1").datepicker();
               $("#dp2").datepicker();
@@ -335,6 +340,13 @@ $(function() {
             }
           }
           break;
+        case "logout":
+          return $(this).snAjax('sendRequest', {
+            action: 'logout',
+            debug: false
+          });
+        case "afterLogout":
+          return window.location = 'index.html';
         case "submit":
           return $(this).snAjax('sendRequest', {
             action: 'submit',
@@ -406,6 +418,9 @@ $(function() {
   var methods;
   methods = {
     init: function() {
+      if ($("#bar").html() !== "") {
+        $(this).snTriggers('bar');
+      }
       if ($("#controls").html() !== "") {
         $(this).snTriggers('controls');
       }
@@ -420,6 +435,9 @@ $(function() {
         return $(this).snTriggers('signin');
       }
     },
+    bar: function() {
+      return $(this).snTriggers('logout');
+    },
     controls: function() {
       $(this).snTriggers('submit');
       $(this).snTriggers('cb');
@@ -433,6 +451,16 @@ $(function() {
         e.preventDefault();
         return th.snEvents({
           href: '#signin'
+        });
+      });
+    },
+    logout: function() {
+      var th;
+      th = $(this);
+      return $("#logout").on("click", function(e) {
+        e.preventDefault();
+        return th.snEvents({
+          href: '#logout'
         });
       });
     },

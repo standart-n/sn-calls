@@ -67,6 +67,7 @@ $ ->
 				beforeSend: ->
 					$("#loading").show()
 				success: (s) ->
+					console.log s
 					if typeof s=='object'
 						$.extend true,sn.result,s
 					else 

@@ -4,6 +4,9 @@ $(function() {
   var methods;
   methods = {
     init: function() {
+      if ($("#bar").html() !== "") {
+        $(this).snTriggers('bar');
+      }
       if ($("#controls").html() !== "") {
         $(this).snTriggers('controls');
       }
@@ -18,6 +21,9 @@ $(function() {
         return $(this).snTriggers('signin');
       }
     },
+    bar: function() {
+      return $(this).snTriggers('logout');
+    },
     controls: function() {
       $(this).snTriggers('submit');
       $(this).snTriggers('cb');
@@ -31,6 +37,16 @@ $(function() {
         e.preventDefault();
         return th.snEvents({
           href: '#signin'
+        });
+      });
+    },
+    logout: function() {
+      var th;
+      th = $(this);
+      return $("#logout").on("click", function(e) {
+        e.preventDefault();
+        return th.snEvents({
+          href: '#logout'
         });
       });
     },
