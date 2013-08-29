@@ -11,7 +11,6 @@ public static function cdr($s="") {
 	$s.=self::date_formats();
 	$s.="FROM `cdr` ";
 	$s.="WHERE (1=1) ";
-	// $s.=self::laws();
 	$s.=self::search();
 	$s.=self::sort();
 	$s.=self::limit();
@@ -19,20 +18,6 @@ public static function cdr($s="") {
 	return $s;
 }
 
-public static function laws($s="") {
-	if (signin::$mask !== '%') {
-		$s.="AND (";
-		$s.="(src LIKE '".signin::$mask."' ";
-		$s.="OR ";
-		$s.="dst LIKE '".signin::$mask."') ";
-		$s.="OR ";
-		$s.="(src REGEXP '[0-9]{6,10}' ";
-		$s.="AND ";
-		$s.="dst REGEXP '[0-9]{6,10}') ";
-		$s.=") ";
-	}
-	return $s;
-}
 
 public static function pagination($s="") {
 	$s.="SELECT COUNT(*) as count_id ";	
@@ -164,17 +149,73 @@ public static function search($s="") {
 			$s.=" AND (lastapp<>'Dial') ";
 		}
 	}
-	if (signin::$mask !== '%') {
-		$s.=" AND (";
-		$s.="(src LIKE '".signin::$mask."' ";
-		$s.="OR ";
-		$s.="dst LIKE '".signin::$mask."') ";
-		$s.="OR ";
-		$s.="(src REGEXP '[0-9]{6,10}' ";
-		$s.="AND ";
-		$s.="dst REGEXP '[0-9]{6,10}') ";
-		$s.=") ";
+
+	if (isset(signin::$mask)) {
+
+		if ((isset(signin::$mask->src)) || (isset(signin::$mask->dst))) {
+
+
+			$s.=" AND (";
+
+				if (isset(signin::$mask->src)) {
+
+					$s.="(";
+
+					if (!is_array(signin::$mask->src)) {
+						signin::$mask->src = array(signin::$mask->src);
+					}
+
+					$s.="(";
+
+					foreach (signin::$mask->src as $value) {
+						$s.="(src LIKE '".$value."') OR ";
+					}
+
+					$s.="(src = '!!!!')";
+
+					$s.=") ";
+
+					$s.=") ";
+
+				}
+
+
+				if (isset(signin::$mask->dst)) {
+
+					if (isset(signin::$mask->src)) { 
+
+						$s.=" OR ";
+
+					}
+
+					$s.="(";
+
+					if (!is_array(signin::$mask->dst)) {
+						signin::$mask->dst = array(signin::$mask->dst);
+					}
+
+					$s.="(";
+
+					foreach (signin::$mask->dst as $value) {
+						$s.="(dst LIKE '".$value."') OR ";
+					}
+
+					$s.="(dst = '!!!!')";
+
+					$s.=") ";
+
+					$s.=")";
+
+				}
+
+
+
+			$s.=")";
+
+		}
+
 	}
+	// echo $s;
 	return $s;
 }
 

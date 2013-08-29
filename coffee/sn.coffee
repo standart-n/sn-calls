@@ -1,4 +1,12 @@
 "use strict"
+
+if !console?
+	console = 
+		log: () ->
+		warn: () ->
+		info: () ->
+		error: () ->
+
 $ ->
 	methods= 
 		init:(options) ->
